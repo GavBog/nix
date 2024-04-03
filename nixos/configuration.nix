@@ -22,6 +22,9 @@
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
+
+    # Import home-manager's NixOS module
+    inputs.home-manager.nixosModules.home-manager
   ];
 
   nixpkgs = {
@@ -79,6 +82,15 @@
   # TODO: This is just an example, be sure to use whatever bootloader you prefer
   boot.loader.systemd-boot.enable = true;
 
+  # TODO: Set your username
+  home-manager = {
+    extraSpecialArgs = { inherit inputs outputs; };
+    users = {
+      # Import your home-manager configuration
+      gavbog = import ../home-manager/home.nix;
+    };
+  };
+
   # TODO: Configure your system-wide user settings (groups, etc), add more users as needed.
   users.users = {
     # FIXME: Replace with your username
@@ -88,6 +100,7 @@
       # Be sure to change it (using passwd) after rebooting!
       initialPassword = "gavbog";
       isNormalUser = true;
+      packages = [ inputs.home-manager.packages.${pkgs.system}.default ];
       openssh.authorizedKeys.keys = [
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
