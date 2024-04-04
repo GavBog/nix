@@ -85,7 +85,7 @@
   # Enable GNOME
   services.xserver = {
 	  enable = true;
-	  displayManager.enable = true;
+	  displayManager.gdm.enable = true;
 	  desktopManager.gnome.enable = true;
   };
 
