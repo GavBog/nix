@@ -40,6 +40,12 @@
     # pass to it, with each system as an argument
     forAllSystems = nixpkgs.lib.genAttrs systems;
   in {
+    # Setup Default Template
+    templates.default = {
+      description = "Gavin Bogie's NixOS Config";
+      path = ./.;
+    };
+
     # Your custom packages
     # Accessible through 'nix build', 'nix shell', etc
     packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
