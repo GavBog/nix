@@ -60,7 +60,19 @@
   };
 
   # Add stuff for your user as you see fit:
-  programs.neovim.enable = true;
+  programs.neovim = {
+    enable = true;
+
+    # Set Neovim Configurations
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+
+    # Configure Neovim with Lua
+    extraLuaConfig = ''
+      ${builtins.readFile ./nvim/init.lua}
+    '';
+  };
   # home.packages = with pkgs; [ steam ];
   programs.alacritty.enable = true;
   programs.librewolf.enable = true;
