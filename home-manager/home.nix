@@ -67,12 +67,12 @@
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
-
-    # Configure Neovim with Lua
-    extraLuaConfig = ''
-      ${builtins.readFile ./nvim/init.lua}
-    '';
+    vimdiffAlias = true;
   };
+
+  # Add Neovim Lua Configurations
+  xdg.configFile."nvim".source = ./nvim;
+
   # home.packages = with pkgs; [ steam ];
   programs.alacritty.enable = true;
   programs.librewolf.enable = true;
