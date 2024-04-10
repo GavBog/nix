@@ -17,7 +17,7 @@
     # inputs.nix-colors.homeManagerModules.default
 
     # You can also split up your configuration and import pieces of it here:
-    # ./nvim.nix
+    ./programs/neovim
   ];
 
   nixpkgs = {
@@ -57,23 +57,6 @@
   dconf = {
     enable = true;
     settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
-  };
-
-  # Add stuff for your user as you see fit:
-  programs.neovim = {
-    enable = true;
-
-    # Set Neovim Configurations
-    defaultEditor = true;
-    viAlias = true;
-    vimAlias = true;
-    vimdiffAlias = true;
-  };
-
-  # Add Neovim Lua Configurations
-  home.file."./.config/nvim/" = {
-    source = ./nvim;
-    recursive = true;
   };
 
   # home.packages = with pkgs; [ steam ];
