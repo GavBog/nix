@@ -17,7 +17,7 @@
     # inputs.nix-colors.homeManagerModules.default
 
     # You can also split up your configuration and import pieces of it here:
-    # ./nvim.nix
+    ./programs/neovim
   ];
 
   nixpkgs = {
@@ -59,8 +59,6 @@
     settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
   };
 
-  # Add stuff for your user as you see fit:
-  programs.neovim.enable = true;
   # home.packages = with pkgs; [ steam ];
   programs.alacritty.enable = true;
   programs.librewolf.enable = true;
