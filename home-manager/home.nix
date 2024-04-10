@@ -71,7 +71,10 @@
   };
 
   # Add Neovim Lua Configurations
-  xdg.configFile."nvim".source = ./nvim;
+  home.file."./.config/nvim/" = {
+    source = ./nvim;
+    recursive = true;
+  };
 
   # home.packages = with pkgs; [ steam ];
   programs.alacritty.enable = true;
