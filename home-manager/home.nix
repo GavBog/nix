@@ -58,21 +58,25 @@
     settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
   };
 
+  # Enable the following programs
   programs.alacritty.enable = true;
   programs.librewolf.enable = true;
 
   home.packages = with pkgs; [
     rustup
+    zig
+    fd
     discord
   ];
 
-  # Enable home-manager and git
   programs.home-manager.enable = true;
   programs.git.enable = true;
+  programs.lazygit.enable = true;
+  programs.ripgrep.enable = true;
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "23.05";
+  home.stateVersion = "23.11";
 }
