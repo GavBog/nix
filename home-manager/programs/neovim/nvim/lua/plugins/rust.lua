@@ -5,9 +5,29 @@ return {
     ft = { "rust" },
     keys = {
       {
-        "<leader>vm",
+        "<leader>fE",
+        "<cmd>FerrisExpandMacro<cr>",
+        desc = "Expand macro",
+      },
+      {
+        "<leader>fm",
         "<cmd>FerrisViewMemoryLayout<cr>",
         desc = "View memory layout",
+      },
+      {
+        "<leader>fC",
+        "<cmd>FerrisOpenCargoToml<cr>",
+        desc = "Open Cargo.toml",
+      },
+      {
+        "<leader>fp",
+        "<cmd>FerrisOpenParentModule<cr>",
+        desc = "Open parent module",
+      },
+      {
+        "<leader>fw",
+        "<cmd>FerrisReloadWorkspace<cr>",
+        desc = "Reload workspace",
       },
     },
     opts = {
