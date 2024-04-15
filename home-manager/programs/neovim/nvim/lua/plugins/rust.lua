@@ -25,6 +25,10 @@ return {
         desc = "Open parent module",
       },
       {
+        "<leader>fd",
+        "<cmd>FerrisOpenDocumentation<cr>",
+      },
+      {
         "<leader>fw",
         "<cmd>FerrisReloadWorkspace<cr>",
         desc = "Reload workspace",
