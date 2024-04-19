@@ -1,9 +1,27 @@
 return {
   {
     "dundalek/lazy-lsp.nvim",
-    dependencies = { "neovim/nvim-lspconfig" },
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      { "VonHeikemen/lsp-zero.nvim", branch = "v3.x" },
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/nvim-cmp",
+    },
     config = function()
-      require("lazy-lsp").setup({
+      local lsp_zero = require("lsp-zero")
+
+      lsp_zero.on_attach(function(client, bufnr)
+        -- see :help lsp-zero-keybindings to learn the available actions
+        lsp_zero.default_keymaps({
+          buffer = bufnr,
+          preserve_mappings = false
+        })
+
+        -- enable formatting on save
+        lsp_zero.async_autoformat(client, bufnr)
+      end)
+
+      require("lazy-lsp").setup {
         prefer_local = true,
 
         excluded_servers = {
@@ -31,7 +49,7 @@ return {
           typescriptreact = { "tsserver" },
           yaml = { "yamlls" },
         },
-      })
+      }
     end,
   },
 }
