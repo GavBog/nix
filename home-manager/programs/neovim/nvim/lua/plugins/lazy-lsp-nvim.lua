@@ -17,6 +17,9 @@ return {
           preserve_mappings = false
         })
 
+        -- set keymaps
+        vim.keymap.set('n', '<leader>cf', '<cmd>LspZeroFormat!<cr>', { buffer = bufnr })
+
         -- enable formatting on save
         lsp_zero.async_autoformat(client, bufnr)
       end)
