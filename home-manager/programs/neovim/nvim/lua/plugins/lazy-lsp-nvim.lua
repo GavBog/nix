@@ -22,7 +22,7 @@ return {
         vim.keymap.set('n', '<leader>cl', '<cmd>LspInfo<cr>', { desc = "Lsp Info" })
 
         -- enable formatting on save
-        lsp_zero.async_autoformat(client, bufnr)
+        lsp_zero.buffer_autoformat()
       end)
 
       require("lazy-lsp").setup {
