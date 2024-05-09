@@ -45,4 +45,13 @@ return {
       url_handler = "xdg-open", -- string | function(string)
     },
   },
+  {
+    "Saecki/crates.nvim",
+    event = { "BufRead Cargo.toml" },
+    opts = {
+      src = {
+        cmp = { enabled = true },
+      },
+    },
+  },
 }
