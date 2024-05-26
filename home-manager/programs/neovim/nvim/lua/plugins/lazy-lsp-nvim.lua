@@ -5,7 +5,7 @@ return {
       "VonHeikemen/lsp-zero.nvim",
     },
     lazy = true,
-    event = "LazyFile",
+    event = "VeryLazy",
     config = function()
       require("lazy-lsp").setup {
         prefer_local = true,
@@ -13,6 +13,7 @@ return {
         excluded_servers = {
           "diagnosticls",
           "efm",
+          "ltex",
           -- Bugged servers
           "sqls",
           "rome",
