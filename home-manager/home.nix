@@ -67,6 +67,8 @@
     zig
     fd
     discord
+    prismlauncher
+    jdk21_headless
   ];
 
   programs.home-manager.enable = true;

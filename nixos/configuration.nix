@@ -86,6 +86,8 @@
     enable = true;
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
+
+    videoDrivers = [ "nvidia" ];
   };
 
   # TODO: Set your username
