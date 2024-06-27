@@ -5,35 +5,35 @@ return {
     ft = { "rust" },
     keys = {
       {
-        "<leader>cr",
+        "<leader>rr",
         desc = "Rust",
       },
       {
-        "<leader>cre",
+        "<leader>rre",
         "<cmd>FerrisExpandMacro<cr>",
         desc = "Expand macro",
       },
       {
-        "<leader>crm",
+        "<leader>rrm",
         "<cmd>FerrisViewMemoryLayout<cr>",
         desc = "View memory layout",
       },
       {
-        "<leader>crc",
+        "<leader>rrc",
         "<cmd>FerrisOpenCargoToml<cr>",
         desc = "Open Cargo.toml",
       },
       {
-        "<leader>crp",
+        "<leader>rrp",
         "<cmd>FerrisOpenParentModule<cr>",
         desc = "Open parent module",
       },
       {
-        "<leader>crd",
+        "<leader>rrd",
         "<cmd>FerrisOpenDocumentation<cr>",
       },
       {
-        "<leader>crr",
+        "<leader>rrr",
         "<cmd>FerrisReloadWorkspace<cr>",
         desc = "Reload workspace",
       },
@@ -46,12 +46,7 @@ return {
     },
   },
   {
-    "Saecki/crates.nvim",
-    event = { "BufRead Cargo.toml" },
-    opts = {
-      src = {
-        cmp = { enabled = true },
-      },
-    },
-  },
+    "mrcjkb/rustaceanvim",
+    enabled = false,
+  }
 }

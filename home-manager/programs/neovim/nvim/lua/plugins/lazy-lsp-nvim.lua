@@ -13,7 +13,6 @@ return {
         excluded_servers = {
           "diagnosticls",
           "efm",
-          "ltex",
           -- Bugged servers
           "sqls",
           "rome",
@@ -60,7 +59,7 @@ return {
       "hrsh7th/nvim-cmp",
     },
     lazy = true,
-    event = "LazyFile",
+    event = "VeryLazy",
 
     config = function()
       local lsp_zero = require("lsp-zero")
@@ -72,13 +71,16 @@ return {
         })
 
         -- set keymaps
+        require("lazyvim.plugins.lsp.keymaps").on_attach(client, bufnr)
         vim.keymap.set('n', '<leader>cf', '<cmd>LspZeroFormat!<cr>', { buffer = bufnr })
-        vim.keymap.set('n', '<leader>cl', '<cmd>LspInfo<cr>', { desc = "Lsp Info" })
-
 
         -- enable formatting on save
         lsp_zero.buffer_autoformat()
       end)
     end,
-  }
+  },
+  {
+    "neovim/nvim-lspconfig",
+    config = function() end,
+  },
 }
