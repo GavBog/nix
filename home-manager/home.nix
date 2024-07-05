@@ -75,6 +75,7 @@
   programs.git.enable = true;
   programs.lazygit.enable = true;
   programs.ripgrep.enable = true;
+  programs.fzf.enable = true;
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
