@@ -13,26 +13,28 @@ return {
         excluded_servers = {
           "diagnosticls",
           "efm",
-          -- Bugged servers
-          "sqls",
-          "rome",
+
+          -- RustaceanVim covers this
+          "rust_analyzer"
         },
         preferred_servers = {
+          astro = { "astro", "tailwindcss" },
           c = { "clangd" },
           cpp = { "clangd" },
           cs = { "omnisharp" },
           go = { "gopls" },
           haskell = { "hls" },
-          javascript = { "tsserver" },
-          javascriptreact = { "tsserver" },
+          javascript = { "ts_ls" },
+          javascriptreact = { "ts_ls", "tailwindcss" },
           json = { "jsonls" },
-          jsx = { "tsserver" },
+          jsx = { "ts_ls", "tailwindcss" },
           nix = { "nil_ls" },
+          proto = { "bufls" },
           python = { "pyright" },
           rust = { "rust_analyzer" },
-          tsx = { "tsserver" },
-          typescript = { "tsserver" },
-          typescriptreact = { "tsserver" },
+          tsx = { "ts_ls", "tailwindcss" },
+          typescript = { "ts_ls" },
+          typescriptreact = { "ts_ls", "tailwindcss" },
           yaml = { "yamlls" },
         },
 
@@ -53,11 +55,6 @@ return {
   {
     "VonHeikemen/lsp-zero.nvim",
     branch = "v3.x",
-    dependencies = {
-      "neovim/nvim-lspconfig",
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/nvim-cmp",
-    },
     lazy = true,
     event = "VeryLazy",
 

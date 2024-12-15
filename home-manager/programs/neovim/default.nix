@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
   programs.neovim = {
     enable = true;
@@ -10,6 +10,8 @@
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
+
+    package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
   };
 
   # Add Lua Configurations
