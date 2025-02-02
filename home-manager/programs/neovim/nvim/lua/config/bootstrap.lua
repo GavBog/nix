@@ -40,5 +40,5 @@ require("lazy").setup({
     -- install missing plugins on startup. This doesn't increase startup time.
     missing = true,
   },
-  checker = { enabled = true }, -- automatically check for plugin updates
+  checker = { enabled = true, notify = false }, -- automatically check for plugin updates
 })
