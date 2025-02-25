@@ -4,3 +4,9 @@
 
 -- Use latest Blink Commit
 -- vim.g.lazyvim_blink_main = true
+
+-- Disable this check since we don't use all LazyVim plugins
+vim.g.lazyvim_check_order = false
+
+-- I handle autoformatting myself
+vim.g.autoformat = false

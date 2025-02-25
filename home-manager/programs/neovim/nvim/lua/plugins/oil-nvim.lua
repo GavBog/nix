@@ -4,8 +4,10 @@ return {
     dependencies = { "echasnovski/mini.icons" },
     lazy = true,
     keys = {
-      { "<leader>fo", "<cmd>Oil<cr>", desc = "Oil" },
+      { "-", "<cmd>Oil<cr>", desc = "Oil" },
     },
-    opts = {},
+    opts = {
+      skip_confirm_for_simple_edits = true,
+    },
   },
 }
