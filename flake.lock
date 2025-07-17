@@ -53,14 +53,19 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-9OTbLYxpegENvjARSkUjg8TkvILiDJROZOOVHfGfhFE=",
-        "path": "./pkgs/nvim",
-        "type": "path"
+        "dir": "pkgs/nvim",
+        "lastModified": 1752720118,
+        "narHash": "sha256-GjXoUlJU+MftShrhbpJW4Ocv3jCRItle4CKvtL8FnO4=",
+        "owner": "GavBog",
+        "repo": "nix",
+        "rev": "a49a2b354d6ad58e8d389fb7f14addfbb2fe3e47",
+        "type": "github"
       },
       "original": {
-        "path": "./pkgs/nvim",
-        "type": "path"
+        "dir": "pkgs/nvim",
+        "owner": "GavBog",
+        "repo": "nix",
+        "type": "github"
       }
     },
     "root": {

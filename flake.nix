@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
-    nvim.url = "path:./pkgs/nvim";
+    nvim.url = "github:GavBog/nix?dir=pkgs/nvim";
   };
 
   outputs = { self, nixpkgs, nvim, ... }@inputs:
