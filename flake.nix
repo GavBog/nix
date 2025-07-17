@@ -18,6 +18,14 @@
       ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
     in {
+      # Re-export nvim for use independently
+      apps = forAllSystems (system: {
+        nvim = {
+          type = "app";
+          program = "${nvim.packages.${system}.default}/bin/nvim";
+        };
+      });
+      # Mac Asahi Configuration
       nixosConfigurations.mac = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         modules = [
