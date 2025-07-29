@@ -71,11 +71,8 @@
     KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
   '';
 
-  services.xserver = {
-    enable = true;
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
-  };
+  services.desktopManager.cosmic.enable = true;
+  services.displayManager.cosmic-greeter.enable = true;
 
   systemd.services.kanata-internalKeyboard.serviceConfig = {
     SupplementaryGroups = [ "input" "uinput" ];
@@ -124,9 +121,10 @@
     gparted
     maliit-framework
     maliit-keyboard
-    micro
-    alacritty
     librewolf
+    fastfetch
+    gh
+    ghostty
   ];
 
   system.stateVersion = "24.11";

@@ -4,9 +4,17 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     nvim.url = "github:GavBog/nix?dir=pkgs/nvim";
+    # Switch back when https://github.com/lilyinstarlight/nixos-cosmic/pull/863 is merged
+    # nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
+    nixos-cosmic = {
+      type = "github";
+      owner = "jerbaroo";
+      repo = "nixos-cosmic";
+      ref = "patch-1";
+    };
   };
 
-  outputs = { self, nixpkgs, nvim, ... }@inputs:
+  outputs = { self, nixpkgs, nvim, nixos-cosmic, ... }@inputs:
     let
       inherit (self) outputs;
       systems = [
@@ -33,6 +41,13 @@
             environment.systemPackages =
               [ nvim.packages.aarch64-linux.default ];
           }
+          {
+            nix.settings = {
+              substituters = [ "https://cosmic.cachix.org/" ];
+              trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
+            };
+          }
+          nixos-cosmic.nixosModules.default
           ./configurations/mac/configuration.nix
         ];
       };
