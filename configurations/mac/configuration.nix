@@ -38,6 +38,8 @@
     experimental-features = [ "nix-command" "flakes" ];
   };
 
+  nixpkgs.config.allowUnfree = true;
+
   networking = {
     networkmanager.enable = true;
     networkmanager.wifi.backend = "iwd";
@@ -55,14 +57,14 @@
   users.groups.uinput = { };
 
   services.openssh.enable = true;
-  services.libinput.touchpad.naturalScrolling = false;
+  services.cloudflare-warp.enable = true;
+
+  services.desktopManager.cosmic.enable = true;
+  services.displayManager.cosmic-greeter.enable = true;
 
   services.udev.extraRules = ''
     KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
   '';
-
-  services.desktopManager.cosmic.enable = true;
-  services.displayManager.cosmic-greeter.enable = true;
 
   systemd.services.kanata-internalKeyboard.serviceConfig = {
     SupplementaryGroups = [ "input" "uinput" ];
@@ -98,6 +100,7 @@
   environment.shellAliases = {
     c = "clear";
     nv = "nvim";
+    nf = "fastfetch";
   };
 
   fonts.packages = with pkgs; [
@@ -114,6 +117,7 @@
     fastfetch
     gh
     ghostty
+    stremio
   ];
 
   system.stateVersion = "25.05";
