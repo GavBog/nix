@@ -2,21 +2,16 @@
   description = "Gavin Bogie's NixOS Configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nvim.url = "github:GavBog/nix?dir=pkgs/nvim";
-    # Switch back when https://github.com/lilyinstarlight/nixos-cosmic/pull/863 is merged
-    # nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
-    nixos-cosmic = {
-      type = "github";
-      owner = "jerbaroo";
-      repo = "nixos-cosmic";
-      ref = "patch-1";
+    nixos-apple-silicon = {
+      url = "github:nix-community/nixos-apple-silicon";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, nvim, nixos-cosmic, ... }@inputs:
+  outputs = { self, nixpkgs, nvim, ... }@inputs:
     let
-      inherit (self) outputs;
       systems = [
         "aarch64-linux"
         "i686-linux"
@@ -36,6 +31,7 @@
       # Mac Asahi Configuration
       nixosConfigurations.mac = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
+        specialArgs = { inherit inputs; };
         modules = [
           {
             environment.systemPackages =
@@ -43,13 +39,13 @@
           }
           {
             nix.settings = {
-              substituters = [ "https://cosmic.cachix.org/" ];
-              trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
+              extra-substituters = [ "https://nixos-asahi.cachix.org" ];
+              extra-trusted-public-keys = [ "nixos-asahi.cachix.org-1:CPH9jazpT/isOQvFhtAZ0Z18XNhAp29+LLVHr0b2qVk=" ];
             };
           }
-          nixos-cosmic.nixosModules.default
           ./configurations/mac/configuration.nix
         ];
       };
     };
 }
+

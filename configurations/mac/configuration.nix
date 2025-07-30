@@ -1,17 +1,8 @@
-{ pkgs, ... }: {
-  imports =
-    # Import nixos-apple-silicon using fetchTarball since this is a standalone
-    # configuration. If using flakes, just add it to inputs.
-    let
-      nixos-apple-silicon = fetchTarball {
-        url =
-          "https://github.com/tpwrules/nixos-apple-silicon/archive/refs/tags/release-2024-12-25.tar.gz";
-        sha256 = "01sxbqq97fm2m152llgx3bvp2xsfw2zv41bflzx5r8l0r13grabb";
-      };
-    in [
-      (toString nixos-apple-silicon + "/apple-silicon-support")
-      ./hardware-configuration.nix
-    ];
+{ inputs, pkgs, ... }: {
+  imports = [
+    inputs.nixos-apple-silicon.nixosModules.default
+    ./hardware-configuration.nix
+  ];
 
   boot = {
     loader.systemd-boot.enable = true;
@@ -31,9 +22,8 @@
   hardware.asahi = {
     experimentalGPUInstallMode = "replace";
     useExperimentalGPUDriver = true;
-    setupAsahiSound = false;
+    setupAsahiSound = true;
     peripheralFirmwareDirectory = ./firmware;
-    withRust = true;
   };
 
   hardware.uinput.enable = true;
@@ -111,8 +101,7 @@
   };
 
   fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "Iosevka" ]; })
-    iosevka
+    nerd-fonts.iosevka
   ];
 
   environment.systemPackages = with pkgs; [
@@ -127,5 +116,5 @@
     ghostty
   ];
 
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.05";
 }

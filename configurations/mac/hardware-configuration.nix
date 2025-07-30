@@ -15,26 +15,13 @@
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/5fe8128f-165f-4e88-9188-823c61dca13e";
-      fsType = "btrfs";
-      options = [ "subvol=@" ];
-    };
-
-  fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/5fe8128f-165f-4e88-9188-823c61dca13e";
-      fsType = "btrfs";
-      options = [ "subvol=@nix" ];
+      fsType = "ext4";
     };
 
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/12CE-A600";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
-    };
-
-  fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/5fe8128f-165f-4e88-9188-823c61dca13e";
-      fsType = "btrfs";
-      options = [ "subvol=@home" ];
     };
 
   swapDevices = [ ];
