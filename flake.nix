@@ -20,6 +20,12 @@
         "x86_64-darwin"
       ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
+      wrappedPackages = import ./pkgs/default.nix;
+      customPkgs = forAllSystems (
+        system: let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in (wrappedPackages.packages pkgs)
+      );
     in {
       # Re-export nvim for use independently
       apps = forAllSystems (system: {
@@ -28,10 +34,14 @@
           program = "${nvim.packages.${system}.default}/bin/nvim";
         };
       });
+
       # Mac Asahi Configuration
       nixosConfigurations.mac = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
-        specialArgs = { inherit inputs; };
+        specialArgs = {
+          inherit inputs;
+          customPkgs = customPkgs.aarch64-linux;
+        };
         modules = [
           {
             environment.systemPackages =

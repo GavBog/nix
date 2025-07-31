@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }: {
+{ inputs, pkgs, customPkgs, ... }: {
   imports = [
     inputs.nixos-apple-silicon.nixosModules.default
     ./hardware-configuration.nix
@@ -107,7 +107,7 @@
     nerd-fonts.iosevka
   ];
 
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs // customPkgs; [
     asahi-bless # reboot to macOS
     git
     gparted
