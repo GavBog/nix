@@ -62,6 +62,10 @@
   services.desktopManager.cosmic.enable = true;
   services.displayManager.cosmic-greeter.enable = true;
 
+  environment.cosmic.excludePackages = with pkgs; [
+    cosmic-term
+  ];
+
   services.udev.extraRules = ''
     KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
   '';
