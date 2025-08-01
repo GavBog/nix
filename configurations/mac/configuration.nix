@@ -59,6 +59,7 @@
     isNormalUser = true;
     extraGroups = ["wheel"];
   };
+  users.defaultUserShell = customPkgs.zsh;
   users.groups.uinput = {};
 
   services.openssh.enable = true;
@@ -95,7 +96,7 @@
           )
 
           (defalias
-            escctrl (tap-hold 150 150 esc lctrl)
+            escctrl (tap-hold 200 200 esc lctrl)
           )
 
           (deflayer base
@@ -106,16 +107,11 @@
     };
   };
 
-  environment.shellAliases = {
-    c = "clear";
-    nv = "nvim";
-    nf = "fastfetch";
-  };
-
   fonts.packages = with pkgs; [
     nerd-fonts.iosevka
   ];
 
+  environment.shells = [ customPkgs.zsh ];
   environment.systemPackages = with pkgs // customPkgs; [
     asahi-bless # reboot to macOS
     git
@@ -127,6 +123,9 @@
     gh
     ghostty
     stremio
+    wl-clipboard
+    zoxide
+    fzf
   ];
 
   system.stateVersion = "25.11";
