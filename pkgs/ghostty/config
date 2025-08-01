@@ -43,3 +43,4 @@
 # resize-overlay-duration = 4s 200ms
 
 theme = GitHub-Dark-High-Contrast
+window-decoration = none

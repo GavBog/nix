@@ -90,11 +90,11 @@
       },
       "locked": {
         "dir": "pkgs/nvim",
-        "lastModified": 1753993093,
-        "narHash": "sha256-F13gX/zR/g2wgUN8017NMicq+iuYZ5P1K9tCw8pvv6g=",
+        "lastModified": 1753996530,
+        "narHash": "sha256-dphVYhzDjLLqdVPSR+R32NjteLtbqCfhFs0oIYGXwE4=",
         "owner": "GavBog",
         "repo": "nix",
-        "rev": "2b1541e03a1eadca7cc9d4e8de69ee6843d964fb",
+        "rev": "cdc30277029cfccb6d450e8b40ff934a1cbcf723",
         "type": "github"
       },
       "original": {

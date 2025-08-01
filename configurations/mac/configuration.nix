@@ -1,4 +1,9 @@
-{ inputs, pkgs, customPkgs, ... }: {
+{
+  inputs,
+  pkgs,
+  customPkgs,
+  ...
+}: {
   imports = [
     inputs.nixos-apple-silicon.nixosModules.default
     ./hardware-configuration.nix
@@ -14,9 +19,9 @@
       options hid_apple swap_fn_leftctrl=1
     '';
 
-    kernelModules = [ "uinput" ];
+    kernelModules = ["uinput"];
 
-    initrd.availableKernelModules = [ "xhci_pci" "usb_storage" "usbhid" ];
+    initrd.availableKernelModules = ["xhci_pci" "usb_storage" "usbhid"];
   };
 
   hardware.asahi = {
@@ -35,7 +40,7 @@
 
   nix.settings = {
     warn-dirty = false;
-    experimental-features = [ "nix-command" "flakes" ];
+    experimental-features = ["nix-command" "flakes"];
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -52,9 +57,9 @@
   users.users.gavbog = {
     initialPassword = "gavbog";
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = ["wheel"];
   };
-  users.groups.uinput = { };
+  users.groups.uinput = {};
 
   services.openssh.enable = true;
   services.cloudflare-warp.enable = true;
@@ -71,7 +76,7 @@
   '';
 
   systemd.services.kanata-internalKeyboard.serviceConfig = {
-    SupplementaryGroups = [ "input" "uinput" ];
+    SupplementaryGroups = ["input" "uinput"];
   };
 
   services.kanata = {

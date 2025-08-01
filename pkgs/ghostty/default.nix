@@ -1,9 +1,11 @@
-{ pkgs, configFile ? ./config }:
-
+{
+  pkgs,
+  configFile ? ./config,
+}:
 pkgs.symlinkJoin {
   name = "ghostty-wrapped";
-  paths = [ pkgs.ghostty ];
-  buildInputs = [ pkgs.makeWrapper ];
+  paths = [pkgs.ghostty];
+  nativeBuildInputs = [pkgs.makeWrapper];
 
   postBuild = ''
     mkdir -p $out/etc/ghostty
