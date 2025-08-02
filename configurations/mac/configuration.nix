@@ -107,11 +107,16 @@
     };
   };
 
+  services.cachixPush = {
+    enable = true;
+    cacheName = "gavbog";
+  };
+
   fonts.packages = with pkgs; [
     nerd-fonts.iosevka
   ];
 
-  environment.shells = [ customPkgs.zsh ];
+  environment.shells = [customPkgs.zsh];
   environment.systemPackages = with pkgs // customPkgs; [
     asahi-bless # reboot to macOS
     git

@@ -59,10 +59,11 @@
         }
         {
           nix.settings = {
-            extra-substituters = ["https://nixos-asahi.cachix.org"];
-            extra-trusted-public-keys = ["nixos-asahi.cachix.org-1:CPH9jazpT/isOQvFhtAZ0Z18XNhAp29+LLVHr0b2qVk="];
+            extra-substituters = ["https://gavbog.cachix.org" "https://nixos-asahi.cachix.org"];
+            extra-trusted-public-keys = ["gavbog.cachix.org-1:oUziS1THwpmDYMwqfa/XNBKXBUdbp65vG/9cOOQpFok=" "nixos-asahi.cachix.org-1:CPH9jazpT/isOQvFhtAZ0Z18XNhAp29+LLVHr0b2qVk="];
           };
         }
+        ./modules/cachix-push.nix
         ./configurations/mac/configuration.nix
       ];
     };
