@@ -107,11 +107,6 @@
     };
   };
 
-  services.cachixPush = {
-    enable = true;
-    cacheName = "gavbog";
-  };
-
   fonts.packages = with pkgs; [
     nerd-fonts.iosevka
   ];
