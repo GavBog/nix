@@ -35,14 +35,15 @@
         "flake-compat": "flake-compat",
         "nixpkgs": [
           "nixpkgs"
-        ]
+        ],
+        "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1753175937,
-        "narHash": "sha256-DtDt87Gld0RCI2qHb7uUb1eWB16FFC4aNDfxZpic/Nw=",
+        "lastModified": 1754152461,
+        "narHash": "sha256-UNPGhPvjMGond6bTq2JXPjH0yyUj0g6nhG/wjEH/Vfo=",
         "owner": "nix-community",
         "repo": "nixos-apple-silicon",
-        "rev": "5ddfff8387edf7c92ce36effb06fb2c52624fece",
+        "rev": "9c936c2686017de6adec644880451bdf3c323306",
         "type": "github"
       },
       "original": {
@@ -90,11 +91,11 @@
       },
       "locked": {
         "dir": "pkgs/nvim",
-        "lastModified": 1754024846,
-        "narHash": "sha256-T/xPFVXkC2hv9QPYrpSc36vAd9oV/jFK7Or0RGwiNhI=",
+        "lastModified": 1754107503,
+        "narHash": "sha256-+PFUzAZteZBO/gcJB7L5/AD6ov0DKiX+V9KrZVDmw6M=",
         "owner": "GavBog",
         "repo": "nix",
-        "rev": "283474cb74ea316a7f22a886dce91c42988fbd67",
+        "rev": "c42e153a46190826cf7f085c4df20ca3dc3f4918",
         "type": "github"
       },
       "original": {
@@ -109,6 +110,27 @@
         "nixos-apple-silicon": "nixos-apple-silicon",
         "nixpkgs": "nixpkgs",
         "nvim": "nvim"
+      }
+    },
+    "treefmt-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixos-apple-silicon",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1753006367,
+        "narHash": "sha256-tzbhc4XttkyEhswByk5R38l+ztN9UDbnj0cTcP6Hp9A=",
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "rev": "421b56313c65a0815a52b424777f55acf0b56ddf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "type": "github"
       }
     }
   },

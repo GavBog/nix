@@ -64,6 +64,7 @@
           };
         }
         ./modules/cachix-push.nix
+        ./modules/dotfiles.nix
         ./configurations/mac/configuration.nix
       ];
     };
