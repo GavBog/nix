@@ -66,7 +66,7 @@
   services.cloudflare-warp.enable = true;
 
   services.desktopManager.cosmic.enable = true;
-  services.displayManager.cosmic-greeter.enable = true;
+  services.displayManager.ly.enable = true;
 
   environment.cosmic.excludePackages = with pkgs; [
     cosmic-term
@@ -126,6 +126,7 @@
     wl-clipboard
     zoxide
     fzf
+    tldr
   ];
 
   time.timeZone = "America/New_York";
