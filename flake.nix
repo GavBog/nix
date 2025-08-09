@@ -2,8 +2,9 @@
   description = "Gavin Bogie's NixOS Configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nvim.url = "github:GavBog/nix?dir=pkgs/nvim";
+    librewolf.url = "github:GavBog/nix?dir=pkgs/librewolf";
     nixos-apple-silicon = {
       url = "github:nix-community/nixos-apple-silicon";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -14,6 +15,7 @@
     self,
     nixpkgs,
     nvim,
+    librewolf,
     ...
   } @ inputs: let
     systems = [
@@ -36,6 +38,10 @@
       nvim = {
         type = "app";
         program = "${nvim.packages.${system}.default}/bin/nvim";
+      };
+      librewolf = {
+        type = "app";
+        program = "${librewolf.packages.${system}.default}/bin/librewolf";
       };
     });
 
