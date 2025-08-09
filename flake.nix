@@ -5,8 +5,17 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nvim.url = "github:GavBog/nix?dir=pkgs/nvim";
     librewolf.url = "github:GavBog/nix?dir=pkgs/librewolf";
+    # nixos-apple-silicon = {
+    #   url = "github:nix-community/nixos-apple-silicon";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+
+    # TODO: remove this when https://github.com/nix-community/nixos-apple-silicon/issues/301 is closed
     nixos-apple-silicon = {
-      url = "github:nix-community/nixos-apple-silicon";
+      type = "github";
+      owner = "flokli";
+      repo = "nixos-apple-silicon";
+      ref = "mainline-mesa";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

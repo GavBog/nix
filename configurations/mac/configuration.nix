@@ -25,8 +25,8 @@
   };
 
   hardware.asahi = {
-    experimentalGPUInstallMode = "replace";
-    useExperimentalGPUDriver = true;
+    # experimentalGPUInstallMode = "replace";
+    # useExperimentalGPUDriver = true;
     setupAsahiSound = true;
     peripheralFirmwareDirectory = ./firmware;
   };
