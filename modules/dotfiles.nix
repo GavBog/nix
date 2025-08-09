@@ -1,4 +1,8 @@
-{lib, ...}: let
+{
+  lib,
+  pkgs,
+  ...
+}: let
   user = "gavbog";
   home = "/home/${user}";
   dotfilesPath = builtins.path {
@@ -16,8 +20,10 @@ in {
 
     # copy nix store dotfiles to their destinations
     mkdir -p "$(dirname "$dest1")" # "$(dirname "$dest2")"
-    cp -rT "${dotfilesPath}/cosmic" "$dest1"
-    # cp -rT "${dotfilesPath}/..." "$dest2"
+    ${pkgs.rsync}/bin/rsync -r --checksum --no-perms --no-owner --no-group \
+      "${dotfilesPath}/cosmic/" "$dest1/"
+    # ${pkgs.rsync}/bin/rsync -r --checksum --no-perms --no-owner --no-group \
+    #   "${dotfilesPath}/.../" "$dest2/"
 
     # change ownership and perms
     set -- "$dest1" # "$dest2"
