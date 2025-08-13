@@ -21,14 +21,33 @@
 
     kernelModules = ["uinput"];
 
-    initrd.availableKernelModules = ["xhci_pci" "usb_storage" "usbhid"];
+    initrd.availableKernelModules = [
+      "xhci_pci"
+      "usb_storage"
+      "usbhid"
+    ];
   };
 
+  hardware.graphics.enable = true;
   hardware.asahi = {
-    # experimentalGPUInstallMode = "replace";
     # useExperimentalGPUDriver = true;
     setupAsahiSound = true;
     peripheralFirmwareDirectory = ./firmware;
+  };
+
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        ControllerMode = "bredr";
+        Experimental = true;
+        FastConnectable = true;
+      };
+      Policy = {
+        AutoEnable = true;
+      };
+    };
   };
 
   hardware.uinput.enable = true;
@@ -40,7 +59,10 @@
 
   nix.settings = {
     warn-dirty = false;
-    experimental-features = ["nix-command" "flakes"];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -53,7 +75,6 @@
       settings.General.EnableNetworkConfiguration = true;
     };
   };
-
   users.users.gavbog = {
     initialPassword = "gavbog";
     isNormalUser = true;
@@ -77,7 +98,10 @@
   '';
 
   systemd.services.kanata-internalKeyboard.serviceConfig = {
-    SupplementaryGroups = ["input" "uinput"];
+    SupplementaryGroups = [
+      "input"
+      "uinput"
+    ];
   };
 
   services.kanata = {
@@ -127,6 +151,8 @@
     zoxide
     fzf
     tldr
+    rustup
+    clang
   ];
 
   time.timeZone = "America/New_York";

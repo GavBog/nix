@@ -74,8 +74,14 @@
         }
         {
           nix.settings = {
-            extra-substituters = ["https://cache.garnix.io" "https://nixos-asahi.cachix.org"];
-            extra-trusted-public-keys = ["cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=" "nixos-asahi.cachix.org-1:CPH9jazpT/isOQvFhtAZ0Z18XNhAp29+LLVHr0b2qVk="];
+            extra-substituters = [
+              "https://cache.garnix.io"
+              "https://nixos-asahi.cachix.org"
+            ];
+            extra-trusted-public-keys = [
+              "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+              "nixos-asahi.cachix.org-1:CPH9jazpT/isOQvFhtAZ0Z18XNhAp29+LLVHr0b2qVk="
+            ];
           };
         }
         ./modules/dotfiles.nix
