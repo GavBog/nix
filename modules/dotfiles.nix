@@ -2,15 +2,17 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   user = "gavbog";
   home = "/home/${user}";
   dotfilesPath = builtins.path {
     name = "dotfiles";
     path = ./dotfiles;
   };
-in {
-  system.activationScripts.dotfiles = lib.stringAfter ["users"] ''
+in
+{
+  system.activationScripts.dotfiles = lib.stringAfter [ "users" ] ''
     user_uid=$(id -u ${user})
     user_gid=$(id -g ${user})
 

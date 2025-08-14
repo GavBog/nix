@@ -4,8 +4,8 @@
 }:
 pkgs.symlinkJoin {
   name = "ghostty-wrapped";
-  paths = [pkgs.ghostty];
-  nativeBuildInputs = [pkgs.makeWrapper];
+  paths = [ pkgs.ghostty ];
+  nativeBuildInputs = [ pkgs.makeWrapper ];
 
   postBuild = ''
     mkdir -p $out/etc/ghostty

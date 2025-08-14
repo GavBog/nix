@@ -1,11 +1,12 @@
-{pkgs}: let
+{ pkgs }:
+let
   profileName = "gavbog.default";
 
   librewolfWithExt = pkgs.wrapFirefox pkgs.librewolf-unwrapped {
     inherit (pkgs.librewolf-unwrapped) extraPrefsFiles extraPoliciesFiles;
     wmClass = "LibreWolf";
     libName = "librewolf";
-    nativeMessagingHosts = with pkgs; [tridactyl-native];
+    nativeMessagingHosts = with pkgs; [ tridactyl-native ];
 
     # Documentation about policies options can be found at `about:policies#documentation`.
     # You can also have a look here: https://github.com/mozilla/policy-templates/.
@@ -29,33 +30,33 @@
   configDir = "${"\${XDG_CONFIG_HOME:-\$HOME/.librewolf}"}";
   fullProfilePath = "${configDir}/${profileName}";
 in
-  pkgs.symlinkJoin {
-    name = "librewolf-wrapped";
-    paths = [librewolfWithExt];
-    nativeBuildInputs = [pkgs.makeWrapper];
+pkgs.symlinkJoin {
+  name = "librewolf-wrapped";
+  paths = [ librewolfWithExt ];
+  nativeBuildInputs = [ pkgs.makeWrapper ];
 
-    postBuild = ''
-      mkdir -p "$out/share/librewolf-profile"
-      cp -r ${profileSkel}/. "$out/share/librewolf-profile"
+  postBuild = ''
+    mkdir -p "$out/share/librewolf-profile"
+    cp -r ${profileSkel}/. "$out/share/librewolf-profile"
 
-      mkdir -p "$out/share/librewolf-meta"
-      cp ${profilesIni} "$out/share/librewolf-meta/profiles.ini"
+    mkdir -p "$out/share/librewolf-meta"
+    cp ${profilesIni} "$out/share/librewolf-meta/profiles.ini"
 
-      wrapProgram "$out/bin/librewolf" \
-        --set OUT "$out" \
-        --prefix PATH : ${pkgs.rsync}/bin \
-        --run 'set -euo pipefail
-          config_dir=${configDir}
-          profile_dir="$config_dir/${profileName}"
+    wrapProgram "$out/bin/librewolf" \
+      --set OUT "$out" \
+      --prefix PATH : ${pkgs.rsync}/bin \
+      --run 'set -euo pipefail
+        config_dir=${configDir}
+        profile_dir="$config_dir/${profileName}"
 
-          mkdir -p "$(dirname "$profile_dir")"
-          rsync -r --checksum --no-perms --chmod=u+rwX \
-            "$OUT/share/librewolf-profile/" "$profile_dir/"
+        mkdir -p "$(dirname "$profile_dir")"
+        rsync -r --checksum --no-perms --chmod=u+rwX \
+          "$OUT/share/librewolf-profile/" "$profile_dir/"
 
-          mkdir -p "$config_dir"
-          rsync -r --checksum --no-perms --chmod=u+rwX \
-            "$OUT/share/librewolf-meta/profiles.ini" "$config_dir/profiles.ini"
-        ' \
-        --add-flags "--profile=${fullProfilePath}"
-    '';
-  }
+        mkdir -p "$config_dir"
+        rsync -r --checksum --no-perms --chmod=u+rwX \
+          "$OUT/share/librewolf-meta/profiles.ini" "$config_dir/profiles.ini"
+      ' \
+      --add-flags "--profile=${fullProfilePath}"
+  '';
+}

@@ -3,7 +3,8 @@
   pkgs,
   customPkgs,
   ...
-}: {
+}:
+{
   imports = [
     inputs.nixos-apple-silicon.nixosModules.default
     ./hardware-configuration.nix
@@ -19,7 +20,7 @@
       options hid_apple swap_fn_leftctrl=1
     '';
 
-    kernelModules = ["uinput"];
+    kernelModules = [ "uinput" ];
 
     initrd.availableKernelModules = [
       "xhci_pci"
@@ -78,10 +79,10 @@
   users.users.gavbog = {
     initialPassword = "gavbog";
     isNormalUser = true;
-    extraGroups = ["wheel"];
+    extraGroups = [ "wheel" ];
   };
   users.defaultUserShell = customPkgs.zsh;
-  users.groups.uinput = {};
+  users.groups.uinput = { };
 
   services.openssh.enable = true;
   services.cloudflare-warp.enable = true;
@@ -136,7 +137,7 @@
     nerd-fonts.iosevka
   ];
 
-  environment.shells = [customPkgs.zsh];
+  environment.shells = [ customPkgs.zsh ];
   environment.systemPackages = with pkgs // customPkgs; [
     asahi-bless # reboot to macOS
     git
