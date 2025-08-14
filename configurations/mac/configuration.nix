@@ -86,6 +86,7 @@
   services.openssh.enable = true;
   services.cloudflare-warp.enable = true;
 
+  services.desktopManager.plasma6.enable = true;
   services.desktopManager.cosmic.enable = true;
   services.displayManager.ly.enable = true;
 

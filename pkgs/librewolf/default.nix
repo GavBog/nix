@@ -49,11 +49,11 @@ in
           profile_dir="$config_dir/${profileName}"
 
           mkdir -p "$(dirname "$profile_dir")"
-          rsync -r --checksum --no-perms --no-owner --no-group \
+          rsync -r --checksum --no-perms --chmod=u+rwX \
             "$OUT/share/librewolf-profile/" "$profile_dir/"
 
           mkdir -p "$config_dir"
-          rsync -r --checksum --no-perms --no-owner --no-group \
+          rsync -r --checksum --no-perms --chmod=u+rwX \
             "$OUT/share/librewolf-meta/profiles.ini" "$config_dir/profiles.ini"
         ' \
         --add-flags "--profile=${fullProfilePath}"

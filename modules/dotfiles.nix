@@ -29,5 +29,10 @@ in {
     set -- "$dest1" # "$dest2"
     chown -R "$user_uid:$user_gid" "$@"
     chmod -R u+rwX "$@"
+
+    # dont forget about the parent directories!
+    set -- "$(dirname "$dest1")" # "$(dirname "$dest2")"
+    chown "$user_uid:$user_gid" "$@"
+    chmod u+rwX "$@"
   '';
 }
