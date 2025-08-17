@@ -88,7 +88,10 @@
   services.cloudflare-warp.enable = true;
 
   services.desktopManager.plasma6.enable = true;
-  services.desktopManager.cosmic.enable = true;
+  programs.hyprland = {
+    enable = true;
+    package = customPkgs.hyprland;
+  };
   services.displayManager.ly.enable = true;
 
   environment.cosmic.excludePackages = with pkgs; [
@@ -155,6 +158,8 @@
     tldr
     rustup
     clang
+    wofi
+    kdePackages.dolphin
   ];
 
   time.timeZone = "America/New_York";

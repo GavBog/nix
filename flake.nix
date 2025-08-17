@@ -90,7 +90,6 @@
               ];
             };
           }
-          ./modules/dotfiles.nix
           ./configurations/mac/configuration.nix
         ];
       };
