@@ -8,11 +8,7 @@ pkgs.symlinkJoin {
   nativeBuildInputs = [ pkgs.makeWrapper ];
 
   postBuild = ''
-    cfg="$out/etc/ghostty"
-    mkdir -p $cfg
-    cp ${configFile} $cfg/config
-
     wrapProgram $out/bin/ghostty \
-      --add-flags "--config-file=$cfg/config"
+      --add-flags "--config-file=${configFile}"
   '';
 }

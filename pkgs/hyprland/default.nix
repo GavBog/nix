@@ -16,11 +16,7 @@ pkgs.symlinkJoin {
   nativeBuildInputs = [ pkgs.makeWrapper ];
 
   postBuild = ''
-    cfg="$out/etc/hypr"
-    mkdir -p "$cfg"
-    cp -rT ${configPath} "$cfg"
-
     wrapProgram "$out/bin/Hyprland" \
-      --add-flags "-c $cfg/hyprland.conf"
+      --add-flags "-c ${configPath}"
   '';
 }
