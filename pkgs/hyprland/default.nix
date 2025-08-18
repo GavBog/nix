@@ -17,6 +17,6 @@ pkgs.symlinkJoin {
 
   postBuild = ''
     wrapProgram "$out/bin/Hyprland" \
-      --add-flags "-c ${configPath}"
+      --add-flags "-c ${configPath}/hyprland.conf"
   '';
 }
