@@ -8,6 +8,5 @@
       ghostty = callPackage ./ghostty { };
       librewolf = callPackage ./librewolf { };
       zsh = callPackage ./zsh { };
-      hyprland = callPackage ./hyprland { };
     };
 }

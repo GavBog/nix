@@ -31,9 +31,29 @@
 
   hardware.graphics.enable = true;
   hardware.asahi = {
-    # useExperimentalGPUDriver = true;
     setupAsahiSound = true;
     peripheralFirmwareDirectory = ./firmware;
+  };
+
+  powerManagement.enable = true;
+  services.power-profiles-daemon.enable = false;
+  services.tlp = {
+    enable = true;
+    settings = {
+      TLP_DEFAULT_MODE = "BAT";
+      TLP_PERSISTENT_DEFAULT = 1;
+
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+
+      CPU_MIN_PERF_ON_AC = 0;
+      CPU_MAX_PERF_ON_AC = 100;
+      CPU_MIN_PERF_ON_BAT = 0;
+      CPU_MAX_PERF_ON_BAT = 50;
+    };
   };
 
   hardware.bluetooth = {
@@ -87,11 +107,8 @@
   services.openssh.enable = true;
   services.cloudflare-warp.enable = true;
 
+  services.xserver.enable = true;
   services.desktopManager.plasma6.enable = true;
-  programs.hyprland = {
-    enable = true;
-    package = customPkgs.hyprland;
-  };
   services.displayManager.ly.enable = true;
 
   environment.cosmic.excludePackages = with pkgs; [
@@ -158,8 +175,7 @@
     tldr
     rustup
     clang
-    wofi
-    kdePackages.dolphin
+    polonium
   ];
 
   time.timeZone = "America/New_York";

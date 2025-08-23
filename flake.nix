@@ -3,19 +3,16 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nvim.url = "github:GavBog/nix?dir=pkgs/nvim";
-    librewolf.url = "github:GavBog/nix?dir=pkgs/librewolf";
-    # nixos-apple-silicon = {
-    #   url = "github:nix-community/nixos-apple-silicon";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
-    # TODO: remove this when https://github.com/nix-community/nixos-apple-silicon/issues/301 is closed
+    nvim = {
+      url = "github:GavBog/nix?dir=pkgs/nvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    librewolf = {
+      url = "github:GavBog/nix?dir=pkgs/librewolf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixos-apple-silicon = {
-      type = "github";
-      owner = "flokli";
-      repo = "nixos-apple-silicon";
-      ref = "mainline-mesa";
+      url = "github:nix-community/nixos-apple-silicon";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -82,16 +79,17 @@
             nix.settings = {
               extra-substituters = [
                 "https://cache.garnix.io"
-                "https://nixos-asahi.cachix.org"
+                "https://nix-community.cachix.org"
               ];
               extra-trusted-public-keys = [
                 "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
-                "nixos-asahi.cachix.org-1:CPH9jazpT/isOQvFhtAZ0Z18XNhAp29+LLVHr0b2qVk="
+                "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
               ];
             };
           }
           ./configurations/mac/configuration.nix
-        ];
+        ]
+        ++ (import ./modules);
       };
     };
 }
