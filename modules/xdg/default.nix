@@ -1,9 +1,16 @@
+{ pkgs, ... }:
+let
+  kdeConfig = builtins.path {
+    name = "kde-config";
+    path = ./config/kde;
+  };
+  configs = pkgs.symlinkJoin {
+    name = "xdg-config";
+    paths = [ kdeConfig ];
+  };
+in
 {
   environment.extraInit = ''
-    export XDG_CONFIG_DIRS="/etc/xdg:''${XDG_CONFIG_DIRS}:/etc/xdg"
+    export XDG_CONFIG_DIRS="${configs}:''${XDG_CONFIG_DIRS}:${configs}"
   '';
-
-  environment.etc."xdg/kdeglobals".source = ./config/kde/kdeglobals;
-  environment.etc."xdg/kcminputrc".source = ./config/kde/kcminputrc;
-  environment.etc."xdg/kwinrc".source = ./config/kde/kwinrc;
 }

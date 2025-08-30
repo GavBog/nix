@@ -168,14 +168,17 @@
     fastfetch
     gh
     ghostty
-    stremio
+    # stremio
     wl-clipboard
     zoxide
     fzf
     tldr
     rustup
     clang
-    polonium
+    kdePackages.krohnkite
+    kdePackages.kconfig
+    comma
+    nix-index
   ];
 
   time.timeZone = "America/New_York";

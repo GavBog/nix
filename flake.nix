@@ -73,6 +73,7 @@
         };
         modules = [
           {
+            nixpkgs.overlays = import ./overlays;
             environment.systemPackages = [ nvim.packages.aarch64-linux.default ];
           }
           {

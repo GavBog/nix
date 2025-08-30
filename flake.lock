@@ -23,11 +23,11 @@
       },
       "locked": {
         "dir": "pkgs/librewolf",
-        "lastModified": 1755484408,
-        "narHash": "sha256-b3SNhWbfWPsJb6QRDywurFHf13KZSne/IV+MD2Rc918=",
+        "lastModified": 1755986567,
+        "narHash": "sha256-nFK5f2OHLueHF69eUgaoeWv5QQZPTIjLImiWG/+Avfc=",
         "owner": "GavBog",
         "repo": "nix",
-        "rev": "a2acdd8e8e12179880f1b63f54a026176a976f95",
+        "rev": "aa712b670e58fd800370577e9e43467a86776634",
         "type": "github"
       },
       "original": {
@@ -39,11 +39,11 @@
     },
     "nixCats": {
       "locked": {
-        "lastModified": 1753170780,
-        "narHash": "sha256-rxnjPhOu7kr3REU8AhbKwRYnXHWlRXBqgWOO9MD0HyY=",
+        "lastModified": 1755685723,
+        "narHash": "sha256-WU7yfMmEbYmJnTWPe0RQpZyjf3c+btJ3BfE9RlnTtU0=",
         "owner": "BirdeeHub",
         "repo": "nixCats-nvim",
-        "rev": "e0c3fd5c218c808ce31e29caa91df43c65d7dfc6",
+        "rev": "515fb737c41504df023f9638aa0b63111a881c76",
         "type": "github"
       },
       "original": {
@@ -61,11 +61,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1755974465,
-        "narHash": "sha256-c2rnzvxt+sEeaXLPFnpnaofxc2PwcipMywRj6unDtp8=",
+        "lastModified": 1756110286,
+        "narHash": "sha256-NE0HwcQCQTgM+HuYqmiemPf/5e+3fjwowceAyJj+ikU=",
         "owner": "nix-community",
         "repo": "nixos-apple-silicon",
-        "rev": "5b323bc36ce3b18cceaefff63bd58f74378b3b8a",
+        "rev": "b99bf9bf7445416fe55da09034fc4a6cd733805c",
         "type": "github"
       },
       "original": {
@@ -76,11 +76,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1755829505,
-        "narHash": "sha256-4/Jd+LkQ2ssw8luQVkqVs9spDBVE6h/u/hC/tzngsPo=",
+        "lastModified": 1756536218,
+        "narHash": "sha256-ynQxPVN2FIPheUgTFhv01gYLbaiSOS7NgWJPm9LF9D0=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "f937f8ecd1c70efd7e9f90ba13dfb400cf559de4",
+        "rev": "a918bb3594dd243c2f8534b3be01b3cb4ed35fd1",
         "type": "github"
       },
       "original": {
@@ -99,11 +99,11 @@
       },
       "locked": {
         "dir": "pkgs/nvim",
-        "lastModified": 1755484408,
-        "narHash": "sha256-b3SNhWbfWPsJb6QRDywurFHf13KZSne/IV+MD2Rc918=",
+        "lastModified": 1755986567,
+        "narHash": "sha256-nFK5f2OHLueHF69eUgaoeWv5QQZPTIjLImiWG/+Avfc=",
         "owner": "GavBog",
         "repo": "nix",
-        "rev": "a2acdd8e8e12179880f1b63f54a026176a976f95",
+        "rev": "aa712b670e58fd800370577e9e43467a86776634",
         "type": "github"
       },
       "original": {

@@ -202,6 +202,9 @@
           # https://github.com/NixOS/nixpkgs/blob/master/pkgs/build-support/setup-hooks/make-wrapper.sh
           extraWrapperArgs = {
             test = [ ''--set CATTESTVAR2 "It worked again!"'' ];
+            general = [
+              ''--run 'mkdir -p "''${HOME}/.config/nvim"' ''
+            ];
           };
 
           # lists of the functions you would have passed to
