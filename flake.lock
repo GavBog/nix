@@ -23,11 +23,11 @@
       },
       "locked": {
         "dir": "pkgs/librewolf",
-        "lastModified": 1755986567,
-        "narHash": "sha256-nFK5f2OHLueHF69eUgaoeWv5QQZPTIjLImiWG/+Avfc=",
+        "lastModified": 1756593793,
+        "narHash": "sha256-xi1T7/E1fCIu3Hk+NNEQX7C0KdQbIAa6brK+gtzqZUg=",
         "owner": "GavBog",
         "repo": "nix",
-        "rev": "aa712b670e58fd800370577e9e43467a86776634",
+        "rev": "4b349b0f55cea4bdab0a15ca9e407663ab455b1d",
         "type": "github"
       },
       "original": {
@@ -39,11 +39,11 @@
     },
     "nixCats": {
       "locked": {
-        "lastModified": 1755685723,
-        "narHash": "sha256-WU7yfMmEbYmJnTWPe0RQpZyjf3c+btJ3BfE9RlnTtU0=",
+        "lastModified": 1756502529,
+        "narHash": "sha256-IPhN1a/DecHCJKugq51TnPqcMkwHU7qrQXagR2k1KwA=",
         "owner": "BirdeeHub",
         "repo": "nixCats-nvim",
-        "rev": "515fb737c41504df023f9638aa0b63111a881c76",
+        "rev": "b262211fc80bf5909f9b6642a7930fee907e3e8d",
         "type": "github"
       },
       "original": {
@@ -99,11 +99,11 @@
       },
       "locked": {
         "dir": "pkgs/nvim",
-        "lastModified": 1755986567,
-        "narHash": "sha256-nFK5f2OHLueHF69eUgaoeWv5QQZPTIjLImiWG/+Avfc=",
+        "lastModified": 1756593793,
+        "narHash": "sha256-xi1T7/E1fCIu3Hk+NNEQX7C0KdQbIAa6brK+gtzqZUg=",
         "owner": "GavBog",
         "repo": "nix",
-        "rev": "aa712b670e58fd800370577e9e43467a86776634",
+        "rev": "4b349b0f55cea4bdab0a15ca9e407663ab455b1d",
         "type": "github"
       },
       "original": {
