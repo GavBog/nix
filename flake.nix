@@ -3,14 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nvim = {
-      url = "github:GavBog/nix?dir=pkgs/nvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    librewolf = {
-      url = "github:GavBog/nix?dir=pkgs/librewolf";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixCats.url = "github:BirdeeHub/nixCats-nvim";
     nixos-apple-silicon = {
       url = "github:nix-community/nixos-apple-silicon";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -21,8 +14,7 @@
     {
       self,
       nixpkgs,
-      nvim,
-      librewolf,
+      nixCats,
       ...
     }@inputs:
     let
@@ -42,17 +34,21 @@
         in
         (wrappedPackages.packages pkgs)
       );
+      nvimExports = import ./pkgs/nvim {
+        inherit nixpkgs;
+        inherit nixCats;
+      };
     in
     {
       # Re-export nvim for use independently
       apps = forAllSystems (system: {
         nvim = {
           type = "app";
-          program = "${nvim.packages.${system}.default}/bin/nvim";
+          program = "${nvimExports.packages.${system}.nvim}/bin/nvim";
         };
         librewolf = {
           type = "app";
-          program = "${librewolf.packages.${system}.default}/bin/librewolf";
+          program = "${customPkgs.${system}.librewolf}/bin/librewolf";
         };
       });
 
@@ -74,7 +70,7 @@
         modules = [
           {
             nixpkgs.overlays = import ./overlays;
-            environment.systemPackages = [ nvim.packages.aarch64-linux.default ];
+            environment.systemPackages = [ nvimExports.packages.aarch64-linux.nvim ];
           }
           {
             nix.settings = {

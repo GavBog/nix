@@ -7,7 +7,7 @@ return {
     lazy = true,
     event = "VeryLazy",
     opts = {
-      prefer_local = true,
+      prefer_local = false,
 
       excluded_servers = {
         "diagnosticls",

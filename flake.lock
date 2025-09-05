@@ -15,28 +15,6 @@
         "type": "github"
       }
     },
-    "librewolf": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "dir": "pkgs/librewolf",
-        "lastModified": 1756593793,
-        "narHash": "sha256-xi1T7/E1fCIu3Hk+NNEQX7C0KdQbIAa6brK+gtzqZUg=",
-        "owner": "GavBog",
-        "repo": "nix",
-        "rev": "4b349b0f55cea4bdab0a15ca9e407663ab455b1d",
-        "type": "github"
-      },
-      "original": {
-        "dir": "pkgs/librewolf",
-        "owner": "GavBog",
-        "repo": "nix",
-        "type": "github"
-      }
-    },
     "nixCats": {
       "locked": {
         "lastModified": 1756502529,
@@ -76,11 +54,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1756536218,
-        "narHash": "sha256-ynQxPVN2FIPheUgTFhv01gYLbaiSOS7NgWJPm9LF9D0=",
+        "lastModified": 1756911493,
+        "narHash": "sha256-6n/n1GZQ/vi+LhFXMSyoseKdNfc2QQaSBXJdgamrbkE=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "a918bb3594dd243c2f8534b3be01b3cb4ed35fd1",
+        "rev": "c6a788f552b7b7af703b1a29802a7233c0067908",
         "type": "github"
       },
       "original": {
@@ -90,35 +68,11 @@
         "type": "github"
       }
     },
-    "nvim": {
-      "inputs": {
-        "nixCats": "nixCats",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "dir": "pkgs/nvim",
-        "lastModified": 1756593793,
-        "narHash": "sha256-xi1T7/E1fCIu3Hk+NNEQX7C0KdQbIAa6brK+gtzqZUg=",
-        "owner": "GavBog",
-        "repo": "nix",
-        "rev": "4b349b0f55cea4bdab0a15ca9e407663ab455b1d",
-        "type": "github"
-      },
-      "original": {
-        "dir": "pkgs/nvim",
-        "owner": "GavBog",
-        "repo": "nix",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
-        "librewolf": "librewolf",
+        "nixCats": "nixCats",
         "nixos-apple-silicon": "nixos-apple-silicon",
-        "nixpkgs": "nixpkgs",
-        "nvim": "nvim"
+        "nixpkgs": "nixpkgs"
       }
     },
     "treefmt-nix": {
