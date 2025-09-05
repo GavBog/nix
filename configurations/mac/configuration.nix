@@ -157,6 +157,11 @@
     nerd-fonts.iosevka
   ];
 
+  # https://github.com/NixOS/nixpkgs/issues/437992
+  nixpkgs.config.permittedInsecurePackages = [
+    "qtwebengine-5.15.19"
+  ];
+
   environment.shells = [ customPkgs.zsh ];
   environment.systemPackages = with pkgs // customPkgs; [
     asahi-bless # reboot to macOS
@@ -168,7 +173,7 @@
     fastfetch
     gh
     ghostty
-    # stremio
+    stremio
     wl-clipboard
     zoxide
     fzf
@@ -179,6 +184,7 @@
     kdePackages.kconfig
     comma
     nix-index
+    prismlauncher
   ];
 
   time.timeZone = "America/New_York";
