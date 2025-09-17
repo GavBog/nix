@@ -12,7 +12,7 @@ return {
       --- The below dependencies are optional,
       "folke/snacks.nvim",
       "saghen/blink.cmp",
-      "echasnovski/mini.icons",
+      "nvim-mini/mini.icons",
       "zbirenbaum/copilot.lua", -- for providers='copilot'
       "MeanderingProgrammer/render-markdown.nvim",
     },
