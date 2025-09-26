@@ -43,4 +43,6 @@
 # resize-overlay-duration = 4s 200ms
 
 theme = GitHub-Dark-High-Contrast
+font-family = Iosevka Nerd Font
+font-size=14
 window-decoration = none

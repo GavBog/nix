@@ -8,5 +8,6 @@
       ghostty = callPackage ./ghostty { };
       librewolf = callPackage ./librewolf { };
       zsh = callPackage ./zsh { };
+      dwl = callPackage ./dwl { };
     };
 }

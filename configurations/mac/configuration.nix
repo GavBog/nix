@@ -108,12 +108,11 @@
   services.cloudflare-warp.enable = true;
 
   services.xserver.enable = true;
+  services.displayManager.sessionPackages = [
+    customPkgs.dwl
+  ];
   services.desktopManager.plasma6.enable = true;
   services.displayManager.ly.enable = true;
-
-  environment.cosmic.excludePackages = with pkgs; [
-    cosmic-term
-  ];
 
   services.udev.extraRules = ''
     KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
@@ -163,6 +162,7 @@
   ];
 
   environment.shells = [ customPkgs.zsh ];
+  programs.nix-index-database.comma.enable = true;
   environment.systemPackages = with pkgs // customPkgs; [
     asahi-bless # reboot to macOS
     git
@@ -182,9 +182,11 @@
     clang
     kdePackages.krohnkite
     kdePackages.kconfig
-    comma
-    nix-index
     prismlauncher
+    ffmpeg
+    wmenu
+    ironbar
+    dwl
   ];
 
   time.timeZone = "America/New_York";

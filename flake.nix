@@ -8,6 +8,10 @@
       url = "github:nix-community/nixos-apple-silicon";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -15,6 +19,7 @@
       self,
       nixpkgs,
       nixCats,
+      nix-index-database,
       ...
     }@inputs:
     let
@@ -84,6 +89,7 @@
               ];
             };
           }
+          nix-index-database.nixosModules.nix-index
           ./configurations/mac/configuration.nix
         ]
         ++ (import ./modules);

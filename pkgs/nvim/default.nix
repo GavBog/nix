@@ -84,6 +84,7 @@ let
           gcc
           rustup
           gnumake
+          tree-sitter
           # lldb
           # vscode-js-debug
           # python312Packages.debugpy
