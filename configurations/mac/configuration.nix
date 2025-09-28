@@ -187,6 +187,7 @@
     wmenu
     ironbar
     dwl
+    mergiraf
   ];
 
   time.timeZone = "America/New_York";

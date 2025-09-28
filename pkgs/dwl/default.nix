@@ -13,6 +13,10 @@ let
       name = "foreign-toplevel-management-patch";
       path = ./patches/ftlm.patch;
     })
+    (builtins.path {
+      name = "ipc-patch";
+      path = ./patches/ipc.patch;
+    })
   ];
 
   dwl = pkgs.dwl.overrideAttrs (old: {
@@ -30,19 +34,24 @@ let
       pkgs.pixman
       pkgs.libdrm
     ];
-    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.git ];
+
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [
+      pkgs.git
+      pkgs.mergiraf
+    ];
 
     patchPhase = ''
       runHook prePatch
 
       git init
+      git config merge.conflictStyle diff3
       git config user.email "builder@nixos.invalid"
       git config user.name "Nix Builder"
       git add .
       git commit -m "base tree"
 
       for p in ${toString patches}; do
-        git am --3way "$p" || exit 1
+        git am --3way "$p" || true
       done
 
       runHook postPatch
@@ -50,6 +59,28 @@ let
 
     postPatch = (old.postPatch or "") + ''
       cp ${configFile} config.h
+
+      find . -type f ! -path '*/.git/*' -print0 | while IFS= read -r -d "" f; do
+        if grep -q '^<<<<<<< HEAD' "$f"; then
+          case "$(basename "$f")" in
+            Makefile|GNUmakefile) mergiraf solve "$f" --language "GNU Make" || true ;;
+            *) mergiraf solve "$f" || true ;;
+          esac
+
+          # Fallback: strip confict markers, keep both sides
+          awk '
+            BEGIN { inconflict = 0 }
+            /^<<<<<<< / { inconflict = 1; next }
+            /^\|\|\|\|\|\|\|/ { inconflict = 3; next }
+            /^=======/ { inconflict = 2; next }
+            /^>>>>>>> / { inconflict = 0; next }
+            inconflict == 0 { print; next }
+            inconflict == 1 { print; next }
+            inconflict == 3 { next }
+            inconflict == 2 { print; next }
+          ' "$f" > "$f.tmp" && mv "$f.tmp" "$f"
+        fi
+      done
     '';
   });
 
