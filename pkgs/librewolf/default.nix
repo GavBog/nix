@@ -26,8 +26,8 @@ let
     path = ./profiles.ini;
   };
 
-  # Shell-evaluated at runtime; expands to ~/.librewolf if XDG isn't set
-  configDir = "${"\${XDG_CONFIG_HOME:-\$HOME/.librewolf}"}";
+  # TODO: Make this $HOME/.librewolf evaluated at runtime
+  configDir = "/home/gavbog/.librewolf";
   fullProfilePath = "${configDir}/${profileName}";
 in
 pkgs.symlinkJoin {

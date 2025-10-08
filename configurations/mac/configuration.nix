@@ -56,6 +56,15 @@
     };
   };
 
+  services.pipewire = {
+    enable = true;
+    audio.enable = true;
+    pulse.enable = true;
+    jack.enable = true;
+  };
+
+  security.rtkit.enable = true;
+
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
@@ -188,6 +197,8 @@
     ironbar
     dwl
     mergiraf
+    brightnessctl
+    obsidian
   ];
 
   time.timeZone = "America/New_York";

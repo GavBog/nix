@@ -1,6 +1,7 @@
 {
   nixpkgs,
   nixCats,
+  neovim-nightly-overlay,
 }:
 let
   inherit (nixCats) utils;
@@ -12,7 +13,7 @@ let
   # will not apply to module imports
   # as that will have your system values
   extra_pkg_config = {
-    # allowUnfree = true;
+    allowUnfree = true;
   };
   # management of the system variable is one of the harder parts of using flakes.
 
@@ -85,6 +86,7 @@ let
           rustup
           gnumake
           tree-sitter
+          github-copilot-cli
           # lldb
           # vscode-js-debug
           # python312Packages.debugpy
@@ -96,54 +98,189 @@ let
       # but you have the option, and that is demonstrated here.
       startupPlugins = with pkgs.vimPlugins; {
         general = [
-          # # LazyVim
-          # lazy-nvim
           # LazyVim
-          # bufferline-nvim
-          # lazydev-nvim
-          # conform-nvim
-          # flash-nvim
+          # blink-cmp-avante
+          # blink-copilot
           # friendly-snippets
-          # gitsigns-nvim
-          # grug-far-nvim
-          # noice-nvim
-          # lualine-nvim
-          # nui-nvim
-          # nvim-lint
+          # github-nvim-theme
+          # harpoon
           # nvim-lspconfig
+          # nvim-navic
+          # # nvim-treesitter.withAllGrammars
           # nvim-treesitter-textobjects
           # nvim-ts-autotag
-          # ts-comments-nvim
-          # blink-cmp
-          # nvim-web-devicons
-          # persistence-nvim
-          # plenary-nvim
-          # telescope-fzf-native-nvim
-          # telescope-nvim
-          # todo-comments-nvim
-          # tokyonight-nvim
-          # trouble-nvim
-          # vim-illuminate
+          # nvim-ts-context-commentstring
+          # rustaceanvim
+          # treesj
           # vim-startuptime
-          # which-key-nvim
-          # snacks-nvim
-          # nvim-treesitter-textobjects
-          # nvim-treesitter.withAllGrammars
-          # # This is for if you only want some of the grammars
-          # # (nvim-treesitter.withPlugins (
-          # #   plugins: with plugins; [
-          # #     nix
-          # #     lua
-          # #   ]
-          # # ))
-          #
-          # # sometimes you have to fix some names
-          # { plugin = catppuccin-nvim; name = "catppuccin"; }
-          # { plugin = mini-ai; name = "mini.ai"; }
-          # { plugin = mini-icons; name = "mini.icons"; }
-          # { plugin = mini-pairs; name = "mini.pairs"; }
-          # # you could do this within the lazy spec instead if you wanted
-          # # and get the new names from `:NixCats pawsible` debug command
+          # {
+          #   plugin = avante-nvim;
+          #   name = "avante.nvim";
+          # }
+          # {
+          #   plugin = blink-cmp;
+          #   name = "blink.cmp";
+          # }
+          # {
+          #   plugin = copilot-lua;
+          #   name = "copilot.lua";
+          # }
+          # {
+          #   plugin = crates-nvim;
+          #   name = "crates.nvim";
+          # }
+          # {
+          #   plugin = dial-nvim;
+          #   name = "dial.nvim";
+          # }
+          # {
+          #   plugin = dressing-nvim;
+          #   name = "dressing.nvim";
+          # }
+          # {
+          #   plugin = flash-nvim;
+          #   name = "flash.nvim";
+          # }
+          # {
+          #   plugin = gitsigns-nvim;
+          #   name = "gitsigns.nvim";
+          # }
+          # {
+          #   plugin = grug-far-nvim;
+          #   name = "grug-far.nvim";
+          # }
+          # {
+          #   plugin = inc-rename-nvim;
+          #   name = "inc-rename.nvim";
+          # }
+          # {
+          #   plugin = indent-blankline-nvim;
+          #   name = "indent-blankline.nvim";
+          # }
+          # {
+          #   plugin = kulala-nvim;
+          #   name = "kulala.nvim";
+          # }
+          # {
+          #   plugin = lazydev-nvim;
+          #   name = "lazydev.nvim";
+          # }
+          # {
+          #   plugin = lazy-lsp-nvim;
+          #   name = "lazy-lsp.nvim";
+          # }
+          # {
+          #   plugin = lazy-nvim;
+          #   name = "lazy.nvim";
+          # }
+          # {
+          #   plugin = lsp-zero-nvim;
+          #   name = "lsp-zero.nvim";
+          # }
+          # {
+          #   plugin = lualine-nvim;
+          #   name = "lualine.nvim";
+          # }
+          # {
+          #   plugin = mini-ai;
+          #   name = "mini.ai";
+          # }
+          # {
+          #   plugin = mini-comment;
+          #   name = "mini.comment";
+          # }
+          # {
+          #   plugin = mini-hipatterns;
+          #   name = "mini.hipatterns";
+          # }
+          # {
+          #   plugin = mini-icons;
+          #   name = "mini.icons";
+          # }
+          # {
+          #   plugin = mini-move;
+          #   name = "mini.move";
+          # }
+          # {
+          #   plugin = mini-pairs;
+          #   name = "mini.pairs";
+          # }
+          # {
+          #   plugin = mini-surround;
+          #   name = "mini.surround";
+          # }
+          # {
+          #   plugin = noice-nvim;
+          #   name = "noice.nvim";
+          # }
+          # {
+          #   plugin = nui-nvim;
+          #   name = "nui.nvim";
+          # }
+          # {
+          #   plugin = obsidian-nvim;
+          #   name = "obsidian.nvim";
+          # }
+          # {
+          #   plugin = octo-nvim;
+          #   name = "octo.nvim";
+          # }
+          # {
+          #   plugin = oil-nvim;
+          #   name = "oil.nvim";
+          # }
+          # {
+          #   plugin = overseer-nvim;
+          #   name = "overseer.nvim";
+          # }
+          # {
+          #   plugin = persistence-nvim;
+          #   name = "persistence.nvim";
+          # }
+          # {
+          #   plugin = plenary-nvim;
+          #   name = "plenary.nvim";
+          # }
+          # {
+          #   plugin = refactoring-nvim;
+          #   name = "refactoring.nvim";
+          # }
+          # {
+          #   plugin = render-markdown-nvim;
+          #   name = "render-markdown.nvim";
+          # }
+          # {
+          #   plugin = smear-cursor-nvim;
+          #   name = "smear-cursor.nvim";
+          # }
+          # {
+          #   plugin = snacks-nvim;
+          #   name = "snacks.nvim";
+          # }
+          # {
+          #   plugin = substitute-nvim;
+          #   name = "substitute.nvim";
+          # }
+          # {
+          #   plugin = todo-comments-nvim;
+          #   name = "todo-comments.nvim";
+          # }
+          # {
+          #   plugin = trouble-nvim;
+          #   name = "trouble.nvim";
+          # }
+          # {
+          #   plugin = ts-comments-nvim;
+          #   name = "ts-comments.nvim";
+          # }
+          # {
+          #   plugin = which-key-nvim;
+          #   name = "which-key.nvim";
+          # }
+          # {
+          #   plugin = yanky-nvim;
+          #   name = "yanky.nvim";
+          # }
         ];
       };
 
@@ -222,7 +359,7 @@ let
           # IMPORTANT:
           # your alias may not conflict with your other packages.
           # aliases = [ "vim" ];
-          # neovim-unwrapped = inputs.neovim-nightly-overlay.packages.${pkgs.system}.neovim;
+          neovim-unwrapped = neovim-nightly-overlay.packages.${pkgs.system}.neovim;
           hosts.python3.enable = true;
           hosts.node.enable = true;
         };
@@ -245,6 +382,7 @@ let
           suffix-LD = true;
           wrapRc = false;
           unwrappedCfgPath = utils.mkLuaInline "os.getenv('HOME') .. '/.config/nvim'";
+          neovim-unwrapped = neovim-nightly-overlay.packages.${pkgs.system}.neovim;
         };
         categories = {
           general = true;

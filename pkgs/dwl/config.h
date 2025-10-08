@@ -1,3 +1,5 @@
+#include <X11/XF86keysym.h>
+
 /* Taken from https://github.com/djpohly/dwl/issues/466 */
 #define COLOR(hex)                                                             \
   {((hex >> 24) & 0xFF) / 255.0f, ((hex >> 16) & 0xFF) / 255.0f,               \
@@ -140,12 +142,27 @@ static const char *termcmd[] = {"ghostty", NULL};
 static const char *browsercmd[] = {"librewolf", NULL};
 static const char *menucmd[] = {"wmenu-run", NULL};
 
+static const char *brightness_up[] = {"brightnessctl", "set", "5%+", NULL};
+static const char *brightness_down[] = {"brightnessctl", "set", "5%-", NULL};
+
+static const char *volume_up[] = {"wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@",
+                                  "5%+", NULL};
+static const char *volume_down[] = {"wpctl", "set-volume",
+                                    "@DEFAULT_AUDIO_SINK@", "5%-", NULL};
+static const char *volume_mute[] = {"wpctl", "set-mute", "@DEFAULT_AUDIO_SINK@",
+                                    "toggle", NULL};
+
 static const Key keys[] = {
     /* Note that Shift changes certain key codes: c -> C, 2 -> at, etc. */
     /* modifier                  key                 function        argument */
     {MODKEY, XKB_KEY_p, spawn, {.v = menucmd}},
     {MODKEY | WLR_MODIFIER_SHIFT, XKB_KEY_Return, spawn, {.v = termcmd}},
     {MODKEY, XKB_KEY_b, spawn, {.v = browsercmd}},
+    {0, XF86XK_MonBrightnessUp, spawn, {.v = brightness_up}},
+    {0, XF86XK_MonBrightnessDown, spawn, {.v = brightness_down}},
+    {0, XF86XK_AudioRaiseVolume, spawn, {.v = volume_up}},
+    {0, XF86XK_AudioLowerVolume, spawn, {.v = volume_down}},
+    {0, XF86XK_AudioMute, spawn, {.v = volume_mute}},
     {MODKEY, XKB_KEY_j, focusstack, {.i = +1}},
     {MODKEY, XKB_KEY_k, focusstack, {.i = -1}},
     {MODKEY, XKB_KEY_i, incnmaster, {.i = +1}},

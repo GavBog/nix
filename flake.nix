@@ -12,6 +12,14 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    neovim-nightly-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    tidal-cycles = {
+      url = "github:mitchmindtree/tidalcycles.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -19,7 +27,9 @@
       self,
       nixpkgs,
       nixCats,
+      neovim-nightly-overlay,
       nix-index-database,
+      tidal-cycles,
       ...
     }@inputs:
     let
@@ -42,6 +52,7 @@
       nvimExports = import ./pkgs/nvim {
         inherit nixpkgs;
         inherit nixCats;
+        inherit neovim-nightly-overlay;
       };
     in
     {
@@ -75,17 +86,29 @@
         modules = [
           {
             nixpkgs.overlays = import ./overlays;
-            environment.systemPackages = [ nvimExports.packages.aarch64-linux.nvim ];
+            environment.systemPackages = [
+              nvimExports.packages.aarch64-linux.nvim
+              tidal-cycles.packages.aarch64-linux.ghcWithTidal
+              tidal-cycles.packages.aarch64-linux.supercollider
+              tidal-cycles.packages.aarch64-linux.sclang-with-superdirt
+              # tidal-cycles.packages.aarch64-linux.superdirt-start-sc
+              tidal-cycles.packages.aarch64-linux.superdirt-start
+              tidal-cycles.packages.aarch64-linux.superdirt-install
+              tidal-cycles.packages.aarch64-linux.tidal
+              # tidal-cycles.packages.aarch64-linux.vim-tidal
+            ];
           }
           {
             nix.settings = {
               extra-substituters = [
                 "https://cache.garnix.io"
                 "https://nix-community.cachix.org"
+                "https://nixos-apple-silicon.cachix.org"
               ];
               extra-trusted-public-keys = [
                 "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
                 "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+                "nixos-apple-silicon.cachix.org-1:8psDu5SA5dAD7qA0zMy5UT292TxeEPzIz8VVEr2Js20="
               ];
             };
           }
