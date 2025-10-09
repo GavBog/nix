@@ -2,6 +2,8 @@
   nixpkgs,
   nixCats,
   neovim-nightly-overlay,
+  nvim-treesitter-main,
+  tidal-cycles,
 }:
 let
   inherit (nixCats) utils;
@@ -39,6 +41,8 @@ let
       # (utils.fixSystemizedOverlay inputs.codeium.overlays
       #   (system: inputs.codeium.overlays.${system}.default)
       # )
+      nvim-treesitter-main.overlays.default
+      tidal-cycles.overlays.default
     ];
 
   # see :help nixCats.flake.outputs.categories
@@ -87,6 +91,7 @@ let
           gnumake
           tree-sitter
           github-copilot-cli
+          imagemagick
           # lldb
           # vscode-js-debug
           # python312Packages.debugpy
@@ -98,189 +103,188 @@ let
       # but you have the option, and that is demonstrated here.
       startupPlugins = with pkgs.vimPlugins; {
         general = [
-          # LazyVim
-          # blink-cmp-avante
-          # blink-copilot
-          # friendly-snippets
-          # github-nvim-theme
-          # harpoon
-          # nvim-lspconfig
-          # nvim-navic
-          # # nvim-treesitter.withAllGrammars
-          # nvim-treesitter-textobjects
-          # nvim-ts-autotag
-          # nvim-ts-context-commentstring
-          # rustaceanvim
-          # treesj
-          # vim-startuptime
-          # {
-          #   plugin = avante-nvim;
-          #   name = "avante.nvim";
-          # }
-          # {
-          #   plugin = blink-cmp;
-          #   name = "blink.cmp";
-          # }
-          # {
-          #   plugin = copilot-lua;
-          #   name = "copilot.lua";
-          # }
-          # {
-          #   plugin = crates-nvim;
-          #   name = "crates.nvim";
-          # }
-          # {
-          #   plugin = dial-nvim;
-          #   name = "dial.nvim";
-          # }
-          # {
-          #   plugin = dressing-nvim;
-          #   name = "dressing.nvim";
-          # }
-          # {
-          #   plugin = flash-nvim;
-          #   name = "flash.nvim";
-          # }
-          # {
-          #   plugin = gitsigns-nvim;
-          #   name = "gitsigns.nvim";
-          # }
-          # {
-          #   plugin = grug-far-nvim;
-          #   name = "grug-far.nvim";
-          # }
-          # {
-          #   plugin = inc-rename-nvim;
-          #   name = "inc-rename.nvim";
-          # }
-          # {
-          #   plugin = indent-blankline-nvim;
-          #   name = "indent-blankline.nvim";
-          # }
-          # {
-          #   plugin = kulala-nvim;
-          #   name = "kulala.nvim";
-          # }
-          # {
-          #   plugin = lazydev-nvim;
-          #   name = "lazydev.nvim";
-          # }
-          # {
-          #   plugin = lazy-lsp-nvim;
-          #   name = "lazy-lsp.nvim";
-          # }
-          # {
-          #   plugin = lazy-nvim;
-          #   name = "lazy.nvim";
-          # }
-          # {
-          #   plugin = lsp-zero-nvim;
-          #   name = "lsp-zero.nvim";
-          # }
-          # {
-          #   plugin = lualine-nvim;
-          #   name = "lualine.nvim";
-          # }
-          # {
-          #   plugin = mini-ai;
-          #   name = "mini.ai";
-          # }
-          # {
-          #   plugin = mini-comment;
-          #   name = "mini.comment";
-          # }
-          # {
-          #   plugin = mini-hipatterns;
-          #   name = "mini.hipatterns";
-          # }
-          # {
-          #   plugin = mini-icons;
-          #   name = "mini.icons";
-          # }
-          # {
-          #   plugin = mini-move;
-          #   name = "mini.move";
-          # }
-          # {
-          #   plugin = mini-pairs;
-          #   name = "mini.pairs";
-          # }
-          # {
-          #   plugin = mini-surround;
-          #   name = "mini.surround";
-          # }
-          # {
-          #   plugin = noice-nvim;
-          #   name = "noice.nvim";
-          # }
-          # {
-          #   plugin = nui-nvim;
-          #   name = "nui.nvim";
-          # }
-          # {
-          #   plugin = obsidian-nvim;
-          #   name = "obsidian.nvim";
-          # }
-          # {
-          #   plugin = octo-nvim;
-          #   name = "octo.nvim";
-          # }
-          # {
-          #   plugin = oil-nvim;
-          #   name = "oil.nvim";
-          # }
-          # {
-          #   plugin = overseer-nvim;
-          #   name = "overseer.nvim";
-          # }
-          # {
-          #   plugin = persistence-nvim;
-          #   name = "persistence.nvim";
-          # }
-          # {
-          #   plugin = plenary-nvim;
-          #   name = "plenary.nvim";
-          # }
-          # {
-          #   plugin = refactoring-nvim;
-          #   name = "refactoring.nvim";
-          # }
-          # {
-          #   plugin = render-markdown-nvim;
-          #   name = "render-markdown.nvim";
-          # }
-          # {
-          #   plugin = smear-cursor-nvim;
-          #   name = "smear-cursor.nvim";
-          # }
-          # {
-          #   plugin = snacks-nvim;
-          #   name = "snacks.nvim";
-          # }
-          # {
-          #   plugin = substitute-nvim;
-          #   name = "substitute.nvim";
-          # }
-          # {
-          #   plugin = todo-comments-nvim;
-          #   name = "todo-comments.nvim";
-          # }
-          # {
-          #   plugin = trouble-nvim;
-          #   name = "trouble.nvim";
-          # }
-          # {
-          #   plugin = ts-comments-nvim;
-          #   name = "ts-comments.nvim";
-          # }
-          # {
-          #   plugin = which-key-nvim;
-          #   name = "which-key.nvim";
-          # }
-          # {
-          #   plugin = yanky-nvim;
-          #   name = "yanky.nvim";
-          # }
+          blink-copilot
+          friendly-snippets
+          github-nvim-theme
+          LazyVim
+          nvim-lspconfig
+          nvim-navic
+          nvim-treesitter.withAllGrammars
+          nvim-treesitter-textobjects
+          nvim-ts-autotag
+          nvim-ts-context-commentstring
+          rustaceanvim
+          treesj
+          vim-startuptime
+          vim-tidal
+          {
+            plugin = blink-cmp;
+            name = "blink.cmp";
+          }
+          {
+            plugin = copilot-lua;
+            name = "copilot.lua";
+          }
+          {
+            plugin = crates-nvim;
+            name = "crates.nvim";
+          }
+          {
+            plugin = dial-nvim;
+            name = "dial.nvim";
+          }
+          {
+            plugin = flash-nvim;
+            name = "flash.nvim";
+          }
+          {
+            plugin = gitsigns-nvim;
+            name = "gitsigns.nvim";
+          }
+          {
+            plugin = grug-far-nvim;
+            name = "grug-far.nvim";
+          }
+          {
+            plugin = harpoon2;
+            name = "harpoon";
+          }
+          {
+            plugin = inc-rename-nvim;
+            name = "inc-rename.nvim";
+          }
+          {
+            plugin = indent-blankline-nvim;
+            name = "indent-blankline.nvim";
+          }
+          {
+            plugin = kulala-nvim;
+            name = "kulala.nvim";
+          }
+          {
+            plugin = lazydev-nvim;
+            name = "lazydev.nvim";
+          }
+          {
+            plugin = lazy-lsp-nvim;
+            name = "lazy-lsp.nvim";
+          }
+          {
+            plugin = lazy-nvim;
+            name = "lazy.nvim";
+          }
+          {
+            plugin = lsp-zero-nvim;
+            name = "lsp-zero.nvim";
+          }
+          {
+            plugin = lualine-nvim;
+            name = "lualine.nvim";
+          }
+          {
+            plugin = mini-ai;
+            name = "mini.ai";
+          }
+          {
+            plugin = mini-comment;
+            name = "mini.comment";
+          }
+          {
+            plugin = mini-hipatterns;
+            name = "mini.hipatterns";
+          }
+          {
+            plugin = mini-icons;
+            name = "mini.icons";
+          }
+          {
+            plugin = mini-move;
+            name = "mini.move";
+          }
+          {
+            plugin = mini-pairs;
+            name = "mini.pairs";
+          }
+          {
+            plugin = mini-surround;
+            name = "mini.surround";
+          }
+          {
+            plugin = noice-nvim;
+            name = "noice.nvim";
+          }
+          {
+            plugin = nui-nvim;
+            name = "nui.nvim";
+          }
+          {
+            plugin = obsidian-nvim;
+            name = "obsidian.nvim";
+          }
+          {
+            plugin = octo-nvim;
+            name = "octo.nvim";
+          }
+          {
+            plugin = oil-nvim;
+            name = "oil.nvim";
+          }
+          {
+            plugin = overseer-nvim;
+            name = "overseer.nvim";
+          }
+          {
+            plugin = persistence-nvim;
+            name = "persistence.nvim";
+          }
+          {
+            plugin = plenary-nvim;
+            name = "plenary.nvim";
+          }
+          {
+            plugin = refactoring-nvim;
+            name = "refactoring.nvim";
+          }
+          {
+            plugin = render-markdown-nvim;
+            name = "render-markdown.nvim";
+          }
+          {
+            plugin = sidekick-nvim;
+            name = "sidekick.nvim";
+          }
+          {
+            plugin = smear-cursor-nvim;
+            name = "smear-cursor.nvim";
+          }
+          {
+            plugin = snacks-nvim;
+            name = "snacks.nvim";
+          }
+          {
+            plugin = substitute-nvim;
+            name = "substitute.nvim";
+          }
+          {
+            plugin = todo-comments-nvim;
+            name = "todo-comments.nvim";
+          }
+          {
+            plugin = trouble-nvim;
+            name = "trouble.nvim";
+          }
+          {
+            plugin = ts-comments-nvim;
+            name = "ts-comments.nvim";
+          }
+          {
+            plugin = which-key-nvim;
+            name = "which-key.nvim";
+          }
+          {
+            plugin = yanky-nvim;
+            name = "yanky.nvim";
+          }
         ];
       };
 
