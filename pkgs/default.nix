@@ -9,6 +9,5 @@
       librewolf = callPackage ./librewolf { };
       zsh = callPackage ./zsh { };
       dwl = callPackage ./dwl { };
-      ironbar = callPackage ./ironbar { };
     };
 }

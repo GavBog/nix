@@ -59,7 +59,6 @@
         inherit nixCats;
         inherit neovim-nightly-overlay;
         inherit nvim-treesitter-main;
-        inherit tidal-cycles;
       };
     in
     {

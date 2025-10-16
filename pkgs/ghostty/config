@@ -45,5 +45,5 @@
 theme = GitHub Dark High Contrast
 font-family = Iosevka Nerd Font
 font-size=14
-cursor-text = white
+cursor-text = black
 window-decoration = none

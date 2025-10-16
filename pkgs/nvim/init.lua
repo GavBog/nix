@@ -16,6 +16,12 @@ end
 
 vim.g.lazyvim_json = getNixifiedConfigPath() .. '/lazyvim.json'
 
+vim.filetype.add({
+  extension = {
+    tidal = "tidal",
+  },
+})
+
 local lazyOptions = {
   lockfile = getNixifiedConfigPath() .. '/lazy-lock.json',
 
@@ -71,6 +77,7 @@ require('nixCatsUtils.lazyCat').setup(nixCats.pawsible { 'allPlugins', 'start', 
   -- { import = "lazyvim.plugins.extras.dap.nlua" },
   { import = "lazyvim.plugins.extras.editor.dial" },
   { import = "lazyvim.plugins.extras.editor.harpoon2" },
+  { import = "lazyvim.plugins.extras.editor.illuminate" },
   { import = "lazyvim.plugins.extras.editor.inc-rename" },
   { import = "lazyvim.plugins.extras.editor.mini-move" },
   { import = "lazyvim.plugins.extras.editor.navic" },

@@ -3,7 +3,6 @@
   nixCats,
   neovim-nightly-overlay,
   nvim-treesitter-main,
-  tidal-cycles,
 }:
 let
   inherit (nixCats) utils;
@@ -42,7 +41,6 @@ let
       #   (system: inputs.codeium.overlays.${system}.default)
       # )
       nvim-treesitter-main.overlays.default
-      tidal-cycles.overlays.default
     ];
 
   # see :help nixCats.flake.outputs.categories
@@ -109,14 +107,14 @@ let
           LazyVim
           nvim-lspconfig
           nvim-navic
-          nvim-treesitter.withAllGrammars
+          # nvim-treesitter.withAllGrammars
           nvim-treesitter-textobjects
           nvim-ts-autotag
           nvim-ts-context-commentstring
           rustaceanvim
           treesj
+          vim-illuminate
           vim-startuptime
-          vim-tidal
           {
             plugin = blink-cmp;
             name = "blink.cmp";

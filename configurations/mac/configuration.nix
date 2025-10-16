@@ -31,7 +31,7 @@
 
   hardware.graphics.enable = true;
   hardware.asahi = {
-    setupAsahiSound = true;
+    setupAsahiSound = false;
     peripheralFirmwareDirectory = ./firmware;
   };
 
@@ -58,9 +58,10 @@
 
   services.pipewire = {
     enable = true;
-    audio.enable = true;
+    alsa.enable = true;
     pulse.enable = true;
     jack.enable = true;
+    wireplumber.enable = true;
   };
 
   security.rtkit.enable = true;
@@ -120,7 +121,7 @@
   services.displayManager.sessionPackages = [
     customPkgs.dwl
   ];
-  services.desktopManager.plasma6.enable = true;
+  # services.desktopManager.plasma6.enable = true;
   services.displayManager.ly.enable = true;
 
   services.udev.extraRules = ''
@@ -165,11 +166,6 @@
     nerd-fonts.iosevka
   ];
 
-  # https://github.com/NixOS/nixpkgs/issues/437992
-  nixpkgs.config.permittedInsecurePackages = [
-    "qtwebengine-5.15.19"
-  ];
-
   environment.shells = [ customPkgs.zsh ];
   programs.nix-index-database.comma.enable = true;
   environment.systemPackages = with pkgs // customPkgs; [
@@ -182,7 +178,6 @@
     fastfetch
     gh
     ghostty
-    stremio
     wl-clipboard
     zoxide
     fzf
@@ -199,6 +194,7 @@
     mergiraf
     brightnessctl
     obsidian
+    bluetuith
   ];
 
   time.timeZone = "America/New_York";
