@@ -107,7 +107,7 @@ let
           LazyVim
           nvim-lspconfig
           nvim-navic
-          # nvim-treesitter.withAllGrammars
+          nvim-treesitter.withAllGrammars
           nvim-treesitter-textobjects
           nvim-ts-autotag
           nvim-ts-context-commentstring

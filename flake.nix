@@ -62,7 +62,7 @@
       };
     in
     {
-      # Re-export nvim for use independently
+      packages = customPkgs // nvimExports.packages;
       apps = forAllSystems (system: {
         nvim = {
           type = "app";
