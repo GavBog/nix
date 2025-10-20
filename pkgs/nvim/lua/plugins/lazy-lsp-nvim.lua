@@ -1,13 +1,11 @@
 return {
   {
     "dundalek/lazy-lsp.nvim",
-    dependencies = {
-      "VonHeikemen/lsp-zero.nvim",
-    },
     lazy = true,
     event = "VeryLazy",
     opts = {
       prefer_local = false,
+      use_vim_lsp_config = true,
 
       excluded_servers = {
         "diagnosticls",
@@ -49,30 +47,6 @@ return {
         },
       }
     },
-  },
-  {
-    "VonHeikemen/lsp-zero.nvim",
-    branch = "v3.x",
-    lazy = true,
-    event = "VeryLazy",
-
-    config = function()
-      local lsp_zero = require("lsp-zero")
-
-      lsp_zero.on_attach(function(client, bufnr)
-        lsp_zero.default_keymaps({
-          buffer = bufnr,
-          preserve_mappings = false
-        })
-
-        -- set keymaps
-        require("lazyvim.plugins.lsp.keymaps").on_attach(client, bufnr)
-        vim.keymap.set('n', '<leader>cf', '<cmd>LspZeroFormat!<cr>', { buffer = bufnr })
-
-        -- enable formatting on save
-        lsp_zero.buffer_autoformat()
-      end)
-    end,
   },
   {
     "neovim/nvim-lspconfig",

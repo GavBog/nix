@@ -172,10 +172,6 @@ let
             name = "lazy.nvim";
           }
           {
-            plugin = lsp-zero-nvim;
-            name = "lsp-zero.nvim";
-          }
-          {
             plugin = lualine-nvim;
             name = "lualine.nvim";
           }
