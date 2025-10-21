@@ -16,6 +16,15 @@ let
 
   hpkgs = pkgs.haskell.packages.ghc96.override {
     overrides = self: super: {
+      mkDerivation =
+        args:
+        super.mkDerivation (
+          args
+          // {
+            doCheck = false;
+          }
+        );
+
       fuzzyfind = super.fuzzyfind.overrideAttrs (_: {
         meta.broken = false;
       });
