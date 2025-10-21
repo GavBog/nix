@@ -62,15 +62,15 @@
       };
     in
     {
-      packages = customPkgs // nvimExports.packages;
+      packages = nixpkgs.lib.recursiveUpdate customPkgs nvimExports.packages;
       apps = forAllSystems (system: {
         nvim = {
           type = "app";
-          program = "${nvimExports.packages.${system}.nvim}/bin/nvim";
+          program = "${self.packages.${system}.nvim}/bin/nvim";
         };
         librewolf = {
           type = "app";
-          program = "${customPkgs.${system}.librewolf}/bin/librewolf";
+          program = "${self.packages.${system}.librewolf}/bin/librewolf";
         };
       });
 
@@ -87,13 +87,12 @@
         system = "aarch64-linux";
         specialArgs = {
           inherit inputs;
-          customPkgs = customPkgs.aarch64-linux;
+          customPkgs = self.packages.aarch64-linux;
         };
         modules = [
           {
             nixpkgs.overlays = import ./overlays;
             environment.systemPackages = [
-              nvimExports.packages.aarch64-linux.nvim
               tidal-cycles.packages.aarch64-linux.ghcWithTidal
               tidal-cycles.packages.aarch64-linux.supercollider
               tidal-cycles.packages.aarch64-linux.sclang-with-superdirt

@@ -195,6 +195,7 @@
     brightnessctl
     obsidian
     bluetuith
+    nvim
   ];
 
   time.timeZone = "America/New_York";
