@@ -56,6 +56,7 @@
       );
       nvimExports = import ./pkgs/nvim {
         inherit nixpkgs;
+        inherit customPkgs;
         inherit nixCats;
         inherit neovim-nightly-overlay;
         inherit nvim-treesitter-main;

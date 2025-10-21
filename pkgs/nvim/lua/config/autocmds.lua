@@ -31,3 +31,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
   end,
 })
+
+-- LSP Keymaps
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    require("lazyvim.plugins.lsp.keymaps").on_attach(client, args.buf)
+  end,
+})

@@ -1,5 +1,6 @@
 {
   nixpkgs,
+  customPkgs,
   nixCats,
   neovim-nightly-overlay,
   nvim-treesitter-main,
@@ -93,6 +94,9 @@ let
           # lldb
           # vscode-js-debug
           # python312Packages.debugpy
+        ]
+        ++ [
+          customPkgs.${pkgs.stdenv.hostPlatform.system}.tidal-language-server
         ];
       };
 

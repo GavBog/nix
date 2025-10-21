@@ -22,6 +22,14 @@ vim.filetype.add({
   },
 })
 
+vim.lsp.config["tidal"] = {
+  cmd = { "tidal-language-server" },
+  filetypes = { "tidal" },
+  settings = {},
+}
+
+vim.lsp.enable({ "tidal" })
+
 local lazyOptions = {
   lockfile = getNixifiedConfigPath() .. '/lazy-lock.json',
 

@@ -1,16 +1,10 @@
 return {
   {
-    "thgrund/tidal.nvim",
+    "GavBog/tidal.nvim",
     lazy = true,
     ft = "tidal",
     opts = {
-      -- Your configuration here
-      -- See configuration section for defaults
-    },
-    -- Recommended: Install TreeSitter parsers for Haskell and SuperCollider
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      opts = { ensure_installed = { "haskell", "supercollider" } },
+      filetype = "tidal",
     },
   },
   {
@@ -19,6 +13,13 @@ return {
     ft = "tidal",
     config = function()
       require("makros").setup()
+    end,
+  },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = function(_, opts)
+      opts.ensure_installed = vim.list_extend(opts.ensure_installed or {}, { "haskell" })
+      vim.treesitter.language.register("haskell", "tidal")
     end,
   },
 }
