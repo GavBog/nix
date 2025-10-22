@@ -31,7 +31,7 @@ let
   fullProfilePath = "${configDir}/${profileName}";
 in
 pkgs.symlinkJoin {
-  name = "librewolf-wrapped";
+  name = "librewolf";
   paths = [ librewolfWithExt ];
   nativeBuildInputs = [ pkgs.makeWrapper ];
 

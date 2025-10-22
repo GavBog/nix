@@ -64,16 +64,6 @@
     in
     {
       packages = nixpkgs.lib.recursiveUpdate customPkgs nvimExports.packages;
-      apps = forAllSystems (system: {
-        nvim = {
-          type = "app";
-          program = "${self.packages.${system}.nvim}/bin/nvim";
-        };
-        librewolf = {
-          type = "app";
-          program = "${self.packages.${system}.librewolf}/bin/librewolf";
-        };
-      });
 
       formatter = forAllSystems (
         system:
