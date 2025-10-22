@@ -248,10 +248,6 @@ let
             name = "render-markdown.nvim";
           }
           {
-            plugin = sidekick-nvim;
-            name = "sidekick.nvim";
-          }
-          {
             plugin = smear-cursor-nvim;
             name = "smear-cursor.nvim";
           }
