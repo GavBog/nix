@@ -82,7 +82,6 @@
         };
         modules = [
           {
-            nixpkgs.overlays = import ./overlays;
             environment.systemPackages = [
               tidal-cycles.packages.aarch64-linux.ghcWithTidal
               tidal-cycles.packages.aarch64-linux.supercollider

@@ -1,3 +1,12 @@
 [
-  ./xdg
+  ./audio
+  ./bluetooth
+  ./boot
+  ./desktop
+  ./development
+  ./input
+  ./networking
+  ./power
+  ./services
+  ./users
 ]
