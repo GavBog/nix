@@ -108,7 +108,7 @@
             };
           }
           nix-index-database.nixosModules.nix-index
-          ./configurations/mac/configuration.nix
+          ./systems/mac/configuration.nix
         ]
         ++ (import ./modules);
       };
