@@ -1,7 +1,7 @@
 {
   pkgs,
   configFile ? ./config.h,
-  wallpaper ? ../../assets/temp-wallpaper.jpg,
+  wallpaper ? ../../assets/wallpaper.svg,
 }:
 let
   patches = [
