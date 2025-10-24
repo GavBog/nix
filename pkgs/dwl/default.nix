@@ -114,6 +114,7 @@ pkgs.symlinkJoin {
   name = "dwl";
   paths = [
     dwlDesktop
+    dwlStart
     dwl
   ];
   passthru.providedSessions = [ "dwl" ];
