@@ -20,6 +20,9 @@
     mergiraf
     nvim
     obsidian
+    kdePackages.dolphin
+    stremio
+    impactor
     prismlauncher
     rustup
     tldr

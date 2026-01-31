@@ -10,5 +10,7 @@
       zsh = callPackage ./zsh { };
       dwl = callPackage ./dwl { };
       tidal-language-server = callPackage ./tidal-language-server { };
+      stremio = callPackage ./stremio { };
+      impactor = callPackage ./impactor { };
     };
 }

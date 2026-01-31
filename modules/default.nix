@@ -3,7 +3,7 @@
   ./bluetooth
   ./boot
   ./desktop
-  ./development
+  ./programs
   ./input
   ./networking
   ./power

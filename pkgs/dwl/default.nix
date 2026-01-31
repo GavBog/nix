@@ -5,17 +5,13 @@
 }:
 let
   patches = [
-    # (pkgs.fetchurl {
-    #   url = "https://codeberg.org/dwl/dwl-patches/raw/commit/770aad7716ecd08774d99e9905f2ebb0c1f719fa/patches/bar/bar.patch";
-    #   hash = "sha256-+XU53ZdOYoPnCSNm/1CbDDmAwkFl+tzRgaBLr54by2Q=";
+    # (builtins.path {
+    #   name = "ipc-patch";
+    #   path = ./patches/ipc.patch;
     # })
-    (builtins.path {
-      name = "foreign-toplevel-management-patch";
-      path = ./patches/ftlm.patch;
-    })
-    (builtins.path {
-      name = "ipc-patch";
-      path = ./patches/ipc.patch;
+    (pkgs.fetchurl {
+      url = "https://codeberg.org/dwl/dwl-patches/raw/commit/4263f5be4dc542fd7e08e902c1da3f6a055776ab/patches/movestack/movestack.patch";
+      hash = "sha256-9Bs6YIMsIN1SpysB3dem+L5Gxg+VwwkXPSQ1W5n4ZOA=";
     })
   ];
 

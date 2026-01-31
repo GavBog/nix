@@ -80,7 +80,7 @@
           inherit inputs;
           customPkgs = self.packages.aarch64-linux;
         };
-        modules = [
+        modules = (import ./modules) ++ [
           {
             environment.systemPackages = [
               tidal-cycles.packages.aarch64-linux.ghcWithTidal
@@ -109,8 +109,7 @@
           }
           nix-index-database.nixosModules.nix-index
           ./systems/mac/configuration.nix
-        ]
-        ++ (import ./modules);
+        ];
       };
     };
 }

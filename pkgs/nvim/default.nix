@@ -23,7 +23,7 @@ let
   # It gets resolved within the builder itself, and then passed to your
   # categoryDefinitions and packageDefinitions.
 
-  # this allows you to use ${pkgs.system} whenever you want in those sections
+  # this allows you to use ${pkgs.stdenv.hostPlatform.system} whenever you want in those sections
   # without fear.
 
   dependencyOverlays = # (import ./overlays inputs) ++
@@ -357,7 +357,7 @@ let
           # IMPORTANT:
           # your alias may not conflict with your other packages.
           # aliases = [ "vim" ];
-          neovim-unwrapped = neovim-nightly-overlay.packages.${pkgs.system}.neovim;
+          neovim-unwrapped = neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.neovim;
           hosts.python3.enable = true;
           hosts.node.enable = true;
         };
@@ -380,7 +380,7 @@ let
           suffix-LD = true;
           wrapRc = false;
           unwrappedCfgPath = utils.mkLuaInline "os.getenv('HOME') .. '/.config/nvim'";
-          neovim-unwrapped = neovim-nightly-overlay.packages.${pkgs.system}.neovim;
+          neovim-unwrapped = neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.neovim;
         };
         categories = {
           general = true;
@@ -427,7 +427,7 @@ forEachSystem (
         name = defaultPackageName;
         packages = [ defaultPackage ];
         inputsFrom = [ ];
-        shellHook = '''';
+        shellHook = "";
       };
     };
 
