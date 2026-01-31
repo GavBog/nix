@@ -1,5 +1,6 @@
 {
   lib,
+  stdenv,
   symlinkJoin,
   rustPlatform,
   fetchFromGitHub,
@@ -68,12 +69,17 @@ rustPlatform.buildRustPackage (finalAttrs: {
       --replace-fail "libxkbcommon.so.0" "${libxkbcommon}/lib/libxkbcommon.so.0"
     substituteInPlace $cargoDepsCopy/xkbcommon-dl-*/src/x11.rs \
       --replace-fail "libxkbcommon-x11.so.0" "${libxkbcommon}/lib/libxkbcommon-x11.so.0"
-
-    # I think this is only needed for aarch64
-    substituteInPlace src/shared/renderer/utils.rs \
-      --replace 'buffer.as_mut_ptr() as *mut i8' \
-                'buffer.as_mut_ptr() as *mut u8'
-  '';
+  ''
+  + (
+    if stdenv.hostPlatform.system == "aarch64-linux" then
+      ''
+        substituteInPlace src/shared/renderer/utils.rs \
+          --replace 'buffer.as_mut_ptr() as *mut i8' \
+                    'buffer.as_mut_ptr() as *mut u8'
+      ''
+    else
+      ""
+  );
 
   # Don't download CEF during build
   buildFeatures = [ "offline-build" ];
