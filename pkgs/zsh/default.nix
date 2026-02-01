@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs }:
 let
   toml = pkgs.formats.toml { };
 
