@@ -2,7 +2,7 @@
 let
   profileName = "gavbog.default";
 
-  librewolfWithExt = pkgs.wrapFirefox pkgs.librewolf-unwrapped {
+  librewolf = pkgs.wrapFirefox pkgs.librewolf-unwrapped {
     inherit (pkgs.librewolf-unwrapped) extraPrefsFiles extraPoliciesFiles;
     wmClass = "LibreWolf";
     libName = "librewolf";
@@ -25,14 +25,10 @@ let
     name = "librewolf-profiles-ini";
     path = ./profiles.ini;
   };
-
-  # TODO: Make this $HOME/.librewolf evaluated at runtime
-  configDir = "/home/gavbog/.librewolf";
-  fullProfilePath = "${configDir}/${profileName}";
 in
 pkgs.symlinkJoin {
   name = "librewolf";
-  paths = [ librewolfWithExt ];
+  paths = [ librewolf ];
   nativeBuildInputs = [ pkgs.makeWrapper ];
 
   postBuild = ''
@@ -46,7 +42,7 @@ pkgs.symlinkJoin {
       --set OUT "$out" \
       --prefix PATH : ${pkgs.rsync}/bin \
       --run 'set -euo pipefail
-        config_dir=${configDir}
+        config_dir=$HOME/.librewolf
         profile_dir="$config_dir/${profileName}"
 
         mkdir -p "$(dirname "$profile_dir")"
@@ -57,6 +53,5 @@ pkgs.symlinkJoin {
         rsync -r --checksum --no-perms --chmod=u+rwX \
           "$OUT/share/librewolf-meta/profiles.ini" "$config_dir/profiles.ini"
       ' \
-      --add-flags "--profile=${fullProfilePath}"
   '';
 }
