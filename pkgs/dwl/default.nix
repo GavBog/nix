@@ -49,19 +49,16 @@ let
     '';
   });
 
+  dwlPostStart = pkgs.writeShellScriptBin "dwl-post-start" ''
+    ${pkgs.swaybg}/bin/swaybg -i ${wallpaper} -m fill
+  '';
+
   dwlStart = pkgs.writeShellScriptBin "dwl-start" ''
-    #!${pkgs.runtimeShell}
     export XDG_SESSION_TYPE=wayland
     export XDG_CURRENT_DESKTOP=dwl
     export XDG_SESSION_DESKTOP=dwl
 
-    ${dwl}/bin/dwl & dwlpid=$!
-
-    sock="$XDG_RUNTIME_DIR/wayland-0"
-    for i in $(seq 1 50); do [ -S "$sock" ] && break; sleep 0.1; done
-
-    ${pkgs.swaybg}/bin/swaybg -i ${wallpaper} -m fill &
-    wait "$dwlpid"
+    ${pkgs.slstatus}/bin/slstatus -s | ${dwl}/bin/dwl -s "${dwlPostStart}/bin/dwl-post-start &"
   '';
 
   dwlDesktop = pkgs.writeTextFile {
