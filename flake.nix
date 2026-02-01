@@ -50,7 +50,10 @@
       customPkgs = forAllSystems (
         system:
         let
-          pkgs = nixpkgs.legacyPackages.${system};
+          pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          };
         in
         (wrappedPackages.packages pkgs)
       );
@@ -68,7 +71,9 @@
       formatter = forAllSystems (
         system:
         let
-          pkgs = nixpkgs.legacyPackages.${system};
+          pkgs = import nixpkgs {
+            inherit system;
+          };
         in
         pkgs.nixfmt-tree
       );
