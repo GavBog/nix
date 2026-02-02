@@ -4,7 +4,7 @@
   <img alt="NixOS Logo" src="https://raw.githubusercontent.com/NixOS/nixos-artwork/master/logo/nix-snowflake-colours.svg" width="75" align="right">
 </picture>
 
-# gavbog's NixOS Configuration
+# My NixOS Configuration
 
 My personal NixOS setup, fully declarative and leveraging the power of Nix for custom packages and configurations.
 
@@ -108,17 +108,13 @@ settings = {
 ## 🚀 Quick Start
 
 ```bash
-# Clone
-git clone https://github.com/gavbog/nixos ~/.config/nixos
-cd ~/.config/nixos
-
-# Build and switch
-sudo nixos-rebuild switch --flake .#<hostname>
+# Load my NixOS configuration
+sudo nixos-rebuild switch --flake github:gavbog/nix#<hostname> # Options: mac
 
 # Try individual packages
-nix run .#nvim
-nix run .#ghostty
-nix build .#dwl
+nix run github:gavbog/nix#nvim
+nix run github:gavbog/nix#ghostty
+nix build github:gavbog/nix#dwl
 ```
 
 ---
