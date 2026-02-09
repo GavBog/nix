@@ -3,9 +3,14 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    determinate-nix.url = "github:DeterminateSystems/nix-src";
     nixCats.url = "github:BirdeeHub/nixCats-nvim";
     nixos-apple-silicon = {
       url = "github:nix-community/nixos-apple-silicon";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-index-database = {
@@ -30,8 +35,10 @@
     {
       self,
       nixpkgs,
+      determinate-nix,
       nixCats,
       nix-index-database,
+      sops-nix,
       neovim-nightly-overlay,
       nvim-treesitter-main,
       tidal-cycles,
@@ -40,14 +47,15 @@
     let
       systems = [
         "aarch64-linux"
-        "i686-linux"
         "x86_64-linux"
         "aarch64-darwin"
         "x86_64-darwin"
       ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
-      wrappedPackages = import ./pkgs/default.nix;
-      customPkgs = forAllSystems (
+      customPkgs = import ./pkgs/default.nix { inherit inputs; };
+    in
+    {
+      packages = forAllSystems (
         system:
         let
           pkgs = import nixpkgs {
@@ -55,18 +63,8 @@
             config.allowUnfree = true;
           };
         in
-        (wrappedPackages.packages pkgs)
+        customPkgs.packages pkgs
       );
-      nvimExports = import ./pkgs/nvim {
-        inherit nixpkgs;
-        inherit customPkgs;
-        inherit nixCats;
-        inherit neovim-nightly-overlay;
-        inherit nvim-treesitter-main;
-      };
-    in
-    {
-      packages = nixpkgs.lib.recursiveUpdate customPkgs nvimExports.packages;
 
       formatter = forAllSystems (
         system:
@@ -99,6 +97,7 @@
             ];
           }
           {
+            nix.package = determinate-nix.packages.aarch64-linux.default;
             nix.settings = {
               extra-substituters = [
                 "https://cache.garnix.io"
@@ -113,6 +112,7 @@
             };
           }
           nix-index-database.nixosModules.nix-index
+          sops-nix.nixosModules.sops
           ./systems/mac/configuration.nix
         ];
       };

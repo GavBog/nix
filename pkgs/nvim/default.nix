@@ -96,7 +96,7 @@ let
           # python312Packages.debugpy
         ]
         ++ [
-          customPkgs.${pkgs.stdenv.hostPlatform.system}.tidal-language-server
+          customPkgs.tidal-language-server
         ];
       };
 

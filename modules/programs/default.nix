@@ -1,10 +1,23 @@
 { pkgs, customPkgs, ... }:
 {
   programs.nix-index-database.comma.enable = true;
+  services.pcscd.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    pinentryPackage = pkgs.pinentry-curses;
+    enableSSHSupport = true;
+  };
 
   environment.systemPackages = with pkgs // customPkgs; [
-    bluetuith
+    impala
+    bluetui
     brightnessctl
+    age
+    age-plugin-yubikey
+    sops
+    pinentry-curses
+    swaybg
+    mosh
     clang
     dwl
     fastfetch
@@ -24,6 +37,7 @@
     stremio
     impactor
     prismlauncher
+    vesktop
     rustup
     tldr
     wl-clipboard

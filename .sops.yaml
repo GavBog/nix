@@ -1,0 +1,9 @@
+keys:
+  - &yubikey age1yubikey1qgyrtg6drd9uzn7t8eqc3h08r6ck647ega4geq84escczjhuteqxv682jtn
+  - &mac age1mk93cgy970xm2pp65ckccnfmc62ap07c4jqzv5ygjthedy5g0ezs68zezl
+creation_rules:
+  - path_regex: .*\.sops\.[^/]+$
+    key_groups:
+      - age:
+          - *yubikey
+          - *mac
