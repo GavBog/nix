@@ -4,9 +4,7 @@ return {
     branch = "improve-event-highlighting",
     lazy = true,
     ft = "tidal",
-    opts = {
-      filetype = "tidal",
-    },
+    opts = {},
   },
   {
     "thgrund/tidal-makros.nvim",
