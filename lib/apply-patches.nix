@@ -3,6 +3,7 @@
   src,
   patches ? [ ],
   fixups ? [ ],
+  excludeFiles ? [ ],
   name ? "patched-src",
 }:
 
@@ -37,10 +38,11 @@ pkgs.stdenvNoCC.mkDerivation {
 
     FIXUPS=( ${pkgs.lib.concatMapStringsSep " " (f: "\"${f}\"") fixups} )
     PATCHES=( ${pkgs.lib.concatMapStringsSep " " (p: "\"${p}\"") patches} )
+    EXCLUDE_FLAGS="${pkgs.lib.concatMapStringsSep " " (e: "--exclude=\"${e}\"") excludeFiles}"
 
     for p in "''${PATCHES[@]}"; do
       echo "Applying patch: $p"
-      if git am --3way --whitespace=nowarn "$p"; then
+      if git am --3way --whitespace=nowarn $EXCLUDE_FLAGS "$p"; then
         echo "  -> Applied cleanly (or resolved by mergiraf)."
       else
         echo "  -> Conflict detected. Attempting to resolve with fixups..."

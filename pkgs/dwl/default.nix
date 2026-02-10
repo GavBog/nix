@@ -1,5 +1,7 @@
 {
   pkgs,
+  customPkgs,
+  lib,
   configFile ? ./config.h,
   wallpaper ? ../../assets/wallpaper.svg,
 }:
@@ -12,36 +14,44 @@ let
     name = "dwl-patched-src";
     src = pkgs.fetchgit {
       url = "https://codeberg.org/dwl/dwl.git";
-      rev = "15bfffd87a6f9da0bc551db95c7c2a9a069b3708";
-      hash = "sha256-AvhGE0PGlwtX+wn59kw+9cH3vHa3S+REEOD9IIzHNxU=";
+      rev = "a8915224e8159e6e0b6ff0fe7b2c6436fb3a1b6d";
+      hash = "sha256-fOQ9B+5YFZeYJswsCAZd7FruiFRxUBC9ZyaX4UysNvo=";
     };
+    excludeFiles = [ "config.def.h" ];
     patches = [
       # (builtins.path {
       #   name = "ipc-patch";
       #   path = ./patches/ipc.patch;
       # })
+
+      # Add this later
+      # https://codeberg.org/dwl/dwl-patches/src/branch/main/patches/chainkeys/chainkeys.patch
+
       (pkgs.fetchurl {
-        url = "https://codeberg.org/dwl/dwl-patches/raw/commit/2e03d8ec91f4acb20d4890a3b26fac01a9eb6fb4/patches/movestack/movestack.patch";
+        url = "https://codeberg.org/dwl/dwl-patches/raw/commit/f24e98a304a818b80b00dbd49faafac99b2672f0/patches/movestack/movestack.patch";
         hash = "sha256-9Bs6YIMsIN1SpysB3dem+L5Gxg+VwwkXPSQ1W5n4ZOA=";
       })
+
+      # WARN: DWL IPC
+      # https://codeberg.org/dwl/dwl-patches/issues/578
       (pkgs.fetchurl {
-        url = "https://codeberg.org/dwl/dwl-patches/raw/commit/adda83d5c4dbdc8b8947398d45440885120c0cde/patches/bar/bar.patch";
-        hash = "sha256-+XU53ZdOYoPnCSNm/1CbDDmAwkFl+tzRgaBLr54by2Q=";
+        url = "https://codeberg.org/attachments/68631114-befa-4f90-9605-1463f14cd649";
+        hash = "sha256-aPYKloeXxRWegKY/ICqkk80foFY7VErAV9mw8UAcrIA=";
       })
     ];
-    fixups = [ ];
+    fixups = [
+      # (builtins.path {
+      #   name = "patch-fixup";
+      #   path = ./fixups/patch-fixup.patch;
+      # })
+    ];
   };
 
   dwl = pkgs.dwl.overrideAttrs (old: {
     version = "0.8-dev";
     src = dwlSrc;
-
     buildInputs = (old.buildInputs or [ ]) ++ [
       pkgs.wlroots_0_19
-      pkgs.tllist
-      pkgs.fcft
-      pkgs.pixman
-      pkgs.libdrm
     ];
 
     postPatch = (old.postPatch or "") + ''
@@ -49,8 +59,13 @@ let
     '';
   });
 
-  dwlPostStart = pkgs.writeShellScriptBin "dwl-post-start" ''
-    ${pkgs.swaybg}/bin/swaybg -i ${wallpaper} -m fill
+  dwlPostStart = lib.trim ''
+    ${pkgs.swaybg}/bin/swaybg -i ${wallpaper} -m fill &
+    ${pkgs.dwlb}/bin/dwlb -ipc &
+    (
+      while ! pgrep -x dwlb > /dev/null; do sleep 0.1; done
+      ${customPkgs.someblocks}/bin/someblocks -p | ${pkgs.dwlb}/bin/dwlb -status-stdin all
+    ) &
   '';
 
   dwlStart = pkgs.writeShellScriptBin "dwl-start" ''
@@ -58,7 +73,7 @@ let
     export XDG_CURRENT_DESKTOP=dwl
     export XDG_SESSION_DESKTOP=dwl
 
-    ${pkgs.slstatus}/bin/slstatus -s | ${dwl}/bin/dwl -s "${dwlPostStart}/bin/dwl-post-start &"
+    ${dwl}/bin/dwl -s "${dwlPostStart}"
   '';
 
   dwlDesktop = pkgs.writeTextFile {

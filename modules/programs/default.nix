@@ -14,12 +14,15 @@
     brightnessctl
     age
     age-plugin-yubikey
+    ssh-to-age
     sops
     pinentry-curses
     swaybg
     mosh
     clang
     dwl
+    dwlb
+    someblocks
     fastfetch
     ffmpeg
     fzf

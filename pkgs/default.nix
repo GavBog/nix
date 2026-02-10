@@ -11,7 +11,8 @@
         ghostty = callPackage ./ghostty { };
         librewolf = callPackage ./librewolf { };
         zsh = callPackage ./zsh { };
-        dwl = callPackage ./dwl { };
+        someblocks = callPackage ./someblocks { };
+        dwl = callPackage ./dwl { inherit customPkgs; };
         tidal-language-server = callPackage ./tidal-language-server { };
         stremio = callPackage ./stremio { };
         impactor = callPackage ./impactor { };
