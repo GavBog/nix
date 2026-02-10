@@ -87,13 +87,8 @@
           {
             environment.systemPackages = [
               tidal-cycles.packages.aarch64-linux.ghcWithTidal
-              tidal-cycles.packages.aarch64-linux.supercollider
-              tidal-cycles.packages.aarch64-linux.sclang-with-superdirt
-              # tidal-cycles.packages.aarch64-linux.superdirt-start-sc
               tidal-cycles.packages.aarch64-linux.superdirt-start
-              tidal-cycles.packages.aarch64-linux.superdirt-install
               tidal-cycles.packages.aarch64-linux.tidal
-              # tidal-cycles.packages.aarch64-linux.vim-tidal
             ];
           }
           {
