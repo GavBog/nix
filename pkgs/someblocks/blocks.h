@@ -6,6 +6,8 @@ static const Block blocks[] = {
 
     {"", "date '+%b %d (%a) %I:%M%p'", 5, 0},
 
+    {"Bat:", "cat /sys/class/power_supply/macsmc-battery/capacity", 10, 0},
+
     /* Updates whenever "pkill -SIGRTMIN+10 someblocks" is ran */
     /* {"", "date '+%b %d (%a) %I:%M%p'",
        0,		10}, */
