@@ -1,6 +1,6 @@
 return {
   {
-    "GavBog/tidal.nvim",
+    "thgrund/tidal.nvim",
     lazy = true,
     ft = "tidal",
     opts = {
