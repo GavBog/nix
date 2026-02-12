@@ -20,9 +20,4 @@
       CPU_MAX_PERF_ON_BAT = 50;
     };
   };
-
-  zramSwap = {
-    enable = true;
-    memoryPercent = 100;
-  };
 }
