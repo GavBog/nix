@@ -4,6 +4,14 @@
   lib,
   ...
 }:
+let
+  btrfsOptions = [
+    "compress-force=zstd"
+    "noatime"
+    "ssd"
+    "discard=async"
+  ];
+in
 {
   imports = [
     inputs.nixos-apple-silicon.nixosModules.default
@@ -31,33 +39,30 @@
   };
 
   fileSystems."/" = {
-    options = lib.mkForce [
-      "subvol=@"
-      "compress=zstd"
-      "noatime"
-      "ssd"
-      "discard=async"
-    ];
+    options = lib.mkForce (
+      [
+        "subvol=@"
+      ]
+      ++ btrfsOptions
+    );
   };
 
   fileSystems."/nix" = {
-    options = lib.mkForce [
-      "subvol=@nix"
-      "compress=zstd"
-      "noatime"
-      "ssd"
-      "discard=async"
-    ];
+    options = lib.mkForce (
+      [
+        "subvol=@nix"
+      ]
+      ++ btrfsOptions
+    );
   };
 
   fileSystems."/home" = {
-    options = lib.mkForce [
-      "subvol=@home"
-      "compress=zstd"
-      "noatime"
-      "ssd"
-      "discard=async"
-    ];
+    options = lib.mkForce (
+      [
+        "subvol=@home"
+      ]
+      ++ btrfsOptions
+    );
   };
 
   environment.systemPackages = with pkgs; [
