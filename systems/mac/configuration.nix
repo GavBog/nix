@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs,
+  lib,
   ...
 }:
 {
@@ -27,6 +28,36 @@
   hardware.asahi = {
     setupAsahiSound = false;
     peripheralFirmwareDirectory = ./firmware;
+  };
+
+  fileSystems."/" = {
+    options = lib.mkForce [
+      "subvol=@"
+      "compress=zstd"
+      "noatime"
+      "ssd"
+      "discard=async"
+    ];
+  };
+
+  fileSystems."/nix" = {
+    options = lib.mkForce [
+      "subvol=@nix"
+      "compress=zstd"
+      "noatime"
+      "ssd"
+      "discard=async"
+    ];
+  };
+
+  fileSystems."/home" = {
+    options = lib.mkForce [
+      "subvol=@home"
+      "compress=zstd"
+      "noatime"
+      "ssd"
+      "discard=async"
+    ];
   };
 
   environment.systemPackages = with pkgs; [
