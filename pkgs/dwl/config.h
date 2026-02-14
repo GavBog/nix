@@ -145,6 +145,10 @@ static const char *toggle_bar[] = {"dwlb", "-toggle-visibility", "all", NULL};
 
 static const char *brightness_up[] = {"brightnessctl", "set", "5%+", NULL};
 static const char *brightness_down[] = {"brightnessctl", "set", "5%-", NULL};
+static const char *keyboard_brightness_up[] = {
+    "brightnessctl", "set", "5%+", "-d", "kbd_backlight", NULL};
+static const char *keyboard_brightness_down[] = {
+    "brightnessctl", "set", "5%-", "-d", "kbd_backlight", NULL};
 
 static const char *volume_up[] = {"wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@",
                                   "5%+", NULL};
@@ -162,6 +166,14 @@ static const Key keys[] = {
     {MODKEY | WLR_MODIFIER_SHIFT, XKB_KEY_B, spawn, {.v = browsercmd}},
     {0, XF86XK_MonBrightnessUp, spawn, {.v = brightness_up}},
     {0, XF86XK_MonBrightnessDown, spawn, {.v = brightness_down}},
+    {WLR_MODIFIER_SHIFT,
+     XF86XK_MonBrightnessUp,
+     spawn,
+     {.v = keyboard_brightness_up}},
+    {WLR_MODIFIER_SHIFT,
+     XF86XK_MonBrightnessDown,
+     spawn,
+     {.v = keyboard_brightness_down}},
     {0, XF86XK_AudioRaiseVolume, spawn, {.v = volume_up}},
     {0, XF86XK_AudioLowerVolume, spawn, {.v = volume_down}},
     {0, XF86XK_AudioMute, spawn, {.v = volume_mute}},
