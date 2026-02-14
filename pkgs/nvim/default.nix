@@ -93,7 +93,6 @@ let
           rust-analyzer
           gnumake
           tree-sitter
-          github-copilot-cli
           imagemagick
           # lldb
           # vscode-js-debug
