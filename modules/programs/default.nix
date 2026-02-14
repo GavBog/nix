@@ -41,7 +41,6 @@
     impactor
     prismlauncher
     vesktop
-    rustup
     tldr
     wl-clipboard
     wmenu

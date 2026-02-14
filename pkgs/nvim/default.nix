@@ -86,7 +86,11 @@ let
           stylua
           xclip
           gcc
-          rustup
+          rustc
+          cargo
+          rustfmt
+          clippy
+          rust-analyzer
           gnumake
           tree-sitter
           github-copilot-cli
