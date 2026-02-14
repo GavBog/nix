@@ -60,11 +60,7 @@ let
   });
 
   dwlPostStart = lib.trim ''
-    if [ -r ${wallpaper} ]; then
-      ${pkgs.swaybg}/bin/swaybg -i ${wallpaper} -m fill &
-    else
-      ${pkgs.swaybg}/bin/swaybg -i ${../../assets/wallpaper.svg} -m fill &
-    fi
+    ${pkgs.swaybg}/bin/swaybg -i ${wallpaper} -m fill &
     ${pkgs.dwlb}/bin/dwlb -ipc &
     (
       while ! pgrep -x dwlb > /dev/null; do sleep 0.1; done
