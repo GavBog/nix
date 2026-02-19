@@ -1,7 +1,6 @@
 return {
   {
     "thgrund/tidal.nvim",
-    branch = "improve-event-highlighting",
     lazy = true,
     ft = "tidal",
     opts = {},
