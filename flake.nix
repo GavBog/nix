@@ -111,5 +111,37 @@
           ./systems/mac/configuration.nix
         ];
       };
+      nixosConfigurations.x86 = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          inherit inputs;
+          customPkgs = self.packages.x86_64-linux;
+        };
+        modules = (import ./modules) ++ [
+          {
+            environment.systemPackages = [
+              tidal-cycles.packages.x86_64-linux.ghcWithTidal
+              tidal-cycles.packages.x86_64-linux.superdirt-start
+              tidal-cycles.packages.x86_64-linux.tidal
+            ];
+          }
+          {
+            nix.package = determinate-nix.packages.x86_64-linux.default;
+            nix.settings = {
+              extra-substituters = [
+                "https://cache.garnix.io"
+                "https://nix-community.cachix.org"
+              ];
+              extra-trusted-public-keys = [
+                "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+                "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+              ];
+            };
+          }
+          nix-index-database.nixosModules.nix-index
+          sops-nix.nixosModules.sops
+          ./systems/x86/configuration.nix
+        ];
+      };
     };
 }

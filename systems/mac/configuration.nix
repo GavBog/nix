@@ -19,13 +19,11 @@ in
   ];
 
   boot = {
-    loader.systemd-boot.enable = true;
-    loader.efi.canTouchEfiVariables = false;
-
     extraModprobeConfig = ''
       options hid_apple swap_fn_leftctrl=1
     '';
 
+    binfmt.emulatedSystems = [ "x86_64-linux" ];
     initrd.availableKernelModules = [
       "xhci_pci"
       "usb_storage"
