@@ -15,6 +15,11 @@
   };
   services.resolved.enable = true;
 
+  virtualisation.docker = {
+    enable = true;
+    storageDriver = "btrfs";
+  };
+
   zramSwap = {
     enable = true;
     memoryPercent = 100;

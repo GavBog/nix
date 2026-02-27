@@ -36,6 +36,7 @@
     mergiraf
     nvim
     obsidian
+    btop
     kdePackages.dolphin
     stremio
     impactor
