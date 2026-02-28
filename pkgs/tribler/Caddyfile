@@ -1,0 +1,10 @@
+:8080 {
+  reverse_proxy 127.0.0.1:7760 {
+    header_up -Authorization
+    header_up X-Api-Key ""
+    flush_interval -1
+  }
+  basic_auth {
+    {$USER} {$HASHED_PASSWORD}
+  }
+}

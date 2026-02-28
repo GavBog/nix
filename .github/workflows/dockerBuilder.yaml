@@ -1,0 +1,49 @@
+name: Build and Push Tribler Image
+on:
+  push:
+    branches: [main]
+    paths:
+      - "pkgs/tribler/**"
+      - "flake.nix"
+      - "flake.lock"
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Nix Magic Cache
+        uses: DeterminateSystems/magic-nix-cache-action@main
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build Docker Image
+        run: nix build .#tribler-docker
+
+      - name: Load and Push to GHCR
+        run: |
+          docker load < result
+
+          REPO_OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          IMAGE_ID="ghcr.io/$REPO_OWNER/tribler"
+          VERSION=$(echo "${{ github.sha }}" | cut -c1-7)
+
+          docker tag tribler:latest $IMAGE_ID:latest
+          docker tag tribler:latest $IMAGE_ID:$VERSION
+
+          docker push $IMAGE_ID:latest
+          docker push $IMAGE_ID:$VERSION

@@ -16,6 +16,7 @@
         tidal-language-server = callPackage ./tidal-language-server { };
         stremio = callPackage ./stremio { };
         impactor = callPackage ./impactor { };
+        tribler-docker = callPackage ./tribler/docker.nix { };
       };
       nvimExports = import ./nvim {
         inherit customPkgs;
