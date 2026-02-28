@@ -18,6 +18,7 @@ pkgs.dockerTools.buildLayeredImage {
       "HOME=/data"
       "LANG=C.UTF-8"
       "QT_QPA_PLATFORM=offscreen"
+      "SSL_CERT_FILE=${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
     ];
     ExposedPorts = {
       "8080/tcp" = { }; # Caddy Proxied API
