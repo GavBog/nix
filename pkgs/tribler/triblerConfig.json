@@ -186,7 +186,7 @@
       0
     ],
     "listen_interface": "0.0.0.0",
-    "port": 0,
+    "port": 20456,
     "proxy_type": 0,
     "proxy_server": "",
     "proxy_auth": "",
