@@ -1,6 +1,6 @@
 {
   pkgs,
-  triblerConf ? ./triblerConfig.json,
+  triblerConfTemplate ? ./triblerConfig.json.tmpl,
   caddyConf ? ./Caddyfile,
 }:
 pkgs.dockerTools.buildLayeredImage {
@@ -9,6 +9,8 @@ pkgs.dockerTools.buildLayeredImage {
   contents = [
     pkgs.tribler
     pkgs.caddy
+    pkgs.socat
+    pkgs.gettext
     pkgs.bash
     pkgs.coreutils
   ];
@@ -19,6 +21,12 @@ pkgs.dockerTools.buildLayeredImage {
       "LANG=C.UTF-8"
       "QT_QPA_PLATFORM=offscreen"
       "SSL_CERT_FILE=${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
+
+      "EXTERNAL_IP=0.0.0.0"
+      "IPV8_INT_PORT=8090"
+      "LIBTORRENT_INT_PORT=20456"
+      "IPV8_EXT_PORT=8090"
+      "LIBTORRENT_EXT_PORT=20456"
     ];
     ExposedPorts = {
       "8080/tcp" = { }; # Caddy Proxied API
@@ -33,7 +41,13 @@ pkgs.dockerTools.buildLayeredImage {
     Cmd = [
       "${pkgs.writeShellScript "entrypoint" ''
         mkdir -p /data/.Tribler/8.0/ /data/Downloads
-        cp ${triblerConf} /data/.Tribler/8.0/configuration.json
+        # export LIBTORRENT_EXT_PORT=
+        # export IPV8_EXT_PORT=
+        # socat TCP4-LISTEN:$LIBTORRENT_INT_PORT,fork,reuseaddr TCP4:127.0.0.1:$LIBTORRENT_EXT_PORT &
+        # socat UDP4-LISTEN:$LIBTORRENT_INT_PORT,fork,reuseaddr UDP4:127.0.0.1:$LIBTORRENT_EXT_PORT &
+        # socat UDP4-LISTEN:$IPV8_INT_PORT,fork,reuseaddr UDP4:127.0.0.1:$IPV8_EXT_PORT &
+
+        envsubst < ${triblerConfTemplate} > /data/.Tribler/8.0/configuration.json
 
         tribler --server &
         exec caddy run --config ${caddyConf} --adapter caddyfile
