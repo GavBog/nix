@@ -7,11 +7,10 @@ let
     sha256 = "sha256-CsEABbPuD99fsg3jm0mpueQ2MbZBwIh+KCPAmRxYkJU=";
   };
 
-  tidalSrc = builtins.fetchTree {
-    type = "git";
+  tidalSrc = pkgs.fetchgit {
     url = "https://codeberg.org/uzu/tidal";
-    rev = "660ac746ec5c89da7ead100c0c46bf67e4037f41";
-    narHash = "sha256-kuhf4uN+jWyq97MnnDQTTKca2IRzJu16xU4R0VwMrhc=";
+    rev = "fb05f0f22f096acf1f6b0e45209da942d5792b35";
+    hash = "sha256-c8/9F6zI86CduMSzJcmmO3H6IqOneJF5Zov3BacYQs8=";
   };
 
   hpkgs = pkgs.haskell.packages.ghc96.override {
