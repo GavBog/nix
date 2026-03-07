@@ -10,7 +10,7 @@ let
     # You can also have a look here: https://github.com/mozilla/policy-templates/.
     extraPolicies = {
       Bookmarks = import ./config/bookmarks.nix;
-      ExtensionSettings = import ./config/extensions.nix;
+      ExtensionSettings = import ./config/extensions.nix { inherit pkgs; };
     };
   };
 
