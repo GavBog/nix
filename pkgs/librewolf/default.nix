@@ -1,7 +1,5 @@
 { pkgs }:
 let
-  profileName = "gavbog.default";
-
   librewolf = pkgs.wrapFirefox pkgs.librewolf-unwrapped {
     inherit (pkgs.librewolf-unwrapped) extraPrefsFiles extraPoliciesFiles;
     wmClass = "LibreWolf";
@@ -11,19 +9,15 @@ let
     # Documentation about policies options can be found at `about:policies#documentation`.
     # You can also have a look here: https://github.com/mozilla/policy-templates/.
     extraPolicies = {
-      # Bookmarks = bookmarks;
-      ExtensionSettings = import ./nix/extensions.nix;
+      Bookmarks = import ./config/bookmarks.nix;
+      ExtensionSettings = import ./config/extensions.nix;
+      Preferences = import ./config/preferences.nix;
     };
   };
 
-  profileSkel = builtins.path {
-    name = "librewolf-profile-skel";
-    path = ./profile;
-  };
-
-  profilesIni = builtins.path {
-    name = "librewolf-profiles-ini";
-    path = ./profiles.ini;
+  userChrome = pkgs.fetchurl {
+    url = "https://raw.githubusercontent.com/rockofox/firefox-minima/dc40a861b24b378982c265a7769e3228ffccd45a/userChrome.css";
+    hash = "sha256-sqHpdf2x5qdoY526KSz8xBRJsOK+z3frjTSdqHFS200=";
   };
 in
 pkgs.symlinkJoin {
@@ -32,26 +26,15 @@ pkgs.symlinkJoin {
   nativeBuildInputs = [ pkgs.makeWrapper ];
 
   postBuild = ''
-    mkdir -p "$out/share/librewolf-profile"
-    cp -r ${profileSkel}/. "$out/share/librewolf-profile"
-
-    mkdir -p "$out/share/librewolf-meta"
-    cp ${profilesIni} "$out/share/librewolf-meta/profiles.ini"
-
     wrapProgram "$out/bin/librewolf" \
-      --set OUT "$out" \
-      --prefix PATH : ${pkgs.rsync}/bin \
-      --run 'set -euo pipefail
-        config_dir=$HOME/.librewolf
-        profile_dir="$config_dir/${profileName}"
+      --set MOZ_ALLOW_DOWNGRADE 1 \
+      --set MOZ_SKIP_CHECK_DEFAULT_BROWSER 1 \
+      --run '
+        PROF_DIR="$HOME/.librewolf/nix-portable"
+        mkdir -p "$PROF_DIR/chrome"
 
-        mkdir -p "$(dirname "$profile_dir")"
-        rsync -r --checksum --no-perms --chmod=u+rwX \
-          "$OUT/share/librewolf-profile/" "$profile_dir/"
-
-        mkdir -p "$config_dir"
-        rsync -r --checksum --no-perms --chmod=u+rwX \
-          "$OUT/share/librewolf-meta/profiles.ini" "$config_dir/profiles.ini"
+        ln -sf "${userChrome}" "$PROF_DIR/chrome/userChrome.css"
       ' \
+      --add-flags "--profile \$HOME/.librewolf/nix-portable"
   '';
 }

@@ -17,4 +17,9 @@
     installation_mode = "force_installed";
     default_area = "menupanel";
   };
+  "addon@darkreader.org" = {
+    install_url = "https://addons.mozilla.org/firefox/downloads/file/4710145/darkreader-4.9.123.xpi";
+    installation_mode = "force_installed";
+    default_area = "menupanel";
+  };
 }
