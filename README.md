@@ -109,7 +109,7 @@ settings = {
 
 ```bash
 # Load my NixOS configuration
-sudo nixos-rebuild switch --flake github:gavbog/nix#<hostname> # Options: mac
+sudo nixos-rebuild switch --flake github:gavbog/nix#<hostname> # Options: mac, x86
 
 # Try individual packages
 nix run github:gavbog/nix#nvim
@@ -121,15 +121,17 @@ nix build github:gavbog/nix#dwl
 
 ## 💻 Systems
 
-| Hostname      | Description                |
-|---------------|----------------------------|
-| `mac`         | Apple Silicon (Asahi)      |
-
+| Hostname      | Description                   |
+|---------------|-------------------------------|
+| `mac`         | Apple Silicon Desktop (Asahi) |
+| `x86`         | Intel/Amd Desktop             |
 Each system has its own configuration defined under `systems/`:
 
 ```
 systems/
-└── mac/                 # Apple Silicon setup
+├── mac/                 # Apple Silicon Desktop setup
+├── x86/                 # x86 Desktop setup
+└── ...
 ```
 
 ---
