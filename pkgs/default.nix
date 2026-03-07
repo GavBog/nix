@@ -23,6 +23,7 @@
         inherit (inputs)
           nixpkgs
           nixCats
+          tidal-cycles
           neovim-nightly-overlay
           nvim-treesitter-main
           ;

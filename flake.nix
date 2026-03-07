@@ -85,13 +85,6 @@
         };
         modules = (import ./modules) ++ [
           {
-            environment.systemPackages = [
-              tidal-cycles.packages.aarch64-linux.ghcWithTidal
-              tidal-cycles.packages.aarch64-linux.superdirt-start
-              tidal-cycles.packages.aarch64-linux.tidal
-            ];
-          }
-          {
             nix.package = determinate-nix.packages.aarch64-linux.default;
             nix.settings = {
               extra-substituters = [
@@ -118,13 +111,6 @@
           customPkgs = self.packages.x86_64-linux;
         };
         modules = (import ./modules) ++ [
-          {
-            environment.systemPackages = [
-              tidal-cycles.packages.x86_64-linux.ghcWithTidal
-              tidal-cycles.packages.x86_64-linux.superdirt-start
-              tidal-cycles.packages.x86_64-linux.tidal
-            ];
-          }
           {
             nix.package = determinate-nix.packages.x86_64-linux.default;
             nix.settings = {

@@ -2,6 +2,7 @@
   nixpkgs,
   customPkgs,
   nixCats,
+  tidal-cycles,
   neovim-nightly-overlay,
   nvim-treesitter-main,
 }:
@@ -100,6 +101,9 @@ let
         ]
         ++ [
           customPkgs.tidal-language-server
+          tidal-cycles.packages.aarch64-linux.ghcWithTidal
+          tidal-cycles.packages.aarch64-linux.superdirt-start
+          tidal-cycles.packages.aarch64-linux.tidal
         ];
       };
 
