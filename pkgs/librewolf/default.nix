@@ -11,7 +11,6 @@ let
     extraPolicies = {
       Bookmarks = import ./config/bookmarks.nix;
       ExtensionSettings = import ./config/extensions.nix;
-      Preferences = import ./config/preferences.nix;
     };
   };
 
@@ -19,6 +18,7 @@ let
     url = "https://raw.githubusercontent.com/rockofox/firefox-minima/dc40a861b24b378982c265a7769e3228ffccd45a/userChrome.css";
     hash = "sha256-sqHpdf2x5qdoY526KSz8xBRJsOK+z3frjTSdqHFS200=";
   };
+  userJs = ./config/user.js;
 in
 pkgs.symlinkJoin {
   name = "librewolf";
@@ -34,6 +34,7 @@ pkgs.symlinkJoin {
         mkdir -p "$PROF_DIR/chrome"
 
         ln -sf "${userChrome}" "$PROF_DIR/chrome/userChrome.css"
+        ln -sf "${userJs}" "$PROF_DIR/user.js"
       ' \
       --add-flags "--profile \$HOME/.librewolf/nix-portable"
   '';
