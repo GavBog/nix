@@ -38,7 +38,7 @@
     obsidian
     btop
     kdePackages.dolphin
-    stremio
+    stremio-linux-shell
     impactor
     prismlauncher
     vesktop

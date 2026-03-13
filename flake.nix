@@ -2,7 +2,8 @@
   description = "Gavin Bogie's NixOS Configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
     determinate-nix.url = "github:DeterminateSystems/nix-src";
     nixCats.url = "github:BirdeeHub/nixCats-nvim";
     nixos-apple-silicon = {
@@ -35,6 +36,7 @@
     {
       self,
       nixpkgs,
+      nixpkgs-stable,
       determinate-nix,
       nixCats,
       nix-index-database,
@@ -50,6 +52,7 @@
         "x86_64-linux"
         "aarch64-darwin"
         "x86_64-darwin"
+        "riscv64-linux"
       ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
       customPkgs = import ./pkgs/default.nix { inherit inputs; };

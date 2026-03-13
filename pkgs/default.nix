@@ -7,6 +7,10 @@
     pkgs:
     let
       inherit (pkgs) callPackage;
+      pkgs-stable = import inputs.nixpkgs-stable {
+        system = pkgs.stdenv.hostPlatform.system;
+        config.allowUnfree = true;
+      };
       customPkgs = {
         ghostty = callPackage ./ghostty { };
         librewolf = callPackage ./librewolf { };
@@ -14,9 +18,8 @@
         someblocks = callPackage ./someblocks { };
         dwl = callPackage ./dwl { inherit customPkgs; };
         tidal-language-server = callPackage ./tidal-language-server { };
-        stremio = callPackage ./stremio { };
         impactor = callPackage ./impactor { };
-        tribler-docker = callPackage ./tribler/docker.nix { };
+        tribler-docker = callPackage ./tribler/docker.nix { pkgs = pkgs-stable; };
       };
       nvimExports = import ./nvim {
         inherit customPkgs;
