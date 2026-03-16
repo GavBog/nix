@@ -4,7 +4,6 @@
   nixCats,
   tidal-cycles,
   neovim-nightly-overlay,
-  nvim-treesitter-main,
 }:
 let
   inherit (nixCats) utils;
@@ -42,7 +41,6 @@ let
       # (utils.fixSystemizedOverlay inputs.codeium.overlays
       #   (system: inputs.codeium.overlays.${system}.default)
       # )
-      nvim-treesitter-main.overlays.default
     ];
 
   # see :help nixCats.flake.outputs.categories

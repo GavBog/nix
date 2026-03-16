@@ -22,10 +22,6 @@
       url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nvim-treesitter-main = {
-      url = "github:iofq/nvim-treesitter-main";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     tidal-cycles = {
       url = "github:mitchmindtree/tidalcycles.nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -42,7 +38,6 @@
       nix-index-database,
       sops-nix,
       neovim-nightly-overlay,
-      nvim-treesitter-main,
       tidal-cycles,
       ...
     }@inputs:
