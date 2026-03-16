@@ -56,7 +56,7 @@ pkgs.dockerTools.buildLayeredImage {
 
         envsubst < ${triblerConfTemplate} > /data/.Tribler/8.0/configuration.json
 
-        tribler --server &
+        tribler --server --log-level INFO &
         exec caddy run --config ${caddyConf} --adapter caddyfile
       ''}"
     ];
