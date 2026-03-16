@@ -1,5 +1,6 @@
 {
   pkgs,
+  customPkgs,
   triblerConfTemplate ? ./triblerConfig.json.tmpl,
   caddyConf ? ./Caddyfile,
 }:
@@ -7,7 +8,7 @@ pkgs.dockerTools.buildLayeredImage {
   name = "tribler";
   tag = "latest";
   contents = [
-    pkgs.tribler
+    customPkgs.tribler
     pkgs.caddy
     pkgs.socat
     pkgs.gettext

@@ -19,7 +19,11 @@
         dwl = callPackage ./dwl { inherit customPkgs; };
         tidal-language-server = callPackage ./tidal-language-server { };
         impactor = callPackage ./impactor { };
-        tribler-docker = callPackage ./tribler/docker.nix { pkgs = pkgs-stable; };
+        tribler = callPackage ./tribler { pkgs = pkgs-stable; };
+        tribler-docker = callPackage ./tribler/docker.nix {
+          pkgs = pkgs-stable;
+          inherit customPkgs;
+        };
       };
       nvimExports = import ./nvim {
         inherit customPkgs;

@@ -12,6 +12,7 @@
     "key": ""
   },
   "headless": true,
+  "start_minimized": false,
   "ipv8": {
     "interfaces": [
       {
@@ -21,8 +22,8 @@
       },
       {
         "interface": "UDPIPv6",
-        "ip": "::",
-        "port": 8091
+        "ip": "::1",
+        "port": 0
       }
     ],
     "keys": [
@@ -51,7 +52,7 @@
             "strategy": "RandomWalk",
             "peers": 20,
             "init": {
-              "timeout": 3
+              "timeout": 3.0
             }
           },
           {
@@ -59,7 +60,7 @@
             "peers": -1,
             "init": {
               "sample_size": 8,
-              "ping_interval": 10,
+              "ping_interval": 10.0,
               "inactive_time": 27.5,
               "drop_time": 57.5
             }
@@ -158,7 +159,7 @@
                   6424
                 ]
               ],
-              "bootstrap_timeout": 30
+              "bootstrap_timeout": 30.0
             }
           }
         ],
@@ -179,11 +180,7 @@
   },
   "libtorrent": {
     "socks_listen_ports": [
-      0,
-      0,
-      0,
-      0,
-      0
+      $LIBTORRENT_EXT_PORT
     ],
     "listen_interface": "$EXTERNAL_IP",
     "port": $LIBTORRENT_EXT_PORT,
@@ -193,11 +190,18 @@
     "max_connections_download": -1,
     "max_download_rate": 0,
     "max_upload_rate": 0,
+    "use_advanced_rate_limits": true,
+    "advanced_rate_limits": {
+      "-1": "[[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null]]",
+      "0": "[[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null]]",
+      "1": "[[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null]]",
+      "2": "[[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null]]"
+    },
     "utp": true,
     "dht": true,
     "dht_readiness_timeout": 30,
-    "upnp": true,
-    "natpmp": true,
+    "upnp": false,
+    "natpmp": false,
     "lsd": true,
     "announce_to_all_tiers": false,
     "announce_to_all_trackers": false,
@@ -205,12 +209,12 @@
     "check_after_complete": false,
     "download_defaults": {
       "anonymity_enabled": true,
-      "number_hops": 3,
+      "number_hops": 1,
       "safeseeding_enabled": true,
       "saveas": "/data/Downloads",
       "seeding_mode": "forever",
-      "seeding_ratio": 2,
-      "seeding_time": 60,
+      "seeding_ratio": 2.0,
+      "seeding_time": 60.0,
       "channel_download": false,
       "add_download_to_channel": false,
       "trackers_file": "",
@@ -225,7 +229,8 @@
     "active_tracker_limit": 1600,
     "active_lsd_limit": 60,
     "active_limit": 500,
-    "ask_download_settings": false
+    "ask_download_settings": false,
+    "clear_orphaned_parts": false
   },
   "recommender": {
     "enabled": true
@@ -254,13 +259,10 @@
   "watch_folder": {
     "enabled": false,
     "directory": "",
-    "check_interval": 10
+    "check_interval": 10.0
   },
   "state_dir": "/data/.Tribler",
   "memory_db": false,
   "tray_icon_color": "",
-  "ui": {
-    "sorting": "{\"download-sorting\":[]}",
-    "columns": "{\"download-columns\":{\"queue_position\":true,\"name\":true,\"size\":true,\"all_time_upload\":false,\"progress\":true,\"num_seeds\":true,\"num_peers\":true,\"speed_down\":true,\"speed_up\":true,\"hops\":true,\"eta\":false,\"last_upload\":false,\"time_added\":false,\"time_finished\":false}}"
-  }
+  "ui": {}
 }
