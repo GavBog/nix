@@ -52,6 +52,10 @@
     nerd-fonts.iosevka
   ];
 
+  environment.sessionVariables = {
+    EDITOR = "nvim";
+  };
+
   nix.settings = {
     warn-dirty = false;
     auto-optimise-store = true;
