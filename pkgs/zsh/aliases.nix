@@ -4,4 +4,5 @@
   nf = "fastfetch";
   cd = "z";
   t = "timedatectl";
+  docker = "podman";
 }

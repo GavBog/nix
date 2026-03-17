@@ -17,10 +17,7 @@
   };
   services.resolved.enable = true;
 
-  virtualisation.docker = {
-    enable = true;
-    storageDriver = "btrfs";
-  };
+  virtualisation.podman.enable = true;
 
   zramSwap = {
     enable = true;
