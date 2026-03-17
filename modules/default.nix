@@ -6,7 +6,6 @@
   ./programs
   ./input
   ./networking
-  ./power
   ./services
   ./users
 ]
