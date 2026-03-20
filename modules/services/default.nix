@@ -1,7 +1,6 @@
 { pkgs, ... }:
 {
   services.openssh.enable = true;
-  services.cloudflare-warp.enable = true;
   services.usbmuxd.enable = true;
   services.dbus.implementation = "broker";
   services.scx = {
@@ -15,7 +14,6 @@
     });
     scheduler = "scx_bpfland";
   };
-  services.resolved.enable = true;
 
   virtualisation.podman.enable = true;
 
