@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "aea-tools": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1774259139,
+        "narHash": "sha256-R++uHeNGWVPmqyokTLga/Ls7H826kZISz+uL2V+zM8w=",
+        "owner": "GavBog",
+        "repo": "aea-tools",
+        "rev": "485043059ab57db9b7e37e3d7e205ffc2b5b1742",
+        "type": "github"
+      },
+      "original": {
+        "owner": "GavBog",
+        "repo": "aea-tools",
+        "type": "github"
+      }
+    },
     "determinate-nix": {
       "inputs": {
         "flake-parts": "flake-parts",
@@ -308,6 +328,7 @@
     },
     "root": {
       "inputs": {
+        "aea-tools": "aea-tools",
         "determinate-nix": "determinate-nix",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nix-index-database": "nix-index-database",

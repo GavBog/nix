@@ -33,7 +33,7 @@ in
 
   hardware.asahi = {
     setupAsahiSound = false;
-    peripheralFirmwareDirectory = ./firmware;
+    peripheralFirmwareDirectory = inputs.aea-tools.packages.aarch64-linux.default;
   };
 
   fileSystems."/" = {
