@@ -55,6 +55,48 @@
       ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
       customPkgs = import ./pkgs/default.nix { inherit inputs; };
+
+      mkSystem =
+        {
+          configName,
+          system,
+          extraModules ? [ ],
+        }:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = {
+            inherit inputs;
+            customPkgs = self.packages.${system};
+            stablePkgs = import nixpkgs-stable {
+              inherit system;
+              config.allowUnfree = true;
+            };
+          };
+          modules =
+            (import ./modules)
+            ++ [
+              {
+                nix.package = determinate-nix.packages.${system}.default;
+                nix.settings = {
+                  extra-substituters = [
+                    "https://cache.garnix.io"
+                    "https://nix-community.cachix.org"
+                    "https://install.determinate.systems"
+                  ];
+                  extra-trusted-public-keys = [
+                    "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+                    "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+                    "cache.flakehub.com-3:hJuILl5sVK4iKm86JzgdXW12Y2Hwd5G07qKtHTOcDCM="
+                  ];
+                };
+              }
+              nix-index-database.nixosModules.nix-index
+              sops-nix.nixosModules.sops
+              ./systems/${configName}/configuration.nix
+            ]
+            ++ extraModules;
+        };
+
     in
     {
       packages = forAllSystems (
@@ -78,70 +120,26 @@
         pkgs.nixfmt-tree
       );
 
-      # Mac Asahi Configuration
-      nixosConfigurations.mac = nixpkgs.lib.nixosSystem {
-        system = "aarch64-linux";
-        specialArgs = {
-          inherit inputs;
-          customPkgs = self.packages.aarch64-linux;
-          stablePkgs = import nixpkgs-stable {
-            system = "aarch64-linux";
-            config.allowUnfree = true;
-          };
+      nixosConfigurations = {
+        mac = mkSystem {
+          configName = "mac";
+          system = "aarch64-linux";
+          extraModules = [
+            {
+              nix.settings = {
+                extra-substituters = [ "https://nixos-apple-silicon.cachix.org" ];
+                extra-trusted-public-keys = [
+                  "nixos-apple-silicon.cachix.org-1:8psDu5SA5dAD7qA0zMy5UT292TxeEPzIz8VVEr2Js20="
+                ];
+              };
+            }
+          ];
         };
-        modules = (import ./modules) ++ [
-          {
-            nix.package = determinate-nix.packages.aarch64-linux.default;
-            nix.settings = {
-              extra-substituters = [
-                "https://cache.garnix.io"
-                "https://nix-community.cachix.org"
-                "https://install.determinate.systems"
-                "https://nixos-apple-silicon.cachix.org"
-              ];
-              extra-trusted-public-keys = [
-                "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
-                "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-                "cache.flakehub.com-3:hJuILl5sVK4iKm86JzgdXW12Y2Hwd5G07qKtHTOcDCM="
-                "nixos-apple-silicon.cachix.org-1:8psDu5SA5dAD7qA0zMy5UT292TxeEPzIz8VVEr2Js20="
-              ];
-            };
-          }
-          nix-index-database.nixosModules.nix-index
-          sops-nix.nixosModules.sops
-          ./systems/mac/configuration.nix
-        ];
-      };
-      nixosConfigurations.x86 = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
-          inherit inputs;
-          customPkgs = self.packages.x86_64-linux;
-          stablePkgs = import nixpkgs-stable {
-            system = "x86_64-linux";
-            config.allowUnfree = true;
-          };
+
+        x86 = mkSystem {
+          configName = "x86";
+          system = "x86_64-linux";
         };
-        modules = (import ./modules) ++ [
-          {
-            nix.package = determinate-nix.packages.x86_64-linux.default;
-            nix.settings = {
-              extra-substituters = [
-                "https://cache.garnix.io"
-                "https://nix-community.cachix.org"
-                "https://install.determinate.systems"
-              ];
-              extra-trusted-public-keys = [
-                "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
-                "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-                "cache.flakehub.com-3:hJuILl5sVK4iKm86JzgdXW12Y2Hwd5G07qKtHTOcDCM="
-              ];
-            };
-          }
-          nix-index-database.nixosModules.nix-index
-          sops-nix.nixosModules.sops
-          ./systems/x86/configuration.nix
-        ];
       };
     };
 }
