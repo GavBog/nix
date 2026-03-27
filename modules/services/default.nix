@@ -6,8 +6,14 @@
   services.scx = {
     enable = true;
     package = pkgs.scx.rustscheds.overrideAttrs (old: {
-      cargoBuildFlags = [ "-p scx_bpfland" ];
-      cargoTestFlags = [ "-p scx_bpfland" ];
+      cargoBuildFlags = [
+        "-p"
+        "scx_bpfland"
+      ];
+      cargoTestFlags = [
+        "-p"
+        "scx_bpfland"
+      ];
       meta = old.meta or { } // {
         badPlatforms = [ ];
       };
