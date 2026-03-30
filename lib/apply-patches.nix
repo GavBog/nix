@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs, ... }:
 {
   src,
   patches ? [ ],
@@ -11,8 +11,9 @@ pkgs.stdenvNoCC.mkDerivation {
   inherit name src;
 
   nativeBuildInputs = [
-    pkgs.git
+    pkgs.patch
     pkgs.mergiraf
+    pkgs.patchutils
   ];
 
   phases = [
@@ -24,39 +25,63 @@ pkgs.stdenvNoCC.mkDerivation {
   patchPhase = ''
     runHook prePatch
 
-    git init
-    git config user.email "builder@nixos.org"
-    git config user.name "nix-builder"
-    git config merge.conflictStyle diff3
+    PATCHES=(${pkgs.lib.escapeShellArgs patches})
+    FIXUPS=(${pkgs.lib.escapeShellArgs fixups})
+    EXCLUDE_FLAGS=(${pkgs.lib.escapeShellArgs (map (e: "--exclude=*/''${e}") excludeFiles)})
 
-    git config merge.mergiraf.name "mergiraf"
-    git config merge.mergiraf.driver "mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L"
-    echo "* merge=mergiraf" > .git/info/attributes
-
-    git add .
-    git commit -m "base"
-
-    FIXUPS=( ${pkgs.lib.concatMapStringsSep " " (f: "\"${f}\"") fixups} )
-    PATCHES=( ${pkgs.lib.concatMapStringsSep " " (p: "\"${p}\"") patches} )
-    EXCLUDE_FLAGS="${pkgs.lib.concatMapStringsSep " " (e: "--exclude=\"${e}\"") excludeFiles}"
+    MARKER_REGEX='<<<<<<<|\|\|\|\|\|\|\||=======|>>>>>>>'
 
     for p in "''${PATCHES[@]}"; do
-      echo "Applying patch: $p"
-      if git am --3way --whitespace=nowarn $EXCLUDE_FLAGS "$p"; then
-        echo "  -> Applied cleanly (or resolved by mergiraf)."
+      echo "========================================"
+      patch_name="$(basename "$p")"
+      echo "Applying patch: $patch_name"
+
+      current_patch="$p"
+      if [ ''${#EXCLUDE_FLAGS[@]} -gt 0 ]; then
+        current_patch="$TMPDIR/filtered_$patch_name"
+        filterdiff "''${EXCLUDE_FLAGS[@]}" "$p" > "$current_patch"
+        echo "  -> Filtered excluded files from patch stream."
+      fi
+
+      if patch -p1 -l --fuzz=0 --merge=diff3 --no-backup-if-mismatch < "$current_patch"; then
+        echo "  -> Applied cleanly."
       else
-        echo "  -> Conflict detected. Attempting to resolve with fixups..."
+        echo "  -> Conflict detected. Initiating auto-resolution..."
 
-        for f in "''${FIXUPS[@]}"; do
-           git apply --ignore-whitespace "$f" >/dev/null 2>&1 || true
+        CONFLICT_FILES=$(grep -rlE "$MARKER_REGEX" . || true)
+
+        if [ -z "$CONFLICT_FILES" ]; then
+          echo "Error: Patch failed but no conflict markers were generated."
+          exit 1
+        fi
+
+        for target_file in $CONFLICT_FILES; do
+          echo "    * Resolving collision in: $target_file"
+
+          if mergiraf solve "$target_file"; then
+            echo "      [SUCCESS] Mergiraf automatically resolved the collision."
+          else
+            echo "      [FAILED] Mergiraf could not resolve collision."
+            echo "      -> Searching for applicable fixup patches..."
+
+            FIXUP_APPLIED=false
+            for f in "''${FIXUPS[@]}"; do
+               if patch -p1 -l --fuzz=0 --no-backup-if-mismatch < "$f" >/dev/null 2>&1; then
+                  echo "      [SUCCESS] Applied fixup: $(basename "$f")"
+                  FIXUP_APPLIED=true
+                  break
+               fi
+            done
+
+            if [ "$FIXUP_APPLIED" = false ]; then
+              echo "Error: Exhausted all auto-resolution and fixup options for $target_file."
+              exit 1
+            fi
+          fi
         done
-        
-        git add .
 
-        if git am --continue; then
-          echo "  -> Resolved successfully via fixups."
-        else
-          echo "Error: Fixups could not resolve the conflict in $p."
+        if grep -rqE "$MARKER_REGEX" .; then
+          echo "Critical Error: Unresolved conflict markers detected in source files."
           exit 1
         fi
       fi
@@ -66,8 +91,7 @@ pkgs.stdenvNoCC.mkDerivation {
   '';
 
   installPhase = ''
-    rm -rf .git
-    mkdir -p $out
-    cp -pr . $out
+    mkdir -p "$out"
+    cp -pr . "$out"
   '';
 }

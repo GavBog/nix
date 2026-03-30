@@ -27,16 +27,16 @@ let
       # Add this later
       # https://codeberg.org/dwl/dwl-patches/src/branch/main/patches/chainkeys/chainkeys.patch
 
-      (pkgs.fetchurl {
+      (pkgs.fetchpatch {
         url = "https://codeberg.org/dwl/dwl-patches/raw/commit/f24e98a304a818b80b00dbd49faafac99b2672f0/patches/movestack/movestack.patch";
-        hash = "sha256-9Bs6YIMsIN1SpysB3dem+L5Gxg+VwwkXPSQ1W5n4ZOA=";
+        hash = "sha256-/Ac7oQyZNVPqGiNDn0y94arN0cz98Ie1nKkQIX27bZo=";
       })
 
       # WARN: DWL IPC
-      # https://codeberg.org/dwl/dwl-patches/issues/578
-      (pkgs.fetchurl {
-        url = "https://codeberg.org/attachments/68631114-befa-4f90-9605-1463f14cd649";
-        hash = "sha256-aPYKloeXxRWegKY/ICqkk80foFY7VErAV9mw8UAcrIA=";
+      # https://codeberg.org/dwl/dwl-patches/pulls/626
+      (pkgs.fetchpatch {
+        url = "https://codeberg.org/dwl/dwl-patches/raw/commit/d00a92263c2df094a21828658f37f6584ae1df1b/patches/ipc/ipc.patch";
+        hash = "sha256-vzMj30SsALLF0Ft7NkTqF6Ez55bjD3PYm9uk5gy+Z/4=";
       })
     ];
     fixups = [
