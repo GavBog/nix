@@ -36,31 +36,6 @@ pkgs.symlinkJoin {
 Applying multiple community patches to dwl usually causes conflicts. `apply-patches.nix` solves this:
 
 ```nix
-# lib/apply-patches.nix (simplified)
-pkgs.stdenvNoCC.mkDerivation {
-  patchPhase = ''
-    git init
-    git config merge.mergiraf.driver "mergiraf merge --git %O %A %B ..."
-
-    for p in "''${PATCHES[@]}"; do
-      git am --3way "$p" || {
-        # Apply fixups for manual conflict resolution
-        for f in "''${FIXUPS[@]}"; do
-          git apply "$f" || true
-        done
-        git am --continue
-      }
-    done
-  '';
-}
-```
-
-**How it works:**
-- Uses **mergiraf** for intelligent 3-way merging
-- Falls back to fixup patches when needed
-- Result: clean patch stacking that "just works"
-
-```nix
 # pkgs/dwl/default.nix
 dwlSrc = applyPatches {
   src = pkgs.fetchgit { url = "https://codeberg.org/dwl/dwl.git"; /* ... */ };
@@ -70,6 +45,11 @@ dwlSrc = applyPatches {
   ];
 };
 ```
+
+**How it works:**
+- Uses [mergiraf](https://codeberg.org/mergiraf/mergiraf) for intelligent 3-way merging
+- Falls back to fixup patches when needed
+- Result: clean patch stacking that "just works"
 
 ---
 
