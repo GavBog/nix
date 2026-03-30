@@ -105,6 +105,7 @@ nix build github:gavbog/nix#dwl
 |---------------|-------------------------------|
 | `mac`         | Apple Silicon Desktop (Asahi) |
 | `x86`         | Intel/Amd Desktop             |
+
 Each system has its own configuration defined under `systems/`:
 
 ```
