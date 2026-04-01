@@ -99,9 +99,9 @@ let
         ]
         ++ [
           customPkgs.tidal-language-server
-          tidal-cycles.packages.aarch64-linux.ghcWithTidal
-          tidal-cycles.packages.aarch64-linux.superdirt-start
-          tidal-cycles.packages.aarch64-linux.tidal
+          tidal-cycles.packages.${pkgs.stdenv.hostPlatform.system}.ghcWithTidal
+          tidal-cycles.packages.${pkgs.stdenv.hostPlatform.system}.superdirt-start
+          tidal-cycles.packages.${pkgs.stdenv.hostPlatform.system}.tidal
         ];
       };
 

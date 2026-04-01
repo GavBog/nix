@@ -13,24 +13,21 @@ let
     hash = "sha256-c8/9F6zI86CduMSzJcmmO3H6IqOneJF5Zov3BacYQs8=";
   };
 
-  hpkgs = pkgs.haskell.packages.ghc96.override {
-    overrides = self: super: {
-      mkDerivation =
-        args:
-        super.mkDerivation (
-          args
-          // {
-            doCheck = false;
-          }
-        );
+  hlib = pkgs.haskell.lib;
 
-      fuzzyfind = super.fuzzyfind.overrideAttrs (_: {
-        meta.broken = false;
-      });
+  # Upgraded from ghc96 for the binary cache.
+  # If it breaks pin it to a stable nixpkgs version or revert.
+  hpkgs = pkgs.haskellPackages.override {
+    overrides = self: super: {
+      fuzzyfind = hlib.doJailbreak (
+        super.fuzzyfind.overrideAttrs (_: {
+          meta.broken = false;
+        })
+      );
     };
   };
 
-  tidalLsp = hpkgs.callCabal2nix "tidal-language-server" tidalLspSrc { };
+  tidalLsp = hlib.doJailbreak (hpkgs.callCabal2nix "tidal-language-server" tidalLspSrc { });
 in
 pkgs.symlinkJoin {
   name = "tidal-language-server";
