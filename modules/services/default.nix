@@ -6,6 +6,8 @@
   services.scx = {
     enable = true;
     package = pkgs.scx.rustscheds.overrideAttrs (old: {
+      postInstall = "";
+      doInstallCheck = false;
       cargoBuildFlags = [
         "-p"
         "scx_bpfland"
