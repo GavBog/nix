@@ -129,6 +129,10 @@ let
             name = "blink.cmp";
           }
           {
+            plugin = conform-nvim;
+            name = "conform.nvim";
+          }
+          {
             plugin = copilot-lua;
             name = "copilot.lua";
           }
