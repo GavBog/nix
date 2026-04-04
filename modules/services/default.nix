@@ -3,6 +3,7 @@
   services.openssh.enable = true;
   services.usbmuxd.enable = true;
   services.dbus.implementation = "broker";
+  services.irqbalance.enable = true;
   services.scx = {
     enable = true;
     package = pkgs.scx.rustscheds.overrideAttrs (old: {
