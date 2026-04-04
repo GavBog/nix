@@ -9,20 +9,14 @@
   };
 
   environment.systemPackages = with pkgs // customPkgs; [
-    impala
-    bluetui
-    brightnessctl
     age
     age-plugin-yubikey
-    ssh-to-age
-    sops
-    pinentry-curses
-    swaybg
-    mosh
+    bluetui
+    brightnessctl
+    btop
     clang
     dwl
     dwlb
-    someblocks
     fastfetch
     ffmpeg
     fzf
@@ -30,22 +24,41 @@
     ghostty
     git
     gparted
+    impactor
+    impala
+    kdePackages.dolphin
     librewolf
     maliit-framework
     maliit-keyboard
     mergiraf
+    mosh
     nvim
     obsidian
-    btop
-    kdePackages.dolphin
-    stremio-linux-shell
-    impactor
+    pinentry-curses
     prismlauncher
-    vesktop
+    rustup
+    someblocks
+    sops
+    ssh-to-age
+    stremio-linux-shell
+    swaybg
     tldr
+    vesktop
     wl-clipboard
     wmenu
     zoxide
+  ];
+
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    stdenv.cc.cc
+    zlib
+    fuse3
+    icu
+    nss
+    openssl
+    curl
+    expat
   ];
 
   fonts.packages = with pkgs; [
