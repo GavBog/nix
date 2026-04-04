@@ -36,6 +36,11 @@ in
     peripheralFirmwareDirectory = inputs.aea-tools.packages.aarch64-linux.default;
   };
 
+  services.scx.extraArgs = [
+    "-m"
+    "powersave"
+  ];
+
   fileSystems."/" = {
     options = lib.mkForce (
       [
