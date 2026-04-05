@@ -1,11 +1,1 @@
-[
-  ./audio
-  ./bluetooth
-  ./boot
-  ./desktop
-  ./programs
-  ./input
-  ./networking
-  ./services
-  ./users
-]
+import ./common

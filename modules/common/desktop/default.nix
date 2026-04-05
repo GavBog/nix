@@ -12,13 +12,13 @@ in
 {
   sops.secrets.wallpaper = {
     format = "binary";
-    sopsFile = ../../assets/sunpaper.sops.jpg;
+    sopsFile = ../../../assets/sunpaper.sops.jpg;
     mode = "0444";
   };
 
   system.activationScripts.wallpaper-fallback = ''
     if [ ! -f "${config.sops.secrets.wallpaper.path}" ]; then
-      ln -sf ${../../assets/wallpaper.svg} /run/current_wallpaper
+      ln -sf ${../../../assets/wallpaper.svg} /run/current_wallpaper
     else
       ln -sf ${config.sops.secrets.wallpaper.path} /run/current_wallpaper
     fi
