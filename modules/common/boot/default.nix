@@ -6,5 +6,9 @@
     loader.efi.canTouchEfiVariables = false;
   };
 
+  image.modules.iso = {
+    isoImage.squashfsCompression = "zstd -Xcompression-level 6";
+  };
+
   hardware.graphics.enable = true;
 }

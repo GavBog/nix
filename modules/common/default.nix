@@ -2,10 +2,11 @@
   ./audio
   ./bluetooth
   ./boot
+  ./cache
   ./desktop
-  ./programs
   ./input
   ./networking
+  ./programs
   ./services
   ./users
 ]
