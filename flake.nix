@@ -77,6 +77,9 @@
             ++ [
               {
                 nix.package = determinate-nix.packages.${system}.default;
+                image.modules.iso = {
+                  isoImage.squashfsCompression = "zstd -Xcompression-level 6";
+                };
                 nix.settings = {
                   extra-substituters = [
                     "https://cache.garnix.io"
