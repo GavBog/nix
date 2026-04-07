@@ -38,12 +38,17 @@ let
         url = "https://codeberg.org/dwl/dwl-patches/raw/commit/d00a92263c2df094a21828658f37f6584ae1df1b/patches/ipc/ipc.patch";
         hash = "sha256-vzMj30SsALLF0Ft7NkTqF6Ez55bjD3PYm9uk5gy+Z/4=";
       })
+
+      (pkgs.fetchpatch {
+        url = "https://codeberg.org/dwl/dwl-patches/raw/commit/2d4463dd832885f3e657fbe93c4b26296ef6f93a/patches/singletagset/singletagset-v0.7.patch";
+        hash = "sha256-ppyLAdYIHOFCZ53/dBpxR3T3jSx5TfSApo0GI18M0tE=";
+      })
     ];
     fixups = [
-      # (builtins.path {
-      #   name = "patch-fixup";
-      #   path = ./fixups/patch-fixup.patch;
-      # })
+      (builtins.path {
+        name = "singletagset-patch";
+        path = ./fixups/singletagset.patch;
+      })
     ];
   };
 

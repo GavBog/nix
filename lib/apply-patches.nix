@@ -80,7 +80,7 @@ pkgs.stdenvNoCC.mkDerivation {
           fi
         done
 
-        if grep -rqE "$MARKER_REGEX" .; then
+        if grep -rqE "$MARKER_REGEX" . --exclude="*.orig" --exclude="*.rej"; then
           echo "Critical Error: Unresolved conflict markers detected in source files."
           exit 1
         fi

@@ -1,0 +1,45 @@
+diff --git a/dwl.c b/dwl.c
+index 5f85322..dd030ea 100644
+--- a/dwl.c
++++ b/dwl.c
+@@ -525,11 +525,8 @@ applyrules(Client *c)
+                        }
+                }
+        }
+-<<<<<<< LEFT
+
+        c->isfloating |= client_is_float_type(c);
+-||||||| BASE
+-=======
+
+        wl_list_for_each(m, &mons, link) {
+                // tag with different monitor selected by rules
+@@ -539,7 +536,6 @@ applyrules(Client *c)
+                }
+        }
+
+->>>>>>> RIGHT
+        setmon(c, mon, newtags);
+        attachclients(mon);
+ }
+@@ -2125,20 +2121,8 @@ monocle(Monitor *m)
+        int n = 0;
+
+        wl_list_for_each(c, &clients, link) {
+-<<<<<<< LEFT
+                if (!VISIBLEON(c, m) || c->isfloating || c->isfullscreen)
+                        continue;
+-||||||| BASE
+-                       if (c->mon != m)
+-                               continue;
+-                       occ |= c->tags;
+-                       if (c->isurgent)
+-                               urg |= c->tags;
+-=======
+-                       occ |= c->tags;
+-                       if (c->isurgent)
+-                               urg |= c->tags;
+->>>>>>> RIGHT
+                resize(c, m->w, 0);
+                n++;
+        }
