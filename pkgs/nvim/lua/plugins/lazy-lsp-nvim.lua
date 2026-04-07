@@ -3,6 +3,10 @@ return {
     "dundalek/lazy-lsp.nvim",
     lazy = true,
     event = "VeryLazy",
+    config = function(_, opts)
+      require("lazy-lsp").setup(opts)
+      LazyVim.format.register(LazyVim.lsp.formatter())
+    end,
     opts = {
       prefer_local = false,
       use_vim_lsp_config = true,
