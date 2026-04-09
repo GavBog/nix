@@ -1,7 +1,6 @@
 {
   pkgs,
   customPkgs,
-  lib,
   configFile ? ./config.h,
   wallpaper ? ../../assets/wallpaper.svg,
 }:
@@ -64,7 +63,8 @@ let
     '';
   });
 
-  dwlPostStart = lib.trim ''
+  dwlPostStart = pkgs.writeShellScript "dwl-post-start" ''
+    ${pkgs.uwsm}/bin/uwsm finalize WAYLAND_DISPLAY
     ${pkgs.swaybg}/bin/swaybg -i ${wallpaper} -m fill &
     ${pkgs.dwlb}/bin/dwlb -ipc &
     (
@@ -74,11 +74,8 @@ let
   '';
 
   dwlStart = pkgs.writeShellScriptBin "dwl-start" ''
-    export XDG_SESSION_TYPE=wayland
-    export XDG_CURRENT_DESKTOP=dwl
-    export XDG_SESSION_DESKTOP=dwl
-
-    ${dwl}/bin/dwl -s "${dwlPostStart}"
+    exec ${pkgs.uwsm}/bin/uwsm start -- \
+      ${dwl}/bin/dwl -s "${dwlPostStart}"
   '';
 
   dwlDesktop = pkgs.writeTextFile {

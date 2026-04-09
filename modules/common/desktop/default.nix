@@ -24,6 +24,25 @@ in
     fi
   '';
 
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    wlr.settings = {
+      screencast = {
+        chooser_type = "simple";
+        chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
+      };
+    };
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+
+    config.common = {
+      default = [ "gtk" ];
+      "org.freedesktop.impl.portal.ScreenCast" = [ "wlr" ];
+      "org.freedesktop.impl.portal.Screenshot" = [ "wlr" ];
+    };
+  };
+
+  programs.uwsm.enable = true;
   environment.etc."dwl-start".source = "${dwl}/bin/dwl-start";
   services.greetd = {
     enable = true;
