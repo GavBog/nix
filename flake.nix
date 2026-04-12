@@ -32,6 +32,21 @@
     };
   };
 
+  nixConfig = {
+    extra-substituters = [
+      "https://cache.garnix.io"
+      "https://nix-community.cachix.org"
+      "https://install.determinate.systems"
+      "https://nixos-apple-silicon.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "cache.flakehub.com-3:hJuILl5sVK4iKm86JzgdXW12Y2Hwd5G07qKtHTOcDCM="
+      "nixos-apple-silicon.cachix.org-1:8psDu5SA5dAD7qA0zMy5UT292TxeEPzIz8VVEr2Js20="
+    ];
+  };
+
   outputs =
     {
       self,
