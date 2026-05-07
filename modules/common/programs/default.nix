@@ -1,6 +1,11 @@
 { pkgs, customPkgs, ... }:
 {
   programs.nix-index-database.comma.enable = true;
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
   services.pcscd.enable = true;
   programs.gnupg.agent = {
     enable = true;

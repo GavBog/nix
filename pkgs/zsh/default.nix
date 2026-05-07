@@ -15,6 +15,7 @@ in
   paths = [
     pkgs.zsh
     pkgs.starship
+    pkgs.direnv
   ];
   nativeBuildInputs = [ pkgs.makeWrapper ];
   postBuild = ''
