@@ -17,7 +17,7 @@
         zsh = callPackage ./zsh { };
         someblocks = callPackage ./someblocks { };
         dwl = callPackage ./dwl { inherit customPkgs; };
-        tidal-language-server = callPackage ./tidal-language-server { };
+        tidal-language-server = callPackage ./tidal-language-server { tidal = inputs.tidal; };
         impactor = callPackage ./impactor { };
         tribler = callPackage ./tribler { pkgs = pkgs-stable; };
         tribler-docker = callPackage ./tribler/docker.nix {

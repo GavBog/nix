@@ -22,9 +22,19 @@
       url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    tidal = {
+      url = "git+https://codeberg.org/uzu/tidal.git";
+      flake = false;
+    };
+    # superdirt = {
+    #   url = "git+https://codeberg.org/musikinformatik/SuperDirt.git";
+    #   flake = false;
+    # };
     tidal-cycles = {
       url = "github:mitchmindtree/tidalcycles.nix";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.tidal-src.follows = "tidal";
+      # inputs.superdirt-src.follows = "superdirt";
     };
     aea-tools = {
       url = "github:GavBog/aea-tools";

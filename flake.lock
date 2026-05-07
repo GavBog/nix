@@ -337,6 +337,7 @@
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-stable": "nixpkgs-stable",
         "sops-nix": "sops-nix",
+        "tidal": "tidal",
         "tidal-cycles": "tidal-cycles"
       }
     },
@@ -376,6 +377,22 @@
         "type": "github"
       }
     },
+    "tidal": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1777648899,
+        "narHash": "sha256-AcHk5Ro40nGz9idoZNCzPIyOL+XNy6Com+pVMrBRupc=",
+        "ref": "refs/heads/main",
+        "rev": "40955c96222063114aec499a014f5b9ef1d80a6e",
+        "revCount": 3502,
+        "type": "git",
+        "url": "https://codeberg.org/uzu/tidal.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://codeberg.org/uzu/tidal.git"
+      }
+    },
     "tidal-cycles": {
       "inputs": {
         "dirt-samples-src": "dirt-samples-src",
@@ -383,7 +400,9 @@
           "nixpkgs"
         ],
         "superdirt-src": "superdirt-src",
-        "tidal-src": "tidal-src",
+        "tidal-src": [
+          "tidal"
+        ],
         "vim-tidal-src": "vim-tidal-src",
         "vowel-src": "vowel-src"
       },
@@ -398,23 +417,6 @@
       "original": {
         "owner": "mitchmindtree",
         "repo": "tidalcycles.nix",
-        "type": "github"
-      }
-    },
-    "tidal-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1712519522,
-        "narHash": "sha256-LbvxQmVxHElidCgvt+w0g1k+QQbNLebK46vtRCgsLeQ=",
-        "owner": "tidalcycles",
-        "repo": "tidal",
-        "rev": "88f09edf6bef2228d5f530dea872b08a9d803066",
-        "type": "github"
-      },
-      "original": {
-        "owner": "tidalcycles",
-        "ref": "v1.9.5",
-        "repo": "tidal",
         "type": "github"
       }
     },
