@@ -39,20 +39,22 @@
     maliit-keyboard
     mergiraf
     mosh
+    mpv
     nix-output-monitor
     nvim
     obsidian
     pinentry-curses
     prismlauncher
+    qbittorrent
     rust-bindgen
     rustup
     someblocks
     sops
     ssh-to-age
-    stremio-linux-shell
     swaybg
     tldr
     vesktop
+    webtorrent_desktop
     wl-clipboard
     wmenu
     zoxide
