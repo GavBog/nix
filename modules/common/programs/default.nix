@@ -19,7 +19,9 @@
     bluetui
     brightnessctl
     btop
+    caligula
     clang
+    dix
     dwl
     dwlb
     fastfetch
@@ -37,10 +39,12 @@
     maliit-keyboard
     mergiraf
     mosh
+    nix-output-monitor
     nvim
     obsidian
     pinentry-curses
     prismlauncher
+    rust-bindgen
     rustup
     someblocks
     sops
