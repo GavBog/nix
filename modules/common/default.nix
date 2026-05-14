@@ -7,6 +7,7 @@
   ./input
   ./networking
   ./programs
+  ./secrets
   ./services
   ./users
 ]
