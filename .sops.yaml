@@ -1,6 +1,6 @@
 keys:
   - &yubikey age1yubikey1qgyrtg6drd9uzn7t8eqc3h08r6ck647ega4geq84escczjhuteqxv682jtn
-  - &mac age1jt3ka82kdczm66ma3p6y65fuvxeky4vmeqarctl7el7rf7j20yfqavpkrf
+  - &mac age1hzz5xl7dqsckdkxt4l6hg2dv0ru2e5tld8vvw3rnz4s4m5j92s7qzj22he
   - &desktop age1p5nxspujq4g46cs0g4kdmx7842q9uqwqajeluysey3hppynvzuls2pkpej
 creation_rules:
   - path_regex: .*\.sops\.[^/]+$
