@@ -13,8 +13,8 @@ let
     name = "dwl-patched-src";
     src = pkgs.fetchgit {
       url = "https://codeberg.org/dwl/dwl.git";
-      rev = "a8915224e8159e6e0b6ff0fe7b2c6436fb3a1b6d";
-      hash = "sha256-fOQ9B+5YFZeYJswsCAZd7FruiFRxUBC9ZyaX4UysNvo=";
+      rev = "a2d03cf6188350005dbdaac12f3b0fbc4d60c567";
+      hash = "sha256-urxssck61OxAO3aodVsm7PXHrKXguSJDSx8J/7UURyg=";
     };
     excludeFiles = [ "config.def.h" ];
     patches = [

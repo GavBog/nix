@@ -2,7 +2,7 @@
   description = "Gavin Bogie's NixOS Configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
     determinate-nix.url = "github:DeterminateSystems/nix-src";
     nixCats.url = "github:BirdeeHub/nixCats-nvim";

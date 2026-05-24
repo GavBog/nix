@@ -4,6 +4,7 @@
     plymouth.enable = true;
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = false;
+    initrd.systemd.enable = false;
   };
 
   image.modules.iso = {
