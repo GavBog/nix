@@ -10,6 +10,10 @@
       url = "github:nix-community/nixos-apple-silicon";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -61,10 +65,11 @@
       nixpkgs,
       nixpkgs-stable,
       determinate-nix,
-      nixCats,
-      nix-index-database,
-      sops-nix,
+      disko,
       neovim-nightly-overlay,
+      nix-index-database,
+      nixCats,
+      sops-nix,
       tidal-cycles,
       ...
     }@inputs:
@@ -99,6 +104,7 @@
             {
               nix.package = determinate-nix.packages.${system}.default;
             }
+            disko.nixosModules.disko
             nix-index-database.nixosModules.nix-index
             sops-nix.nixosModules.sops
             ./systems/${configName}/configuration.nix
@@ -140,6 +146,12 @@
           configName = "x86";
           system = "x86_64-linux";
           extraModules = (import ./modules/x86) ++ [ ];
+        };
+
+        server = mkSystem {
+          configName = "server";
+          system = "aarch64-linux";
+          extraModules = [ ];
         };
       };
     };

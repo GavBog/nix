@@ -41,6 +41,7 @@
     mosh
     mpv
     nix-output-monitor
+    nixos-anywhere
     nvim
     obsidian
     pinentry-curses
