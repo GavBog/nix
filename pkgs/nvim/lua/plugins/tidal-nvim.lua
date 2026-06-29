@@ -1,17 +1,9 @@
 return {
 	{
-		"thgrund/tidal.nvim",
+		"https://codeberg.org/MrReason/tidal.nvim",
 		lazy = true,
 		ft = "tidal",
 		opts = {},
-	},
-	{
-		"thgrund/tidal-makros.nvim",
-		lazy = true,
-		ft = "tidal",
-		config = function()
-			require("makros").setup()
-		end,
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
