@@ -110,14 +110,14 @@ let
       # but you have the option, and that is demonstrated here.
       startupPlugins = with pkgs.vimPlugins; {
         general = [
+          LazyVim
           blink-copilot
           friendly-snippets
           github-nvim-theme
-          LazyVim
           nvim-lspconfig
           nvim-navic
-          nvim-treesitter.withAllGrammars
           nvim-treesitter-textobjects
+          nvim-treesitter.withAllGrammars
           nvim-ts-autotag
           nvim-ts-context-commentstring
           rustaceanvim
@@ -173,16 +173,16 @@ let
             name = "kulala.nvim";
           }
           {
-            plugin = lazydev-nvim;
-            name = "lazydev.nvim";
-          }
-          {
             plugin = lazy-lsp-nvim;
             name = "lazy-lsp.nvim";
           }
           {
             plugin = lazy-nvim;
             name = "lazy.nvim";
+          }
+          {
+            plugin = lazydev-nvim;
+            name = "lazydev.nvim";
           }
           {
             plugin = lualine-nvim;
@@ -287,6 +287,12 @@ let
           {
             plugin = yanky-nvim;
             name = "yanky.nvim";
+          }
+        ]
+        ++ [
+          {
+            plugin = customPkgs.nvimPlugins.tidal-nvim;
+            name = "tidal.nvim";
           }
         ];
       };

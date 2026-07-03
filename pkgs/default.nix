@@ -11,6 +11,17 @@
         system = pkgs.stdenv.hostPlatform.system;
         config.allowUnfree = true;
       };
+
+      nvimExports = import ./nvim {
+        inherit customPkgs;
+        inherit (inputs)
+          nixpkgs
+          nixCats
+          tidal-cycles
+          neovim-nightly-overlay
+          ;
+      };
+
       customPkgs = {
         ghostty = callPackage ./ghostty { };
         librewolf = callPackage ./librewolf { };
@@ -29,16 +40,10 @@
           pkgs = pkgs-stable;
           inherit customPkgs;
         };
-      };
-      nvimExports = import ./nvim {
-        inherit customPkgs;
-        inherit (inputs)
-          nixpkgs
-          nixCats
-          tidal-cycles
-          neovim-nightly-overlay
-          ;
+
+        nvim = nvimExports.packages.${pkgs.stdenv.hostPlatform.system}.nvim;
+        nvimPlugins = (import ./nvim/pluginPkgs { }).packages pkgs;
       };
     in
-    customPkgs // { nvim = nvimExports.packages.${pkgs.stdenv.hostPlatform.system}.nvim; };
+    customPkgs;
 }
