@@ -32,6 +32,7 @@ in
   };
 
   hardware.asahi = {
+    enable = true;
     setupAsahiSound = false;
     peripheralFirmwareDirectory = inputs.aea-tools.packages.aarch64-linux.default;
   };
