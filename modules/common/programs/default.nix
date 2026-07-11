@@ -1,4 +1,9 @@
-{ pkgs, customPkgs, ... }:
+{
+  pkgs,
+  customPkgs,
+  inputs,
+  ...
+}:
 {
   programs.nix-index-database.comma.enable = true;
   programs.direnv = {
@@ -13,53 +18,57 @@
     enableSSHSupport = true;
   };
 
-  environment.systemPackages = with pkgs // customPkgs; [
-    age
-    age-plugin-yubikey
-    bluetui
-    brightnessctl
-    btop
-    caligula
-    clang
-    dix
-    dwl
-    dwlb
-    fastfetch
-    ffmpeg
-    fzf
-    gh
-    ghostty
-    git
-    gparted
-    impactor
-    impala
-    kdePackages.dolphin
-    librewolf
-    maliit-framework
-    maliit-keyboard
-    mergiraf
-    mosh
-    mpv
-    nix-output-monitor
-    nixos-anywhere
-    nvim
-    obsidian
-    pinentry-curses
-    prismlauncher
-    qbittorrent
-    rust-bindgen
-    rustup
-    someblocks
-    sops
-    ssh-to-age
-    swaybg
-    tldr
-    vesktop
-    webtorrent_desktop
-    wl-clipboard
-    wmenu
-    zoxide
-  ];
+  environment.systemPackages =
+    with pkgs // customPkgs;
+    [
+      age
+      age-plugin-yubikey
+      bluetui
+      brightnessctl
+      btop
+      caligula
+      clang
+      dix
+      dwl
+      dwlb
+      fastfetch
+      ffmpeg
+      fzf
+      gh
+      ghostty
+      git
+      gparted
+      impala
+      kdePackages.dolphin
+      librewolf
+      maliit-framework
+      maliit-keyboard
+      mergiraf
+      mosh
+      mpv
+      nix-output-monitor
+      nixos-anywhere
+      nvim
+      obsidian
+      pinentry-curses
+      prismlauncher
+      qbittorrent
+      rust-bindgen
+      rustup
+      someblocks
+      sops
+      ssh-to-age
+      swaybg
+      tldr
+      vesktop
+      webtorrent_desktop
+      wl-clipboard
+      wmenu
+      zoxide
+    ]
+    ++ [
+      inputs.iloader.packages.${stdenv.hostPlatform.system}.default
+    ];
 
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [

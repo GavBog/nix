@@ -29,7 +29,6 @@
         someblocks = callPackage ./someblocks { };
         dwl = callPackage ./dwl { inherit customPkgs; };
         tidal-language-server = callPackage ./tidal-language-server { tidal = inputs.tidal; };
-        impactor = callPackage ./impactor { };
         risc0 = callPackage ./risc0 { pkgs = pkgs-stable; };
         cartesi-machine = callPackage ./cartesi {
           pkgs = pkgs-stable;
