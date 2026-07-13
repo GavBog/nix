@@ -189,6 +189,10 @@ let
             name = "lualine.nvim";
           }
           {
+            plugin = markdown-preview-nvim;
+            name = "markdown-preview.nvim";
+          }
+          {
             plugin = mini-ai;
             name = "mini.ai";
           }
