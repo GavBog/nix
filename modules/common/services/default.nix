@@ -11,17 +11,17 @@
       doInstallCheck = false;
       cargoBuildFlags = [
         "-p"
-        "scx_bpfland"
+        "scx_lavd"
       ];
       cargoTestFlags = [
         "-p"
-        "scx_bpfland"
+        "scx_lavd"
       ];
       meta = old.meta or { } // {
         badPlatforms = [ ];
       };
     });
-    scheduler = "scx_bpfland";
+    scheduler = "scx_lavd";
   };
 
   security.polkit.enable = true;

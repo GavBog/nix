@@ -38,8 +38,7 @@ in
   };
 
   services.scx.extraArgs = [
-    "-m"
-    "powersave"
+    "--powersave"
   ];
 
   fileSystems."/" = {
