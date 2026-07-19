@@ -5,4 +5,5 @@
   cd = "z";
   t = "timedatectl";
   docker = "podman";
+  yz = "yazi";
 }

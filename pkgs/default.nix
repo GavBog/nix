@@ -39,6 +39,7 @@
           pkgs = pkgs-stable;
           inherit customPkgs;
         };
+        yazi = callPackage ./yazi { };
 
         nvim = nvimExports.packages.${pkgs.stdenv.hostPlatform.system}.nvim;
         nvimPlugins = (import ./nvim/pluginPkgs { }).packages pkgs;

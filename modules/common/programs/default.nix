@@ -6,6 +6,10 @@
 }:
 {
   programs.nix-index-database.comma.enable = true;
+  programs.fuse = {
+    enable = true;
+    userAllowOther = true;
+  };
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
@@ -58,12 +62,14 @@
       someblocks
       sops
       ssh-to-age
+      sshfs
       swaybg
       tldr
       vesktop
       webtorrent_desktop
       wl-clipboard
       wmenu
+      yazi
       zoxide
     ]
     ++ [
