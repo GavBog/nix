@@ -93,6 +93,7 @@
   ];
 
   environment.sessionVariables = {
+    PATH = [ "$HOME/.cargo/bin" ];
     EDITOR = "nvim";
     NIXPKGS_ALLOW_UNFREE = "1";
   };
