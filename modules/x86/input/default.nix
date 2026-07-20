@@ -4,20 +4,12 @@
     enable = true;
     keyboards = {
       default = {
-        extraDefCfg = "process-unmapped-keys yes";
-        config = ''
-          (defsrc
-            caps lmet lalt
-          )
-
-          (defalias
-            escctrl (tap-hold 200 200 esc lctrl)
-          )
-
-          (deflayer base
-            @escctrl lalt lmet
-          )
-        '';
+        extraDefCfg = "
+          process-unmapped-keys yes
+          concurrent-tap-hold   yes
+          chords-v2-min-idle    25
+        ";
+        config = builtins.readFile ./handsdown-neu.kbd;
       };
     };
   };

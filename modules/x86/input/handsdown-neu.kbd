@@ -1,0 +1,101 @@
+;; ===========================================================================
+;; Hands Down Neu
+;; ===========================================================================
+
+;; (defcfg
+;;   process-unmapped-keys yes
+;;   concurrent-tap-hold   yes
+;;   chords-v2-min-idle    25
+;; )
+
+(defvar
+  tt 200    ;; tap-hold tap-repress timeout
+  ht 200    ;; tap-hold hold timeout
+  cw 20     ;; chord window (ms)
+)
+
+(defsrc
+  caps        -
+  q           w           e           r           t           y           u           i           o           p           [           ]
+  a           s           d           f           g           h           j           k           l           ;           '
+  lsft        z           x           c           v           b           n           m           ,           .           /
+  lctl        lmet        lalt        spc
+)
+
+(defalias
+  th (macro t h)  sh (macro s h)  ch (macro c h)
+  wh (macro w h)  gh (macro g h)  ph (macro p h)
+  qu (macro q u)
+
+  au (macro a u)  eo (macro e o)  ua (macro u a)
+
+  c-base      (multi lctl (layer-while-held ctrl-base))
+  c-qwerty    (multi lctl (layer-while-held ctrl-qwerty))
+
+  esc-base    (tap-hold $tt $ht esc @c-base)
+  esc-qwerty  (tap-hold $tt $ht esc @c-qwerty)
+
+  sft-x       (tap-hold $tt $ht x   lsft)
+
+  nav-bspc    (tap-hold $tt $ht bspc (layer-while-held nav))
+
+  to-base     (layer-switch base)
+  to-qwerty   (layer-switch qwerty)
+)
+
+(defchordsv2
+  (d f)  @th  $cw  first-release  (qwerty ctrl-base ctrl-qwerty nav)
+  (s d)  @sh  $cw  first-release  (qwerty ctrl-base ctrl-qwerty nav)
+  (s f)  @ch  $cw  first-release  (qwerty ctrl-base ctrl-qwerty nav)
+  (w r)  @wh  $cw  first-release  (qwerty ctrl-base ctrl-qwerty nav)
+  (c v)  @gh  $cw  first-release  (qwerty ctrl-base ctrl-qwerty nav)
+  (r e)  @ph  $cw  first-release  (qwerty ctrl-base ctrl-qwerty nav)
+
+  (i u)  @qu  $cw  first-release  (qwerty ctrl-base ctrl-qwerty nav)
+
+  (j i)  @au  $cw  first-release  (qwerty ctrl-base ctrl-qwerty nav)
+  (k o)  @eo  $cw  first-release  (qwerty ctrl-base ctrl-qwerty nav)
+  (m n)  @ua  $cw  first-release  (qwerty ctrl-base ctrl-qwerty nav)
+
+  (q w)  z    $cw  first-release  (qwerty ctrl-base ctrl-qwerty nav)
+)
+
+(deflayer base
+  @esc-base   /
+  w           f           m           p           v           ,           .           q           [           ]           '           z
+  r           s           n           t           b           ;           a           e           i           h           j
+  @sft-x      c           l           d           g           @nav-bspc   -           u           o           y           k
+  @c-base     lalt        lmet        spc
+)
+
+(deflayer nav
+  _           _
+  _           _           _           _           _           _           _           _           _           _           _           _
+  _           _           _           _           _           _           left        down        up          right       _
+  _           _           _           _           _           _           _           _           _           _           _
+  _           _           _           _
+)
+
+(deflayer ctrl-base
+  _           _
+  _           _           _           _           _           _           _           _           _           _           _           _
+  _           _           _           _           _           _           _           _           _           _           _
+  _           _           _           _           _           _           _           _           _           _           _
+  _           _           _           @to-qwerty
+)
+
+(deflayer qwerty
+  @esc-qwerty -
+  q           w           e           r           t           y           u           i           o           p           [           ]
+  a           s           d           f           g           h           j           k           l           ;           '
+  lsft        z           x           c           v           b           n           m           ,           .           /
+  @c-qwerty   lalt        lmet        spc
+)
+
+(deflayer ctrl-qwerty
+  _           _
+  _           _           _           _           _           _           _           _           _           _           _           _
+  _           _           _           _           _           _           _           _           _           _           _
+  _           _           _           _           _           _           _           _           _           _           _
+  _           _           _           @to-base
+)
