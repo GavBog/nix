@@ -46,9 +46,9 @@
 (defchordsv2
   (d f)  @th  $cw  first-release  (qwerty ctrl-base ctrl-qwerty nav)
   (s d)  @sh  $cw  first-release  (qwerty ctrl-base ctrl-qwerty nav)
-  (s f)  @ch  $cw  first-release  (qwerty ctrl-base ctrl-qwerty nav)
-  (w r)  @wh  $cw  first-release  (qwerty ctrl-base ctrl-qwerty nav)
-  (c v)  @gh  $cw  first-release  (qwerty ctrl-base ctrl-qwerty nav)
+  (x c)  @ch  $cw  first-release  (qwerty ctrl-base ctrl-qwerty nav)
+  (w e)  @wh  $cw  first-release  (qwerty ctrl-base ctrl-qwerty nav)
+  (z x)  @gh  $cw  first-release  (qwerty ctrl-base ctrl-qwerty nav)
   (r e)  @ph  $cw  first-release  (qwerty ctrl-base ctrl-qwerty nav)
 
   (i u)  @qu  $cw  first-release  (qwerty ctrl-base ctrl-qwerty nav)
