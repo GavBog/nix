@@ -30,10 +30,6 @@
         dwl = callPackage ./dwl { inherit customPkgs; };
         tidal-language-server = callPackage ./tidal-language-server { tidal = inputs.tidal; };
         risc0 = callPackage ./risc0 { pkgs = pkgs-stable; };
-        cartesi-machine = callPackage ./cartesi {
-          pkgs = pkgs-stable;
-          inherit customPkgs;
-        };
         tribler = callPackage ./tribler { pkgs = pkgs-stable; };
         tribler-docker = callPackage ./tribler/docker.nix {
           pkgs = pkgs-stable;
